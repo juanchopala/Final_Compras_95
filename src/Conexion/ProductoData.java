@@ -33,6 +33,8 @@ public class ProductoData {
         try {
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            
             ps.setString(1, p.getNomreProducto());
             ps.setString(2, p.getDescripcion());
             ps.setDouble(3, p.getPrecioActual());
@@ -70,7 +72,7 @@ public class ProductoData {
     }
 
     public void eliminarProducto(int id) {
-        try {
+        try {   
             String sql = "UPDATE producto set estado=0 where idproducto=?";
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -99,14 +101,12 @@ public class ProductoData {
                 p.setPrecioActual(rs.getDouble("precioActual"));
                 p.setStock(rs.getInt("stock"));
                 p.setEstado(true);
-                
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
-                    
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla producto");
         }
         return p;
     }
+    
 
 }

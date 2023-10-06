@@ -16,6 +16,12 @@ public class Compra {
         this.fecha = fecha;
     }
 
+    public Compra(Proveedor proveedor, LocalDate fecha) {
+        this.proveedor = proveedor;
+        this.fecha = fecha;
+    }
+    
+
     public int getIdCompra() {
         return idCompra;
     }
@@ -38,6 +44,11 @@ public class Compra {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Compra{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + '}';
     }
     
 }

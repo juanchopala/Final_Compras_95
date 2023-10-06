@@ -26,6 +26,15 @@ public class DetalleCompra {
         this.producto = producto;
     }
 
+    public DetalleCompra(int cantidad, double precioCosto, Compra compra, Producto producto) {
+        this.cantidad = cantidad;
+        this.precioCosto = precioCosto;
+        this.compra = compra;
+        this.producto = producto;
+    }
+    
+    
+
     public int getIdDetalle() {
         return idDetalle;
     }
@@ -65,6 +74,12 @@ public class DetalleCompra {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    @Override
+    public String toString() {
+        return "DetalleCompra{" + "idDetalle=" + idDetalle + ", cantidad=" + cantidad + ", precioCosto=" + precioCosto + ", compra=" + compra + ", producto=" + producto + '}';
+    }
+    
     
     
 }

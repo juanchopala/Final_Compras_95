@@ -16,10 +16,13 @@ import java.sql.Connection;
 public class Main {
 
     public static void main(String[] args) {
-        Connection con = Conexion.getConexion();
-        Producto p = new Producto(25,"OlspiceLeña","desodoranteCorporal",250.0,100,true);
+        Producto p = new Producto("Rexona","no te abandona",200.0,30,true);
         ProductoData pd = new ProductoData();
+        pd.guardarProducto(p);
+        Producto p1 = new Producto (p.getIdProducto(),"Rexona","si te abandona",200.0,10,true);
         pd.modificarProducto(p);
+        System.out.println(pd.buscarProducto(p.getIdProducto()).toString());
+                
         
     }
    

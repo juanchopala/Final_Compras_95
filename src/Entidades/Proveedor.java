@@ -24,6 +24,12 @@ public class Proveedor {
         this.telefono = telefono;
     }
 
+    public Proveedor(String razonSocial, String domicilio, String telefono) {
+        this.razonSocial = razonSocial;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+    }
+
     public int getIdProveedor() {
         return idProveedor;
     }
@@ -55,5 +61,11 @@ public class Proveedor {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    @Override
+    public String toString() {
+        return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+    }
+    
     
 }

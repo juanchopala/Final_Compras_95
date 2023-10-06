@@ -83,5 +83,10 @@ public class Producto {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-  
+
+    @Override
+    public String toString() {
+        return "Producto{" + "idProducto=" + idProducto + ", nomreProducto=" + nomreProducto + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
+    }
+    
 }
