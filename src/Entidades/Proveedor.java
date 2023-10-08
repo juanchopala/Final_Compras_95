@@ -13,22 +13,29 @@ public class Proveedor {
     private String razonSocial;
     private String domicilio;
     private String telefono;
-
+    private String email;
+    private String pagina;
+    
     public Proveedor() {
     }
 
-    public Proveedor(int idProveedor, String razonSocial, String domicilio, String telefono) {
+    public Proveedor(int idProveedor, String razonSocial, String domicilio, String telefono, String email, String pagina) {
         this.idProveedor = idProveedor;
         this.razonSocial = razonSocial;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.email = email;
+        this.pagina = pagina;
     }
 
-    public Proveedor(String razonSocial, String domicilio, String telefono) {
+    public Proveedor(String razonSocial, String domicilio, String telefono, String email, String pagina) {
         this.razonSocial = razonSocial;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.email = email;
+        this.pagina = pagina;
     }
+    
 
     public int getIdProveedor() {
         return idProveedor;
@@ -62,10 +69,28 @@ public class Proveedor {
         this.telefono = telefono;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPagina() {
+        return pagina;
+    }
+
+    public void setPagina(String pagina) {
+        this.pagina = pagina;
+    }
+
     @Override
     public String toString() {
-        return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+        return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + ", email=" + email + ", pagina=" + pagina + '}';
     }
+    
+    
     
     
 }

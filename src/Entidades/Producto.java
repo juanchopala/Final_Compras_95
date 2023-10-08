@@ -1,17 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//aqui en la base de datos cambie en la base de datos a stock como predeterminado en 0 
 package Entidades;
 
-/**
- *
- * @author Administrador
- */
+import java.time.LocalDate;
+
 public class Producto {
   private int idProducto;
-  private String nomreProducto;
+  private String categoriaProducto;
+  private String nombreProducto;
+  private String importadonacional;
   private String descripcion;
+  private LocalDate fechalimite;
   private double precioActual;
   private int stock;
   private boolean estado;
@@ -19,22 +17,28 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(int idProducto, String nomreProducto, String descripcion, double precioActual, int stock, boolean estado) {
-        this.idProducto = idProducto;
-        this.nomreProducto = nomreProducto;
+    public Producto(String categoriaProducto, String nombreProducto, String importadonacional, String descripcion, LocalDate fechalimite, double precioActual, boolean estado) {
+        this.categoriaProducto = categoriaProducto;
+        this.nombreProducto = nombreProducto;
+        this.importadonacional = importadonacional;
         this.descripcion = descripcion;
+        this.fechalimite = fechalimite;
         this.precioActual = precioActual;
-        this.stock = stock;
+        this.estado = estado;
+    }
+
+    public Producto(int idProducto, String categoriaProducto, String nombreProducto, String importadonacional, String descripcion, LocalDate fechalimite, double precioActual, boolean estado) {
+        this.idProducto = idProducto;
+        this.categoriaProducto = categoriaProducto;
+        this.nombreProducto = nombreProducto;
+        this.importadonacional = importadonacional;
+        this.descripcion = descripcion;
+        this.fechalimite = fechalimite;
+        this.precioActual = precioActual;
         this.estado = estado;
     }
     
-    public Producto(String nomreProducto, String descripcion, double precioActual, int stock, boolean estado) {
-        this.nomreProducto = nomreProducto;
-        this.descripcion = descripcion;
-        this.precioActual = precioActual;
-        this.stock = stock;
-        this.estado = estado;
-    }
+    
 
     public int getIdProducto() {
         return idProducto;
@@ -44,12 +48,28 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public String getNomreProducto() {
-        return nomreProducto;
+    public String getCategoriaProducto() {
+        return categoriaProducto;
     }
 
-    public void setNomreProducto(String nomreProducto) {
-        this.nomreProducto = nomreProducto;
+    public void setCategoriaProducto(String categoriaProducto) {
+        this.categoriaProducto = categoriaProducto;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public String getImportadonacional() {
+        return importadonacional;
+    }
+
+    public void setImportadonacional(String importadonacional) {
+        this.importadonacional = importadonacional;
     }
 
     public String getDescripcion() {
@@ -58,6 +78,14 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public LocalDate getFechalimite() {
+        return fechalimite;
+    }
+
+    public void setFechalimite(LocalDate fechalimite) {
+        this.fechalimite = fechalimite;
     }
 
     public double getPrecioActual() {
@@ -86,7 +114,6 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nomreProducto=" + nomreProducto + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
-    }
-    
+        return "Producto{" + "idProducto=" + idProducto + ", categoriaProducto=" + categoriaProducto + ", nombreProducto=" + nombreProducto + ", importadonacional=" + importadonacional + ", descripcion=" + descripcion + ", fechalimite=" + fechalimite + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
+    }   
 }

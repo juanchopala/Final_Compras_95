@@ -1,13 +1,14 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package Logica;
 
 import Conexion.Conexion;
 import Conexion.ProductoData;
 import Entidades.Producto;
 import java.sql.Connection;
+import java.time.LocalDate;
+import javax.swing.SpringLayout;
 
 /**
  *
@@ -16,14 +17,21 @@ import java.sql.Connection;
 public class Main {
 
     public static void main(String[] args) {
-        Producto p = new Producto("Rexona","no te abandona",200.0,30,true);
+
+        
+        
+        
+        /*
+        Producto p = new Producto("Desodorante", "Rexona Odorono", "IndustriaArgentina", "no te abandona", LocalDate.of(2023, 10, 7), 200.0, true);
         ProductoData pd = new ProductoData();
         pd.guardarProducto(p);
-        Producto p1 = new Producto (p.getIdProducto(),"Rexona","si te abandona",200.0,10,true);
-        pd.modificarProducto(p);
-        System.out.println(pd.buscarProducto(p.getIdProducto()).toString());
-                
-        
+        Producto p1 = new Producto(p.getIdProducto(), "Desodorante", "Rexona Odorono", "IndustriaArgentina", "Este si te abandona es una poronga", LocalDate.of(2023, 10, 7), 200.0, true);
+        pd.modificarProducto(p1);
+        System.out.println(p.toString());
+        System.out.println((pd.buscarProducto(p.getIdProducto()).toString()));
+        System.out.println(pd.buscarProducto(1).toString());
+        System.out.println(pd.buscarProducto(1).getImportadonacional());
+*/
     }
-   
+
 }
