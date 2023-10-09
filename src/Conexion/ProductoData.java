@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class ProductoData {
 
     private Connection con = null;
+    
 
     public ProductoData() {
         this.con = Conexion.getConexion();

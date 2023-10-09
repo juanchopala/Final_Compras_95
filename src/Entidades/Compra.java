@@ -5,23 +5,29 @@ import java.time.LocalDate;
 
 public class Compra {
     private int idCompra;
-    private Proveedor proveedor;
+    private Proveedor idProveedor;
     private LocalDate fecha;
+    private boolean estado;
+    private String Reporte;
     
     public Compra(){
     }
-    public Compra(int idCompra, Proveedor proveedor, LocalDate fecha) {
+
+    public Compra(int idCompra, Proveedor idProveedor, LocalDate fecha, boolean estado, String Reporte) {
         this.idCompra = idCompra;
-        this.proveedor = proveedor;
+        this.idProveedor = idProveedor;
         this.fecha = fecha;
+        this.estado = estado;
+        this.Reporte = Reporte;
     }
 
-    public Compra(Proveedor proveedor, LocalDate fecha) {
-        this.proveedor = proveedor;
+    public Compra(Proveedor idProveedor, LocalDate fecha, boolean estado, String Reporte) {
+        this.idProveedor = idProveedor;
         this.fecha = fecha;
+        this.estado = estado;
+        this.Reporte = Reporte;
     }
-    
-
+       
     public int getIdCompra() {
         return idCompra;
     }
@@ -30,13 +36,15 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public Proveedor getProveedor() {
-        return proveedor;
+    public Proveedor getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
+    public void setIdProveedor(Proveedor idProveedor) {
+        this.idProveedor = idProveedor;
     }
+    
+    
 
     public LocalDate getFecha() {
         return fecha;
@@ -46,9 +54,30 @@ public class Compra {
         this.fecha = fecha;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public String getReporte() {
+        return Reporte;
+    }
+
+    public void setReporte(String Reporte) {
+        this.Reporte = Reporte;
+    }
+
     @Override
     public String toString() {
-        return "Compra{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + '}';
+        return "Compra{" + "idCompra=" + idCompra + ", idProveedor=" + idProveedor + ", fecha=" + fecha + ", estado=" + estado + ", Reporte=" + Reporte + '}';
     }
+
+
+    
+
+
     
 }

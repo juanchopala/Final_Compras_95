@@ -17,6 +17,9 @@ import java.util.Map;
 
 public class Proveedor_ProductoData {
 private Connection con;
+private ProveedorData ps = new ProveedorData();
+private ProductoData pd = new ProductoData();
+
     public Proveedor_ProductoData() {
         this.con = Conexion.getConexion();
     }
@@ -26,8 +29,8 @@ private Connection con;
         
     try {
         PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1,pp.getIdProvedor());
-        ps.setInt(2,pp.getIdProducto());
+        ps.setInt(1,pp.getIdProvedor().getIdProveedor());
+        ps.setInt(2,pp.getIdProducto().getIdProducto());
         ps.setDouble(3, pp.getCosto());
         ps.execute();
         ResultSet rs = ps.getGeneratedKeys();

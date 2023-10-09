@@ -4,41 +4,42 @@ package Entidades;
 
 public class Proveedor_Producto {
     private int idProveedorproducto;
-    private int idProvedor;
-    private int idProducto;
+    private Proveedor idProvedor;
+    private Producto idProducto;
     private double costo;
 
     public Proveedor_Producto() {
     }
 
-    public Proveedor_Producto(int idProvedor, int idProducto, double costo) {
-        this.idProvedor = idProvedor;
-        this.idProducto = idProducto;
-        this.costo = costo;
-    }
-
-    public Proveedor_Producto(int idProveedorproducto, int idProvedor, int idProducto, double costo) {
+    public Proveedor_Producto(int idProveedorproducto, Proveedor idProvedor, Producto idProducto, double costo) {
         this.idProveedorproducto = idProveedorproducto;
         this.idProvedor = idProvedor;
         this.idProducto = idProducto;
         this.costo = costo;
     }
 
-    public int getIdProvedor() {
+    public Proveedor_Producto(Proveedor idProvedor, Producto idProducto, double costo) {
+        this.idProvedor = idProvedor;
+        this.idProducto = idProducto;
+        this.costo = costo;
+    }
+
+    public Proveedor getIdProvedor() {
         return idProvedor;
     }
 
-    public void setIdProvedor(int idProvedor) {
+    public void setIdProvedor(Proveedor idProvedor) {
         this.idProvedor = idProvedor;
     }
 
-    public int getIdProducto() {
+    public Producto getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(Producto idProducto) {
         this.idProducto = idProducto;
     }
+    
 
     public double getCosto() {
         return costo;
@@ -55,7 +56,6 @@ public class Proveedor_Producto {
     public void setIdProveedorproducto(int idProveedorproducto) {
         this.idProveedorproducto = idProveedorproducto;
     }
-    
 
     @Override
     public String toString() {
