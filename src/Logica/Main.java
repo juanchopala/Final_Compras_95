@@ -31,7 +31,7 @@ public class Main {
         System.out.println((pd.buscarProducto(p.getIdProducto()).toString()));
         System.out.println(pd.buscarProducto(1).toString());
         System.out.println(pd.buscarProducto(1).getImportadonacional());
-*/
+        */
     }
 
 }

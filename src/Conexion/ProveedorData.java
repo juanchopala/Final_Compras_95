@@ -41,7 +41,7 @@ public class ProveedorData {
 
     }
 
-    public void modigicarProveedor(Proveedor p) {
+    public void modificarProveedor(Proveedor p) {
 
         String sql = "UPDATE proveedor set razonSocial=?,domicilio=?,telefono=?,email=?,pagina=? WHERE idproveedor=?";
         try {

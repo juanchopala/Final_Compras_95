@@ -21,7 +21,7 @@ public class Conexion {
             JOptionPane.showMessageDialog(null, "Error al cargar el driver");
         }
     }
-    //PUTO EL QUE LO LEE 
+    
     public static Connection getConexion(){
         Connection con = null;
         
@@ -36,5 +36,5 @@ public class Conexion {
         }
         return con;
     }
-    //RE PUTO EL QUE SIGUE LEYENDO                
+                   
 }
