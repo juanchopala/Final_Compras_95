@@ -2,15 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package IGU;
+package GUI;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 /**
  *
  * @author gonza
  */
 public class Login extends javax.swing.JFrame {
 
+    private static final String USER = "admin";
+    private static final String PASSWORD = "admin1234";
     /**
      * Creates new form Login
      */
@@ -19,6 +22,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
+    @Override
     public Image getIconImage(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/maxi-1.png"));
         return retValue;
@@ -86,6 +90,11 @@ public class Login extends javax.swing.JFrame {
         jButtonInicioSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonInicioSesion.setForeground(new java.awt.Color(255, 255, 255));
         jButtonInicioSesion.setText("Iniciar sesion");
+        jButtonInicioSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInicioSesionActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
@@ -102,6 +111,25 @@ public class Login extends javax.swing.JFrame {
     private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldActionPerformed
+
+    private void jButtonInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioSesionActionPerformed
+        // TODO add your handling code here:
+
+                String usuario = jTextFieldUsuario.getText();
+                String pass = jPasswordField.getText();
+                
+                if (usuario.equals(USER) && pass.equals(PASSWORD)) {
+                    MainFrameGUI paginaPrincipal = new MainFrameGUI();
+                    
+                    paginaPrincipal.setVisible(true);
+                    this.setVisible(false);
+                } else{
+                    Login log = new Login();
+                    
+                    JOptionPane.showMessageDialog(log, "Usuario o contraseña incorrectos.", "Error", HEIGHT);
+                    
+                }
+    }//GEN-LAST:event_jButtonInicioSesionActionPerformed
 
     /**
      * @param args the command line arguments

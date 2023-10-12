@@ -1,7 +1,6 @@
 package Conexion;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -14,9 +13,10 @@ public class Conexion {
     private static final String DRIVER= "org.mariadb.jdbc.Driver";
     private static Conexion conexion = null;
     
-    private Conexion(){
+    public Conexion(){
         try {
             Class.forName(DRIVER);
+           
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar el driver");
         }

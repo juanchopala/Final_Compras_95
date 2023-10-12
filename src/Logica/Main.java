@@ -17,11 +17,7 @@ import javax.swing.SpringLayout;
 public class Main {
 
     public static void main(String[] args) {
-
         
-        
-        
-        /*
         Producto p = new Producto("Desodorante", "Rexona Odorono", "IndustriaArgentina", "no te abandona", LocalDate.of(2023, 10, 7), 200.0, true);
         ProductoData pd = new ProductoData();
         pd.guardarProducto(p);
@@ -31,7 +27,7 @@ public class Main {
         System.out.println((pd.buscarProducto(p.getIdProducto()).toString()));
         System.out.println(pd.buscarProducto(1).toString());
         System.out.println(pd.buscarProducto(1).getImportadonacional());
-        */
+        
     }
 
 }
