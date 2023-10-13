@@ -44,6 +44,7 @@ public class Login extends javax.swing.JFrame {
         jPasswordField = new javax.swing.JPasswordField();
         jTextFieldUsuario = new javax.swing.JTextField();
         jButtonInicioSesion = new javax.swing.JButton();
+        jCheckBoxShowPass = new javax.swing.JCheckBox();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +61,7 @@ public class Login extends javax.swing.JFrame {
                 jButtonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
+        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
 
         jLabelUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_icon_128.png"))); // NOI18N
         getContentPane().add(jLabelUserIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 130, 140));
@@ -73,7 +74,7 @@ public class Login extends javax.swing.JFrame {
         jLabelPwd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelPwd.setForeground(new java.awt.Color(0, 0, 0));
         jLabelPwd.setText("Contraseña:");
-        getContentPane().add(jLabelPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        getContentPane().add(jLabelPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
         jPasswordField.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +82,7 @@ public class Login extends javax.swing.JFrame {
                 jPasswordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 130, -1));
+        getContentPane().add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 130, -1));
 
         jTextFieldUsuario.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 130, -1));
@@ -89,13 +90,23 @@ public class Login extends javax.swing.JFrame {
         jButtonInicioSesion.setBackground(new java.awt.Color(102, 153, 255));
         jButtonInicioSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonInicioSesion.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonInicioSesion.setText("Iniciar sesion");
+        jButtonInicioSesion.setText("Iniciar sesión");
         jButtonInicioSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInicioSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+        getContentPane().add(jButtonInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
+
+        jCheckBoxShowPass.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBoxShowPass.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBoxShowPass.setText("Mostrar contraseña");
+        jCheckBoxShowPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxShowPassActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCheckBoxShowPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 140, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 530));
@@ -123,13 +134,24 @@ public class Login extends javax.swing.JFrame {
                     
                     paginaPrincipal.setVisible(true);
                     this.setVisible(false);
-                } else{
-                    Login log = new Login();
-                    
-                    JOptionPane.showMessageDialog(log, "Usuario o contraseña incorrectos.", "Error", HEIGHT);
-                    
+                } else if(usuario.equals("")){
+                    JOptionPane.showMessageDialog(null, "Por favor complete el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if(pass.equals("")){
+                    JOptionPane.showMessageDialog(null, "Por favor complete la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else{                   
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
     }//GEN-LAST:event_jButtonInicioSesionActionPerformed
+
+    private void jCheckBoxShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxShowPassActionPerformed
+        // TODO add your handling code here:
+        if (jCheckBoxShowPass.isSelected()) {
+            jPasswordField.setEchoChar((char)0);
+        } else{
+            jPasswordField.setEchoChar('*');
+        }
+        
+    }//GEN-LAST:event_jCheckBoxShowPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,6 +191,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonInicioSesion;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JCheckBox jCheckBoxShowPass;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JLabel jLabelPwd;
     private javax.swing.JLabel jLabelUser;
