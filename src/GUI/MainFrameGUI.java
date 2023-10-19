@@ -18,6 +18,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
     public MainFrameGUI() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        Escritorio.isMaximumSizeSet();
     }
 
     /**
@@ -28,39 +29,47 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jPanel1 = new javax.swing.JPanel();
+        Escritorio = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        Proveedores = new javax.swing.JMenuItem();
+        Productos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        Compras = new javax.swing.JMenuItem();
+        Ventas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        Variables = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setDoubleBuffered(false);
+        jPanel1.setPreferredSize(getMaximumSize());
+
+        Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,10 +84,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 630, 430));
-
-        jLabel1.setText("Ordenar");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 98, -1));
+        Escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 670, 430));
 
         jRadioButton1.setText("Compras");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -86,24 +92,13 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        Escritorio.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
         jRadioButton2.setText("Ventas");
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
+        Escritorio.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, -1, -1));
 
-        jButton1.setText("Nombre del proveedor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 140, -1));
-
-        jButton2.setText("Nombre del  producto");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 140, -1));
-
-        jLabel2.setText("Stock");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 89, -1));
+        jRadioButton4.setText("Minimo");
+        Escritorio.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
 
         jRadioButton3.setText("Maximo");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -111,78 +106,114 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jRadioButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        Escritorio.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
-        jRadioButton4.setText("Minimo");
-        getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        jLabel2.setText("Stock");
+        Escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 89, -1));
+        Escritorio.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        Escritorio.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
 
         jLabel3.setText("Entre fechas");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 150, -1));
-
-        jLabel4.setText("Fecha especifica");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-
-        jButton5.setText("fecha");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
-
-        jRadioButton5.setText("Stock");
-        getContentPane().add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 130, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 130, -1));
+        Escritorio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 150, 20));
 
         jLabel5.setText("Hasta");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
+        Escritorio.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+
+        jRadioButton5.setText("Stock");
+        Escritorio.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 40, -1, -1));
+
+        jLabel1.setText("Ordenar");
+        Escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+
+        jButton1.setText("Nombre del proveedor");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        Escritorio.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+
+        jButton2.setText("Nombre del  producto");
+        Escritorio.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+
+        jLabel4.setText("Fecha especifica");
+        Escritorio.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        jButton5.setText("fecha");
+        Escritorio.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Escritorio.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Escritorio.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+        );
+
+        Escritorio.getAccessibleContext().setAccessibleDescription("");
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 530));
 
         jMenu1.setText("Administrar");
 
-        jMenuItem4.setText("Proveedores");
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem5.setText("Productos");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        Proveedores.setText("Proveedores");
+        Proveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                ProveedoresActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenu1.add(Proveedores);
+
+        Productos.setText("Productos");
+        Productos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Productos);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ordenes");
 
-        jMenuItem2.setText("Compras");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        Compras.setText("Compras");
+        Compras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                ComprasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenu2.add(Compras);
 
-        jMenuItem3.setText("Ventas");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        Ventas.setText("Ventas");
+        Ventas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                VentasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(Ventas);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Opciones");
 
-        jMenuItem7.setText("Variables");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        Variables.setText("Variables");
+        Variables.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                VariablesActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu3.add(Variables);
 
         jMenuBar1.add(jMenu3);
 
@@ -199,25 +230,45 @@ public class MainFrameGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
+         Compras compras = new Compras();
+         compras.setVisible(true);
+         Escritorio.add(compras);
+         Escritorio.moveToFront(compras);
+    }//GEN-LAST:event_ComprasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VentasActionPerformed
+        Ventas ventas = new Ventas ();
+        ventas.setVisible(true);
+        Escritorio.add(ventas);
+        Escritorio.moveToFront(ventas);
+    }//GEN-LAST:event_VentasActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductosActionPerformed
+        Productos productos = new Productos();
+        productos.setVisible(true);
+        Escritorio.add(productos);
+        Escritorio.moveToFront(productos);
+    }//GEN-LAST:event_ProductosActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    private void VariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VariablesActionPerformed
+        Variables variables = new Variables();
+        variables.setVisible(true);
+        Escritorio.add(variables);
+        Escritorio.moveToFront(variables);
+    }//GEN-LAST:event_VariablesActionPerformed
+
+    private void ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProveedoresActionPerformed
+
+        Proveedores proveedores = new Proveedores();
+        proveedores.setVisible(true);
+        Escritorio.add(proveedores);
+        Escritorio.moveToFront(proveedores);
+    }//GEN-LAST:event_ProveedoresActionPerformed
 
      public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -252,6 +303,12 @@ public class MainFrameGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Compras;
+    private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JMenuItem Productos;
+    private javax.swing.JMenuItem Proveedores;
+    private javax.swing.JMenuItem Variables;
+    private javax.swing.JMenuItem Ventas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
@@ -269,11 +326,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
