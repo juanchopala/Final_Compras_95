@@ -5,6 +5,7 @@
 package GUI;
 
 import Conexion.CategoriasData;
+import Entidades.Variable2;
 import Entidades.Variables;
 
 
@@ -23,6 +24,7 @@ public class Variables1 extends javax.swing.JInternalFrame {
     public Variables1() {
         initComponents();
         cargarLista ();
+        cargarMetodos();
     }
 
     
@@ -53,15 +55,17 @@ public class Variables1 extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTMetodo = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jCMetodo = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jTNuevoDato = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTNuevoMetodo = new javax.swing.JTextField();
 
         setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,41 +115,76 @@ public class Variables1 extends javax.swing.JInternalFrame {
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, -1, -1));
 
         jLabel4.setText("Cambio");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 170, 65, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 65, -1));
 
         jLabel5.setText("Valor Actual");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 212, 65, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 65, -1));
 
         jTextField2.setEditable(false);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 212, 45, -1));
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 80, -1));
 
         jLabel6.setText("Nuevo Valor");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 252, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel7.setText("Metodos de Pago");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 311, 137, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 137, -1));
 
         jLabel8.setText("Nuevo Metodo");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 355, -1, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 352, 140, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        jTMetodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTMetodoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTMetodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 140, -1));
 
         jButton4.setText("Crear");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 392, -1, -1));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
         jLabel9.setText("Elegir Metodo");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 355, 81, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 81, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 352, 133, -1));
+        jCMetodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCMetodoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCMetodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 190, -1));
 
         jButton5.setText("Modificar");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 392, -1, -1));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, -1, -1));
 
         jButton6.setText("Eliminar");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 392, -1, -1));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, -1, -1));
 
         jButton7.setText("Salir");
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 454, -1, -1));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 420, -1, -1));
 
         jTNuevoDato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +196,17 @@ public class Variables1 extends javax.swing.JInternalFrame {
         jLabel10.setText("Ingrese nuevo dato : ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 110, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 501));
+        jLabel11.setText("Ingrese nuevo dato:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+
+        jTNuevoMetodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNuevoMetodoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTNuevoMetodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 190, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -193,6 +242,46 @@ public class Variables1 extends javax.swing.JInternalFrame {
         categoriasData.borrarCategoria(idc);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTMetodoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTMetodoActionPerformed
+
+    private void jCMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCMetodoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCMetodoActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       String Nombre = jTMetodo.getText();
+       Variable2 variable = new Variable2 (Nombre);
+       categoriasData.guardarMetodos(variable);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       String id = jCMetodo.getItemAt(jCMetodo.getSelectedIndex()).split(" - ")[0];
+        int idc = Integer.parseInt(id);
+        String nuevoDato = jTNuevoMetodo.getText();
+        Variable2 vari = new Variable2(idc,nuevoDato);
+        categoriasData.modificarMetodo(vari);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTNuevoMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNuevoMetodoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNuevoMetodoActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    String id = jCMetodo.getItemAt(jCMetodo.getSelectedIndex()).split(" - ")[0];
+    int idc = Integer.parseInt(id);   
+    categoriasData.borrarMetodoPago(idc);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCrear;
@@ -202,10 +291,11 @@ public class Variables1 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JComboBox<String> jCMetodo;
     private javax.swing.JComboBox<String> jCcategoria;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -216,9 +306,10 @@ public class Variables1 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTCategorias;
+    private javax.swing.JTextField jTMetodo;
     private javax.swing.JTextField jTNuevoDato;
+    private javax.swing.JTextField jTNuevoMetodo;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
     private void cargarLista (){
         
@@ -228,5 +319,9 @@ public class Variables1 extends javax.swing.JInternalFrame {
             
         
     }
-
+    private void cargarMetodos(){
+        for (Variable2 var : categoriasData.listarMetodos()){
+            jCMetodo.addItem(var.getIdMetodoPago() + " - " + var.getNombreMetodo());
+        }
+    }
 }
