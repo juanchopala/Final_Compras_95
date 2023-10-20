@@ -5,6 +5,7 @@
 package Conexion;
 
 import Entidades.Producto;
+import Entidades.Variables;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -31,13 +32,13 @@ public class ProductoData {
     }
 
     public void guardarProducto(Producto p) {
-        String sql = "INSERT INTO producto (`categoriaProducto`,`nombreProducto`,`importado/nacional`,`descripcion`,`fechaLimite`,`precioActual`,`estado`)"
+        String sql = "INSERT INTO producto (`nombreProducto`,`importado/nacional`,`descripcion`,`fechaLimite`,`precioActual`,`estado`)"
                 + " VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-            ps.setString(1, p.getCategoriaProducto());
+ 
             ps.setString(2, p.getNombreProducto());
             ps.setString(3, p.getImportadonacional());
             ps.setString(4, p.getDescripcion());
@@ -58,11 +59,11 @@ public class ProductoData {
     }
 
     public void modificarProducto(Producto p) {
-        String sql = "UPDATE producto SET categoriaProducto=?, nombreProducto=?, `importado/nacional`=?, descripcion=?,fechaLimite=?, precioActual=?"
+        String sql = "UPDATE producto SET , nombreProducto=?, `importado/nacional`=?, descripcion=?,fechaLimite=?, precioActual=?"
                 + "WHERE idproducto=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, p.getCategoriaProducto());
+            
             ps.setString(2, p.getNombreProducto());
             ps.setString(3, p.getImportadonacional());
             ps.setString(4, p.getDescripcion());
@@ -187,4 +188,8 @@ public class ProductoData {
         return Productos;
     }
 
+
+    
 }
+    
+

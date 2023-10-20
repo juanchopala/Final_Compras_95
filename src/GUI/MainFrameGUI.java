@@ -67,7 +67,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setDoubleBuffered(false);
-        jPanel1.setPreferredSize(getMaximumSize());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -148,19 +148,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         Escritorio.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-        );
-
+        jPanel1.add(Escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1054, 530));
         Escritorio.getAccessibleContext().setAccessibleDescription("");
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 530));
@@ -256,10 +244,10 @@ public class MainFrameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductosActionPerformed
 
     private void VariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VariablesActionPerformed
-        Variables variables = new Variables();
-        variables.setVisible(true);
-        Escritorio.add(variables);
-        Escritorio.moveToFront(variables);
+        Variables1 variables1 = new Variables1();
+        variables1.setVisible(true);
+        Escritorio.add(variables1);
+        Escritorio.moveToFront(variables1);
     }//GEN-LAST:event_VariablesActionPerformed
 
     private void ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProveedoresActionPerformed
