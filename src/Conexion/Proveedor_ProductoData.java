@@ -107,7 +107,7 @@ private ProductoData pd = new ProductoData();
             p.setIdProveedor(rs.getInt("idProveedor"));
             p.setRazonSocial(rs.getString("razonSocial"));
             p.setDomicilio(rs.getString("domiciolio"));
-            p.setTelefono(rs.getString("telefono"));
+            p.setTelefono(rs.getInt("telefono"));
             p.setEmail(rs.getString("email"));
             p.setPagina(rs.getString("pagina"));
             proveedores.add(p);

@@ -98,75 +98,75 @@ public class CompraData {
         
     }
     
-    public Compra buscarCompra(int idCompra){
-        Compra c = new Compra();
-        String sql = "SELECT * FROM compra where idcompra=? and estado=1";
-        
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idCompra);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                c.setIdCompra(rs.getInt("idCompra"));
-                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
-                c.setFecha(rs.getDate("fecha").toLocalDate());
-                c.setEstado(true);
-                c.setReporte(rs.getString("Reporte"));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-        }
-        return c;
-    } 
-    
-    public List<Compra> listarComprasActivas(){
-        ArrayList<Compra> lista = new ArrayList<Compra>();
-        
-        String sql = "SELECT * FROM compra where estado=1";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                Compra c = new Compra();
-                c.setIdCompra(rs.getInt("idCompra"));
-                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
-                c.setFecha(rs.getDate("fecha").toLocalDate());
-                c.setEstado(true);
-                c.setReporte(rs.getString("Reporte"));
-                lista.add(c);
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-        }
-        
-        return lista;
-    }
-    
-        public List<Compra> listarComprasInactivas(){
-        ArrayList<Compra> lista = new ArrayList<Compra>();
-        
-        String sql = "SELECT * FROM compra where estado=1";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                Compra c = new Compra();
-                c.setIdCompra(rs.getInt("idCompra"));
-                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
-                c.setFecha(rs.getDate("fecha").toLocalDate());
-                c.setEstado(false);
-                c.setReporte(rs.getString("Reporte"));
-                lista.add(c);
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-        }
-        
-        return lista;
-    }
+//    public Compra buscarCompra(int idCompra){
+//        Compra c = new Compra();
+//        String sql = "SELECT * FROM compra where idcompra=? and estado=1";
+//        
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, idCompra);
+//            ResultSet rs = ps.executeQuery();
+//            if(rs.next()){
+//                c.setIdCompra(rs.getInt("idCompra"));
+//                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
+//                c.setFecha(rs.getDate("fecha").toLocalDate());
+//                c.setEstado(true);
+//                c.setReporte(rs.getString("Reporte"));
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
+//        }
+//        return c;
+//    } 
+//    
+//    public List<Compra> listarComprasActivas(){
+//        ArrayList<Compra> lista = new ArrayList<Compra>();
+//        
+//        String sql = "SELECT * FROM compra where estado=1";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//            
+//            while(rs.next()){
+//                Compra c = new Compra();
+//                c.setIdCompra(rs.getInt("idCompra"));
+//                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
+//                c.setFecha(rs.getDate("fecha").toLocalDate());
+//                c.setEstado(true);
+//                c.setReporte(rs.getString("Reporte"));
+//                lista.add(c);
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
+//        }
+//        
+//        return lista;
+//    }
+//    
+//        public List<Compra> listarComprasInactivas(){
+//        ArrayList<Compra> lista = new ArrayList<Compra>();
+//        
+//        String sql = "SELECT * FROM compra where estado=1";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//            
+//            while(rs.next()){
+//                Compra c = new Compra();
+//                c.setIdCompra(rs.getInt("idCompra"));
+//                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
+//                c.setFecha(rs.getDate("fecha").toLocalDate());
+//                c.setEstado(false);
+//                c.setReporte(rs.getString("Reporte"));
+//                lista.add(c);
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
+//        }
+//        
+//        return lista;
+//    }
 
 }
