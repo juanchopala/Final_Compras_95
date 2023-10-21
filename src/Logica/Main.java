@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import javax.swing.SpringLayout;
 import Conexion.CategoriasData;
+import GUI.MainFrameGUI;
 /**
  *
  * @author Administrador
@@ -19,6 +20,9 @@ import Conexion.CategoriasData;
 public class Main {
 
     public static void main(String[] args) {
+          MainFrameGUI mf = new MainFrameGUI();
+          mf.setVisible(true);
+          mf.setLocationRelativeTo(null);
 //        CategoriasData cat = new CategoriasData();
 //        Producto p = new Producto("Desodorante", "Rexona Odorono", "IndustriaArgentina", "no te abandona", LocalDate.of(2023, 10, 7), 200.0, true);
 //        ProductoData pd = new ProductoData();
