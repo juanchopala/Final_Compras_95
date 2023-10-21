@@ -163,6 +163,63 @@ public class Proveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+<<<<<<< Updated upstream
+=======
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        CrearProveedor crearP = new CrearProveedor();
+        crearP.setVisible(true);
+        EscritProveedor.add(crearP);
+        EscritProveedor.moveToFront(crearP);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+          modelo.setRowCount(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            modelo.setRowCount(0);
+            for(Proveedor prove : provD.listarProveedores())
+                modelo.addRow(new Object[]{prove.getIdProveedor(),prove.getRazonSocial(),prove.getDomicilio(),prove.getTelefono(),prove.getEmail(),
+                        prove.getPagina()});
+            
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+           int id = Integer.parseInt(jCProveedores.getItemAt(jCProveedores.getSelectedIndex()).split(" - ")[0]);
+           
+           modelo.setRowCount(0);
+
+              for (Proveedor prove : provD.buscarProveedor(id)){
+                  modelo.addRow(new Object[]{prove.getIdProveedor(),prove.getRazonSocial(),prove.getDomicilio(),prove.getTelefono(),prove.getEmail(),
+                        prove.getPagina()});
+               }                                        
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+//        if (selec != -1) {
+//            int idM = (Integer) jTmateria.getValueAt(selec, 0);
+//            String notaStr = (String) jTmateria.getValueAt(selec, 2);
+//            double nota = Double.parseDouble(notaStr);
+//            insc.actualizarNota(idA, idM, nota);
+        //Seleccionar Lista
+        int selec = jTLista.getSelectedRow();
+        if (selec != 1){
+            int idP = (Integer) jTLista.getValueAt(selec, 0);
+           provD.eliminarProveedor(idP);
+            modelo.removeRow(selec);
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+>>>>>>> Stashed changes
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
