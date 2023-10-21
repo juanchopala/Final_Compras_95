@@ -15,9 +15,6 @@ public class Proveedor {
     private int telefono;
     private String email;
     private String pagina;
-    
-    public Proveedor() {
-    }
 
     public Proveedor(int idProveedor, String razonSocial, String domicilio, int telefono, String email, String pagina) {
         this.idProveedor = idProveedor;
@@ -34,9 +31,10 @@ public class Proveedor {
         this.telefono = telefono;
         this.email = email;
         this.pagina = pagina;
-       
     }
-    
+
+    public Proveedor() {
+    }
 
     public int getIdProveedor() {
         return idProveedor;
@@ -90,6 +88,7 @@ public class Proveedor {
     public String toString() {
         return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + ", email=" + email + ", pagina=" + pagina + '}';
     }
+    
     
     
     

@@ -44,7 +44,8 @@ public class ProveedorData {
 
     public void modificarProveedor(Proveedor p) {
 
-        String sql = "UPDATE proveedor set razonSocial=?,domicilio=?,telefono=?,email=?,pagina=? WHERE idproveedor=?";
+        String sql = "UPDATE proveedor SET razonSocial = ?, domicilio = ? ,telefono = ? , email = ? , pagina = ? "
+                + " WHERE idProveedor = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, p.getRazonSocial());
@@ -52,10 +53,12 @@ public class ProveedorData {
             ps.setInt(3, p.getTelefono());
             ps.setString(4, p.getEmail());
             ps.setString(5, p.getPagina());
-            ps.setInt(6, p.getIdProveedor());
+            ps.setInt(6,p.getIdProveedor());
+            
+            
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "proveedor eliminado con exito");
+                JOptionPane.showMessageDialog(null, "proveedor modificado con exito");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al aceder a la tabla proveedor");
@@ -78,16 +81,15 @@ public class ProveedorData {
         }
     }
 
-    public List <Proveedor>  buscarProveedor(int id) {
+    public List<Proveedor> buscarProveedor(int id) {
         ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
         String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, email, pagina FROM proveedor WHERE idProveedor = ? ";
-        
-       
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 Proveedor p = new Proveedor();
                 p.setIdProveedor(rs.getInt("idProveedor"));
@@ -105,13 +107,13 @@ public class ProveedorData {
     }
 
     public List<Proveedor> listarProveedores() {
-       
-        String sql= "SELECT * FROM proveedor";
-         ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+
+        String sql = "SELECT * FROM proveedor";
+        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Proveedor p = new Proveedor();
                 p.setIdProveedor(rs.getInt("idProveedor"));
                 p.setRazonSocial(rs.getString("razonsocial"));
@@ -125,8 +127,7 @@ public class ProveedorData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al aceder a la tabla proveedor");
         }
-        
-        
+
         return proveedores;
     }
 

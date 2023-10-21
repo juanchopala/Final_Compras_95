@@ -63,13 +63,13 @@ public class ProductoData {
                 + "WHERE idproducto=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setString(2, p.getNombreProducto());
-            ps.setString(3, p.getImportadonacional());
-            ps.setString(4, p.getDescripcion());
-            ps.setDate(5, Date.valueOf(p.getFechalimite()));
-            ps.setDouble(6, p.getPrecioActual());   
-            ps.setInt(7, p.getIdProducto());
+            ps.setInt(0, p.getIdProducto());
+            ps.setString(1, p.getNombreProducto());
+            ps.setString(2, p.getImportadonacional());
+            ps.setString(3, p.getDescripcion());
+            ps.setDate(4, Date.valueOf(p.getFechalimite()));
+            ps.setDouble(5, p.getPrecioActual());   
+           
 
             int exito = ps.executeUpdate();
             if (exito == 1) {

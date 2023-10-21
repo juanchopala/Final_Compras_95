@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package GUI;
+
 import java.util.ArrayList;
 import Conexion.ProveedorData;
 import Entidades.Proveedor;
+import java.util.Objects;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,14 +16,24 @@ import javax.swing.table.DefaultTableModel;
  * @author gonza
  */
 public class Proveedores extends javax.swing.JInternalFrame {
+
     ProveedorData provD = new ProveedorData();
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            if (columna == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
+
     /**
      * Creates new form Proveedores
      */
     public Proveedores() {
         initComponents();
-        listaCombo ();
+        listaCombo();
         ProveedorTabla();
     }
 
@@ -51,16 +64,24 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
         jTLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "idProveedor", "razonSocial", "domicilio", "telefono", "email", "paginaWeb"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTLista);
+        if (jTLista.getColumnModel().getColumnCount() > 0) {
+            jTLista.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jButton6.setText("limpiar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -142,24 +163,23 @@ public class Proveedores extends javax.swing.JInternalFrame {
                         .addComponent(jButton7)))
                 .addGap(16, 16, 16))
             .addGroup(EscritProveedorLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(637, 637, 637)
+                .addComponent(jButton5)
                 .addGap(0, 89, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritProveedorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(74, 74, 74))
             .addGroup(EscritProveedorLayout.createSequentialGroup()
                 .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EscritProveedorLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton1))
+                        .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EscritProveedorLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EscritProveedorLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jButton1))))
                     .addGroup(EscritProveedorLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jButton2)
@@ -167,7 +187,11 @@ public class Proveedores extends javax.swing.JInternalFrame {
                         .addComponent(jButton3)
                         .addGap(57, 57, 57)
                         .addComponent(jButton4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritProveedorLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addGap(65, 65, 65))
         );
         EscritProveedorLayout.setVerticalGroup(
             EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,10 +205,10 @@ public class Proveedores extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
@@ -205,7 +229,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 31, Short.MAX_VALUE)
+                .addGap(0, 24, Short.MAX_VALUE)
                 .addComponent(EscritProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -213,15 +237,29 @@ public class Proveedores extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//       int idA = jCalumno.getItemAt(jCalumno.getSelectedIndex()).getId_Alumnos();
-//        int selec = jTmateria.getSelectedRow();
-//        if (selec != -1) {
-//            int idM = (Integer) jTmateria.getValueAt(selec, 0);
-//            String notaStr = (String) jTmateria.getValueAt(selec, 2);
-//            double nota = Double.parseDouble(notaStr);
-//            insc.actualizarNota(idA, idM, nota);
-           
+        int selec = jTLista.getSelectedRow();
+        
+        if (selec != 1) {
+            
+        int idp = (Integer) jTLista.getValueAt(selec, 0);
+        String razonSocial = Objects.toString(jTLista.getValueAt(selec, 1), "");
+        String domicilio = Objects.toString(jTLista.getValueAt(selec, 2), "");
+        String telefono = Objects.toString(jTLista.getValueAt(selec, 3), "");
+        String email = Objects.toString(jTLista.getValueAt(selec, 4), "");
+        String pagina = Objects.toString(jTLista.getValueAt(selec, 5), "");
+          try {
+            int Telefono = Integer.parseInt(telefono);
 
+            Proveedor prove = new Proveedor(idp, razonSocial, domicilio, Telefono, email, pagina);
+            provD.modificarProveedor(prove);
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Complete con datos válidos el campo teléfono.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Seleccione una fila para modificar.");
+    }
+     
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -233,48 +271,44 @@ public class Proveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-          modelo.setRowCount(0);
+        modelo.setRowCount(0);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-            modelo.setRowCount(0);
-            for(Proveedor prove : provD.listarProveedores())
-                modelo.addRow(new Object[]{prove.getIdProveedor(),prove.getRazonSocial(),prove.getDomicilio(),prove.getTelefono(),prove.getEmail(),
-                        prove.getPagina()});
-            
+        modelo.setRowCount(0);
+        for (Proveedor prove : provD.listarProveedores()) {
+            modelo.addRow(new Object[]{prove.getIdProveedor(), prove.getRazonSocial(), prove.getDomicilio(), prove.getTelefono(), prove.getEmail(),
+                prove.getPagina()});
+        }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-           int id = Integer.parseInt(jCProveedores.getItemAt(jCProveedores.getSelectedIndex()).split(" - ")[0]);
-           
-           modelo.setRowCount(0);
+        int id = Integer.parseInt(jCProveedores.getItemAt(jCProveedores.getSelectedIndex()).split(" - ")[0]);
 
-              for (Proveedor prove : provD.buscarProveedor(id)){
-                  modelo.addRow(new Object[]{prove.getIdProveedor(),prove.getRazonSocial(),prove.getDomicilio(),prove.getTelefono(),prove.getEmail(),
-                        prove.getPagina()});
-               }                                        
+        modelo.setRowCount(0);
+
+        for (Proveedor prove : provD.buscarProveedor(id)) {
+            modelo.addRow(new Object[]{prove.getIdProveedor(), prove.getRazonSocial(), prove.getDomicilio(), prove.getTelefono(), prove.getEmail(),
+                prove.getPagina()});
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-//        if (selec != -1) {
-//            int idM = (Integer) jTmateria.getValueAt(selec, 0);
-//            String notaStr = (String) jTmateria.getValueAt(selec, 2);
-//            double nota = Double.parseDouble(notaStr);
-//            insc.actualizarNota(idA, idM, nota);
         //Seleccionar Lista
         int selec = jTLista.getSelectedRow();
-        if (selec != 1){
+        if (selec != 1) {
             int idP = (Integer) jTLista.getValueAt(selec, 0);
-           provD.buscarProveedor(idP);
-           modelo.removeRow(selec);
-            
+            provD.buscarProveedor(idP);
+            modelo.removeRow(selec);
+
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -295,13 +329,14 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTLista;
     // End of variables declaration//GEN-END:variables
-    private void listaCombo (){
-        
-        for (Proveedor prove : provD.listarProveedores() ){
-            jCProveedores.addItem(prove.getIdProveedor()+ " - " + prove.getRazonSocial());
+    private void listaCombo() {
+
+        for (Proveedor prove : provD.listarProveedores()) {
+            jCProveedores.addItem(prove.getIdProveedor() + " - " + prove.getRazonSocial());
         }
     }
-    private void ProveedorTabla(){
+
+    private void ProveedorTabla() {
         modelo.addColumn("idProveedor");
         modelo.addColumn("razonSocial");
         modelo.addColumn("domicilio");
@@ -309,6 +344,11 @@ public class Proveedores extends javax.swing.JInternalFrame {
         modelo.addColumn("email");
         modelo.addColumn("paginaWeb");
         jTLista.setModel(modelo);
+
+    }
+
+    public static boolean validarDatos(String datos) {
+        return datos.matches("[0-9]");
     }
 
 }
