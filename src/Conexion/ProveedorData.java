@@ -20,16 +20,17 @@ public class ProveedorData {
 
     public void guardarProveedor(Proveedor p) {
 
-        String sql = "INSERT INTO provedor (razonSocial,domicilio,telefono,email,pagina) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO `proveedor`(`razonSocial`, `domicilio`, `telefono`, `email`, `pagina`) "
+                + "VALUES (?,?,?,?,?)";
         try {
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, p.getRazonSocial());
             ps.setString(2, p.getDomicilio());
-            ps.setString(3, p.getTelefono());
+            ps.setInt(3, p.getTelefono());
             ps.setString(4, p.getEmail());
             ps.setString(5, p.getPagina());
-            ps.execute();
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 p.setIdProveedor(rs.getInt(1));
@@ -48,7 +49,7 @@ public class ProveedorData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, p.getRazonSocial());
             ps.setString(2, p.getDomicilio());
-            ps.setString(3, p.getTelefono());
+            ps.setInt(3, p.getTelefono());
             ps.setString(4, p.getEmail());
             ps.setString(5, p.getPagina());
             ps.setInt(6, p.getIdProveedor());
@@ -77,42 +78,45 @@ public class ProveedorData {
         }
     }
 
-    public Proveedor buscarProveedor(int i) {
-        String sql = "SELECT * FROM proveedor where idproveedor=?";
-        Proveedor p = new Proveedor();
+    public List <Proveedor>  buscarProveedor(int id) {
+        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, email, pagina FROM proveedor WHERE idProveedor = ? ";
+        
+       
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(0, i);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+            
             if (rs.next()) {
-                p.setIdProveedor(i);
-                p.setRazonSocial(rs.getString("razonsocial"));
+                Proveedor p = new Proveedor();
+                p.setIdProveedor(rs.getInt("idProveedor"));
+                p.setRazonSocial(rs.getString("razonSocial"));
                 p.setDomicilio(rs.getString("domicilio"));
-                p.setTelefono(rs.getString("telefono"));
+                p.setTelefono(rs.getInt("telefono"));
                 p.setEmail(rs.getString("email"));
                 p.setPagina(rs.getString("pagina"));
-                JOptionPane.showMessageDialog(null, "Proveedor encontrado");
-            } else {
-                JOptionPane.showMessageDialog(null, "Este proveedor no esta en la base de datos");
+                proveedores.add(p);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al aceder a la tabla proveedor");
         }
-        return p;
+        return proveedores;
     }
 
     public List<Proveedor> listarProveedores() {
-        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
-        String sql="SELECT * FROM proveedor";
-        
+       
+        String sql= "SELECT * FROM proveedor";
+         ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Proveedor p = new Proveedor();
+                p.setIdProveedor(rs.getInt("idProveedor"));
                 p.setRazonSocial(rs.getString("razonsocial"));
                 p.setDomicilio(rs.getString("domicilio"));
-                p.setTelefono(rs.getString("telefono"));
+                p.setTelefono(rs.getInt("telefono"));
                 p.setEmail(rs.getString("email"));
                 p.setPagina(rs.getString("pagina"));
                 proveedores.add(p);
