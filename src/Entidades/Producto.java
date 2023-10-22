@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class Producto {
   private int idProducto;
-  private String categoriaProducto;
+  private int idCategoria;
   private String nombreProducto;
   private String importadonacional;
   private String descripcion;
@@ -17,28 +17,28 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String categoriaProducto, String nombreProducto, String importadonacional, String descripcion, LocalDate fechalimite, double precioActual, boolean estado) {
-        this.categoriaProducto = categoriaProducto;
+    public Producto(int  idCategoria, String nombreProducto, String importadonacional, String descripcion, LocalDate fechalimite, double precioActual, int stock, boolean estado) {
+        this.idCategoria = idCategoria;
         this.nombreProducto = nombreProducto;
         this.importadonacional = importadonacional;
         this.descripcion = descripcion;
         this.fechalimite = fechalimite;
         this.precioActual = precioActual;
+        this.stock = stock;
         this.estado = estado;
     }
 
-    public Producto(int idProducto, String categoriaProducto, String nombreProducto, String importadonacional, String descripcion, LocalDate fechalimite, double precioActual, boolean estado) {
+    public Producto(int idProducto, int idCategoria, String nombreProducto, String importadonacional, String descripcion, LocalDate fechalimite, double precioActual, int stock, boolean estado) {
         this.idProducto = idProducto;
-        this.categoriaProducto = categoriaProducto;
+        this.idCategoria = idCategoria;
         this.nombreProducto = nombreProducto;
         this.importadonacional = importadonacional;
         this.descripcion = descripcion;
         this.fechalimite = fechalimite;
         this.precioActual = precioActual;
+        this.stock = stock;
         this.estado = estado;
     }
-    
-    
 
     public int getIdProducto() {
         return idProducto;
@@ -48,12 +48,12 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public String getCategoriaProducto() {
-        return categoriaProducto;
+    public int getidCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoriaProducto(String categoriaProducto) {
-        this.categoriaProducto = categoriaProducto;
+    public void setidCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getNombreProducto() {
@@ -114,6 +114,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", categoriaProducto=" + categoriaProducto + ", nombreProducto=" + nombreProducto + ", importadonacional=" + importadonacional + ", descripcion=" + descripcion + ", fechalimite=" + fechalimite + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
-    }   
-}
+        return "Producto{" + "idProducto=" + idProducto + ", categoriaProducto=" + idCategoria + ", nombreProducto=" + nombreProducto + ", importadonacional=" + importadonacional + ", descripcion=" + descripcion + ", fechalimite=" + fechalimite + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
+    }
+
+    }
