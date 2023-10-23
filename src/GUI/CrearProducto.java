@@ -255,8 +255,8 @@ public class CrearProducto extends javax.swing.JInternalFrame {
 
         modelo.setRowCount(0);
         for(Producto prod : prod.listarProductos()){
-            modelo.addRow(new Object[]{prod.getIdProducto(),prod.getidCategoria(),prod.getNombreProducto(),prod.getDescripcion(),
-                    prod.getFechalimite(),prod.getPrecioActual(),prod.getStock(),prod.getidCategoria()});
+            modelo.addRow(new Object[]{prod.getIdProducto(),prod.getidCategoria(),prod.getNombreProducto(),prod.getDescripcion(),prod.getImportadonacional(),
+                    prod.getFechalimite(),prod.getPrecioActual(),prod.getStock(),prod.isEstado()});
            
             }
         
@@ -330,6 +330,7 @@ public class CrearProducto extends javax.swing.JInternalFrame {
        modelo.addColumn("idCategoria");
        modelo.addColumn("nombreProducto");
        modelo.addColumn("descripcion");
+       modelo.addColumn("importadoNacional");
        modelo.addColumn("FechaLimite");
        modelo.addColumn("PrecioActual");
        modelo.addColumn("Stock");

@@ -32,7 +32,7 @@ public class ProductoData {
     }
 
     public void guardarProducto(Producto p) {
-        String sql = " INSERT INTO producto ( idCategoria , `nombreProducto`,`importado/nacional`,`descripcion`,`fechaLimite`,`precioActual`, stock , `estado`)"
+        String sql = " INSERT INTO producto ( idCategoria , `nombreProducto`,`importadoNacional`,`descripcion`,`fechaLimite`,`precioActual`, stock , `estado`)"
                 + " VALUES (?,?,?,?,?,?,?,?) ";
 
         try {
@@ -60,15 +60,13 @@ public class ProductoData {
     }
 
 
-    public void modificarProducto(Producto idProducto) {
-        String sql = " UPDATE producto SET  idProducto = ? , idCategoria = ? , nombreProducto = ? , importado/nacional = ? , descripcion = ? , fechaLimite = ? , precioActual = ?, stock = ? , estado = ? "
+    public void modificarProducto(Producto p) {
+        String sql = " UPDATE producto SET   idCategoria = ? , nombreProducto = ? , importadoNacional = ? , descripcion = ? , fechaLimite = ? , precioActual = ?, stock = ? , estado = ? "
                 + " WHERE idProducto = ? " ;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+
            
-            Producto p = new Producto ();
-            
-            ps.setInt(0, p.getIdProducto());
             ps.setInt(1, p.getidCategoria());
             ps.setString(2, p.getNombreProducto());
             ps.setString(3, p.getImportadonacional());
@@ -77,7 +75,7 @@ public class ProductoData {
             ps.setDouble(6, p.getPrecioActual());
             ps.setInt(7, p.getStock());
             ps.setBoolean(8, p.isEstado());
-
+            ps.setInt(9, p.getIdProducto());
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Producto modificado con exito");
@@ -132,7 +130,7 @@ public class ProductoData {
                 p.setIdProducto(rs.getInt("idProducto"));
                  p.setidCategoria(rs.getInt("idCategoria"));
                 p.setNombreProducto(rs.getString("nombreProducto"));
-                p.setImportadonacional(rs.getString("importado/nacional"));
+                p.setImportadonacional(rs.getString("importadoNacional"));
                 p.setDescripcion(rs.getString("descripcion"));
                 p.setFechalimite(rs.getDate("fechaLimite").toLocalDate());
                 p.setPrecioActual(rs.getDouble("precioActual"));
@@ -159,7 +157,7 @@ public class ProductoData {
                 p.setIdProducto(rs.getInt("idProducto"));
                 p.setidCategoria(rs.getInt("categoriaProducto"));
                 p.setNombreProducto(rs.getString("nombreProducto"));
-                p.setImportadonacional(rs.getString("importado/nacional"));
+                p.setImportadonacional(rs.getString("importadoNacional"));
                 p.setDescripcion(rs.getString("descripcion"));
                 p.setFechalimite(rs.getDate("fechaLimite").toLocalDate());
                 p.setPrecioActual(rs.getDouble("precioActual"));
@@ -186,7 +184,7 @@ public class ProductoData {
                 p.setIdProducto(rs.getInt("idProducto"));
                 p.setidCategoria(rs.getInt("idCategoria"));
                 p.setNombreProducto(rs.getString("nombreProducto"));
-                p.setImportadonacional(rs.getString("importado/nacional"));
+                p.setImportadonacional(rs.getString("importadoNacional"));
                 p.setDescripcion(rs.getString("descripcion"));
                 p.setFechalimite(rs.getDate("fechaLimite").toLocalDate());
                 p.setPrecioActual(rs.getDouble("precioActual"));

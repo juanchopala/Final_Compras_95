@@ -221,12 +221,12 @@ public class Productos extends javax.swing.JInternalFrame {
         if (selec != -1) {
             int id = Integer.parseInt(jClista.getItemAt(jClista.getSelectedIndex()).split(" - ")[0]);
             int idp = (Integer) jTLista.getValueAt(selec, 0);
-            String nombre = Objects.toString(jTLista.getValueAt(selec, 1), "");
-            String importado = Objects.toString(jTLista.getValueAt(selec, 2), "");
-            String descri = Objects.toString(jTLista.getValueAt(selec, 3), "");
-            String FechaLimite = Objects.toString(jTLista.getValueAt(selec, 4), "");
-            String precio = Objects.toString(jTLista.getValueAt(selec, 5), "");
-            String stock = Objects.toString(jTLista.getValueAt(selec, 6), "");
+            String nombre = Objects.toString(jTLista.getValueAt(selec, 1));
+            String importado = Objects.toString(jTLista.getValueAt(selec, 2));
+            String descri = Objects.toString(jTLista.getValueAt(selec, 3));
+            String FechaLimite = Objects.toString(jTLista.getValueAt(selec, 4));
+            String precio = Objects.toString(jTLista.getValueAt(selec, 5));
+            String stock = Objects.toString(jTLista.getValueAt(selec, 6));
             LocalDate fechaLimite = LocalDate.parse(FechaLimite, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             try {
@@ -292,7 +292,7 @@ public class Productos extends javax.swing.JInternalFrame {
     private void litaTabla() {
         modelo.addColumn("idProducto");
         modelo.addColumn("nombreProducto");
-        modelo.addColumn("importado/nacional");
+        modelo.addColumn("importadoNacional");
         modelo.addColumn("descripcion");
         modelo.addColumn("fechaLimite");
         modelo.addColumn("precioActual");

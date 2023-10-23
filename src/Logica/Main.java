@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import javax.swing.SpringLayout;
 import Conexion.CategoriasData;
 import GUI.MainFrameGUI;
+import java.io.File;
 /**
  *
  * @author Administrador
@@ -23,6 +24,7 @@ public class Main {
           MainFrameGUI mf = new MainFrameGUI();
           mf.setVisible(true);
           mf.setLocationRelativeTo(null);
+          ProductoData prod = new ProductoData();
 //        CategoriasData cat = new CategoriasData();
 //        Producto p = new Producto("Desodorante", "Rexona Odorono", "IndustriaArgentina", "no te abandona", LocalDate.of(2023, 10, 7), 200.0, true);
 //        ProductoData pd = new ProductoData();
@@ -39,5 +41,8 @@ public class Main {
 //            System.out.println(var.getIdCategoria());
 //        }
 //      }
-    }
+//       Producto produc = new Producto(8,6, "per", "pa","sadasd", LocalDate.of(2023, 10, 7), 555, 555, true);
+//                prod.modificarProducto(produc);
+
+ }
 }
