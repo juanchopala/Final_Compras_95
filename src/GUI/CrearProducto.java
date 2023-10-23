@@ -127,6 +127,12 @@ public class CrearProducto extends javax.swing.JInternalFrame {
 
         jButton4.setText("Salir");
 
+        jCcategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCcategoriasActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Stock");
 
         jactivo.setText("Activo");
@@ -291,6 +297,10 @@ public class CrearProducto extends javax.swing.JInternalFrame {
         Producto producto = new Producto(idc,Nombre,IM,detalle, fechaN,precio,stoc,activo);
         prod.guardarProducto(producto);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCcategoriasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

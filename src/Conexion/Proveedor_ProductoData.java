@@ -25,12 +25,12 @@ private ProductoData pd = new ProductoData();
     }
     
     public void añadirProductoaProveedor(Proveedor_Producto pp){
-        String sql = "INSERT INTO PROVEEDOR_PRODUCTO (idProveedor,idProducto,costo) VALUES (?,?,?)";
+        String sql = "INSERT INTO proveedor_producto (idProveedor,idProducto,costo) VALUES (?,?,?)";
         
     try {
         PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1,pp.getIdProvedor().getIdProveedor());
-        ps.setInt(2,pp.getIdProducto().getIdProducto());
+        ps.setInt(1,pp.getIdProveedor());
+        ps.setInt(2,pp.getIdProducto());
         ps.setDouble(3, pp.getCosto());
         ps.execute();
         ResultSet rs = ps.getGeneratedKeys();
@@ -133,7 +133,7 @@ private ProductoData pd = new ProductoData();
             Map<String,Object> mapita = new HashMap<>();
             mapita.put("idProducto",rs.getString("idProducto"));
             mapita.put("categoriaProducto",rs.getString("categoriaProducto"));
-            mapita.put("importado/nacional", rs.getString(4));
+            mapita.put("importadonNacional", rs.getString("importadoNacional"));
             mapita.put("descripcion", rs.getString("descripcion"));
             mapita.put("fechaLimite", rs.getDate("fechaLimite").toLocalDate());
             mapita.put("precioActual", rs.getDouble("precioActual"));

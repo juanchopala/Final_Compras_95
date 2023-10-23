@@ -54,6 +54,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         Proveedores = new javax.swing.JMenuItem();
         Productos = new javax.swing.JMenuItem();
+        ProductoProveedor = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Compras = new javax.swing.JMenuItem();
         Ventas = new javax.swing.JMenuItem();
@@ -255,6 +256,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
         Escritorio.getAccessibleContext().setAccessibleDescription("");
 
         jMenu1.setText("Administrar");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         Proveedores.setText("Proveedores");
         Proveedores.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +277,14 @@ public class MainFrameGUI extends javax.swing.JFrame {
             }
         });
         jMenu1.add(Productos);
+
+        ProductoProveedor.setText("Producto-proveedor");
+        ProductoProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductoProveedorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ProductoProveedor);
 
         jMenuBar1.add(jMenu1);
 
@@ -370,6 +384,17 @@ public class MainFrameGUI extends javax.swing.JFrame {
         Escritorio.moveToFront(proveedores);
     }//GEN-LAST:event_ProveedoresActionPerformed
 
+    private void ProductoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductoProveedorActionPerformed
+      ProveedorProducto prodv = new  ProveedorProducto();
+        prodv.setVisible(true);
+        Escritorio.add(prodv);
+        Escritorio.moveToFront(prodv);
+    }//GEN-LAST:event_ProductoProveedorActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
      public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -405,6 +430,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compras;
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JMenuItem ProductoProveedor;
     private javax.swing.JMenuItem Productos;
     private javax.swing.JMenuItem Proveedores;
     private javax.swing.JMenuItem Variables;
