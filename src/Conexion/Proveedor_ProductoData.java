@@ -44,13 +44,13 @@ private ProductoData pd = new ProductoData();
     }  
     }
     
-    public void borrarProductoaProveedor(int idProveedor, int idProducto){
-        String sql = "DELETE FROM proveedor_producto WHERE idProveedor=? AND idProducto=?";
+    public void borrarProductoaProveedor(int idProveedorproducto){
+        String sql = "DELETE FROM proveedor_producto WHERE idProveedorproducto = ? ";
         
     try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1,idProveedor);
-        ps.setInt(2, idProducto);
+        ps.setInt(1,idProveedorproducto);
+
         int exito = ps.executeUpdate();
         if(exito==1){
             JOptionPane.showMessageDialog(null, "producto borrado a proveedor");
@@ -92,6 +92,7 @@ private ProductoData pd = new ProductoData();
 //        return productos;
 //    }
 //    
+    
     public List<Proveedor> ProveedoresdeProducto(int idproducto){
         ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
         String sql = "SELECT * FROM proveedor_producto WHERE idProducto=?";
@@ -121,37 +122,32 @@ private ProductoData pd = new ProductoData();
     }
     
     
-    public List<Map<String,Object>> ProductosConPrecio(int idprovedor){
+    public List<Map<String,Object>> ProductosConPrecio(){
         ArrayList<Map<String,Object>> productosconprecio= new ArrayList<>();
-        String sql = "SELECT p.*,u.costo FROM proveedor_producto u LEFT JOIN producto p on u.idProducto=p.idProducto WHERE IdProvedor=?";
+        String sql = "SELECT u.idProveedorproducto, u.idProveedor, u.idProducto, p.nombreProducto,pro.razonSocial "
+                + "FROM proveedor_producto u "
+                + "JOIN producto p ON u.idProducto= p.idProducto "
+                + "JOIN proveedor pro ON u.idProveedor = pro.IdProveedor ";
+               
     try {
         PreparedStatement ps= con.prepareStatement(sql);
-        ps.setInt(1, idprovedor);
         ResultSet rs = ps.executeQuery();
         
         while(rs.next()){
             Map<String,Object> mapita = new HashMap<>();
-            mapita.put("idProducto",rs.getString("idProducto"));
-            mapita.put("categoriaProducto",rs.getString("categoriaProducto"));
-            mapita.put("importadonNacional", rs.getString("importadoNacional"));
-            mapita.put("descripcion", rs.getString("descripcion"));
-            mapita.put("fechaLimite", rs.getDate("fechaLimite").toLocalDate());
-            mapita.put("precioActual", rs.getDouble("precioActual"));
-            mapita.put("stock",rs.getInt("stock"));
-            mapita.put("estado", rs.getBoolean("estado"));
-            mapita.put("costo",rs.getDouble("costo"));
+            mapita.put("idProveedorproducto", rs.getInt("idProveedorproducto"));
+            mapita.put("idProducto",rs.getString("idProducto")); 
+            mapita.put("nombreProducto", "nombreProducto");
+            mapita.put("idProveedor",  rs.getInt("idProveedor"));
+            mapita.put("razonSocial", "razonSocial");
+
             productosconprecio.add(mapita);
             ps.close();
         }
         
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null,"error al acceder a la tabla proveedor_Producto");
-        //AQUI HICE ALGO QUE TENGO QUE PROBAR QUE ES EL * EN EL APODO DE producto TIENE SENTIDO PERO NO ESTA COMPROBADO CUALQUIER COSA LO HAGO BIEN SI NO ANDA
-        
-        //aqui elegi la opcion del map por que es similar a lo que ya trabajo gonza en inscripcion en la anterior de manera que
-        //se le haga mas facil sin embargo me gustaria discutir en algun momento por que no uso la clase Pair que es una colección
-        //que almacena dos elementos de cualquier tipo de modo que se almacenen 2 objetos por lista (creo que seria mas amigable con el modelo de capas
-        
+   
     }   
         return productosconprecio;   
     }

@@ -12,16 +12,21 @@ import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Proveedor_Producto;
 import Entidades.Variables;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author gonza
  */
 public class ProveedorProducto extends javax.swing.JInternalFrame {
+
     private CategoriasData categoriasData = new CategoriasData();
     private ProductoData prod = new ProductoData();
     private ProveedorData provD = new ProveedorData();
     private Proveedor_ProductoData propro = new Proveedor_ProductoData();
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form ProveedorProducto
      */
@@ -29,6 +34,7 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
         initComponents();
         cargarLista();
         listaCombo();
+        listapp();
     }
 
     /**
@@ -51,9 +57,11 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTLISTA = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLabel1.setText("Asignar Producto a proveedor");
 
@@ -105,7 +113,7 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTLISTA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -116,17 +124,45 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTLISTA);
 
         jButton3.setText("Cargar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Eliminar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(17, 17, 17)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(173, 173, 173)
+                            .addComponent(jButton1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(133, 133, 133)
+                                .addComponent(jButton2))
+                            .addComponent(jButton3))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
@@ -138,33 +174,13 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jProveedores, 0, 219, Short.MAX_VALUE)
-                    .addComponent(Jproductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(508, 508, 508))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jButton4)
-                            .addGap(133, 133, 133)
-                            .addComponent(jButton2))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(173, 173, 173)
-                                .addComponent(jButton1))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(364, 364, 364)
-                        .addComponent(jButton3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jProveedores, 0, 219, Short.MAX_VALUE)
+                        .addComponent(Jproductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(508, 508, 508))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,15 +201,15 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(21, 21, 21)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,7 +227,7 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCategoriaActionPerformed
@@ -223,7 +239,7 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JproductosActionPerformed
 
     private void JproductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JproductosMouseClicked
-    
+
     }//GEN-LAST:event_JproductosMouseClicked
 
     private void jProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProveedoresActionPerformed
@@ -231,20 +247,58 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jProveedoresActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     int idProd = Integer.parseInt(Jproductos.getItemAt(Jproductos.getSelectedIndex()).split(" - ")[0]);
-      double costo = Double.parseDouble(Jproductos.getItemAt(Jproductos.getSelectedIndex()).split(" - ")[2]);
-       int idProve = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
-       Proveedor_Producto provep= new Proveedor_Producto (idProve,idProd,costo);
-       propro.añadirProductoaProveedor(provep);
+        int idProd = Integer.parseInt(Jproductos.getItemAt(Jproductos.getSelectedIndex()).split(" - ")[0]);
+        double costo = Double.parseDouble(Jproductos.getItemAt(Jproductos.getSelectedIndex()).split(" - ")[2]);
+        int idProve = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
+        Proveedor_Producto provep = new Proveedor_Producto(idProve, idProd, costo);
+        propro.añadirProductoaProveedor(provep);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCategoriaMouseClicked
-          int id = Integer.parseInt(jCategoria.getItemAt(jCategoria.getSelectedIndex()).split(" - ")[0]);
-       Jproductos.removeAllItems();
+        int id = Integer.parseInt(jCategoria.getItemAt(jCategoria.getSelectedIndex()).split(" - ")[0]);
+        Jproductos.removeAllItems();
         for (Producto pro : prod.listarProductosActivos(id)) {
-          Jproductos.addItem(pro.getIdProducto() + " - " + pro.getNombreProducto() + " - " + pro.getPrecioActual());
-        }       
+            Jproductos.addItem(pro.getIdProducto() + " - " + pro.getNombreProducto() + " - " + pro.getPrecioActual());
+        }
     }//GEN-LAST:event_jCategoriaMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//               int id = jCalumno.getItemAt(jCalumno.getSelectedIndex()).getId_Alumnos();
+//        
+//
+//        // Limpia la tabla antes de actualizarla
+//        modelo.setRowCount(0);
+//
+//          for (Map<String, Object> materiaConNota : insc.obtenerMateriasConNotas(id)) {
+//              Object[] fila = new Object[3];
+//                      fila[0] = materiaConNota.get("id_Materia");
+//                      fila[1] = materiaConNota.get("nombre"); // Nombre de la materia
+//                      fila[2] = materiaConNota.get("nota");   // Nota
+//                      modelo.addRow(fila);
+//              }
+        for (Map<String, Object> mapita : propro.ProductosConPrecio()) {
+            Object[] fila = new Object[5];
+            fila[0] = mapita.get("idProveedorproducto");
+            fila[1] = mapita.get("idProveedor");
+            fila[2] = mapita.get("razonSocial");
+            fila[3] = mapita.get("idProducto");
+            fila[4] = mapita.get("nombreProducto");
+            modelo.addRow(fila);
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    
+        int selec = jTLISTA.getSelectedRow();
+        if (selec != -1) {
+            int idP = (Integer) jTLISTA.getValueAt(selec, 0);
+          
+           propro.borrarProductoaProveedor(idP);
+            modelo.removeRow(selec);
+            }  
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -261,18 +315,28 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jProveedores;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTLISTA;
     // End of variables declaration//GEN-END:variables
  private void cargarLista() {
 
         for (Variables var : categoriasData.listarCategoria()) {
-           jCategoria.addItem(var.getIdCategoria() + " - " + var.getnombreCategoria());
+            jCategoria.addItem(var.getIdCategoria() + " - " + var.getnombreCategoria());
         }
     }
- private void listaCombo() {
+
+    private void listaCombo() {
 
         for (Proveedor prove : provD.listarProveedores()) {
             jProveedores.addItem(prove.getIdProveedor() + " - " + prove.getRazonSocial());
         }
+    }
+
+    private void listapp() {
+        modelo.addColumn("idProvProd");
+        modelo.addColumn("idProveedor");
+        modelo.addColumn("razonSocial");
+        modelo.addColumn("idProducto");
+        modelo.addColumn("nombreProducto");
+        jTLISTA.setModel(modelo);
     }
 }
