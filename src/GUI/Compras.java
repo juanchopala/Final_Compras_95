@@ -9,7 +9,7 @@ package GUI;
  * @author gonza
  */
 public class Compras extends javax.swing.JInternalFrame {
-
+///
     /**
      * Creates new form Compras
      */
