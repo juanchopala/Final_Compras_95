@@ -69,6 +69,9 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCategoriaMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCategoriaMousePressed(evt);
+            }
         });
         jCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,15 +258,11 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCategoriaMouseClicked
-        int id = Integer.parseInt(jCategoria.getItemAt(jCategoria.getSelectedIndex()).split(" - ")[0]);
-        Jproductos.removeAllItems();
-        for (Producto pro : prod.listarProductosActivos(id)) {
-            Jproductos.addItem(pro.getIdProducto() + " - " + pro.getNombreProducto() + " - " + pro.getPrecioActual());
-        }
+
     }//GEN-LAST:event_jCategoriaMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+         modelo.setRowCount(0);
         for (Map<String, Object> mapita : propro.ProductosConPrecio()) {
             Object[] fila = new Object[5];
             fila[0] = mapita.get("idProveedorproducto");
@@ -272,21 +271,29 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
             fila[3] = mapita.get("idProducto");
             fila[4] = mapita.get("nombreProducto");
             modelo.addRow(fila);
+           
         }
-
-
+     
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    
+
         int selec = jTLISTA.getSelectedRow();
         if (selec != -1) {
             int idP = (Integer) jTLISTA.getValueAt(selec, 0);
-          
-           propro.borrarProductoaProveedor(idP);
+
+            propro.borrarProductoaProveedor(idP);
             modelo.removeRow(selec);
-            }  
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jCategoriaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCategoriaMousePressed
+        int id = Integer.parseInt(jCategoria.getItemAt(jCategoria.getSelectedIndex()).split(" - ")[0]);
+        Jproductos.removeAllItems();
+        for (Producto pro : prod.listarProductosActivos(id)) {
+            Jproductos.addItem(pro.getIdProducto() + " - " + pro.getNombreProducto() + " - " + pro.getPrecioActual());
+        }
+    }//GEN-LAST:event_jCategoriaMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

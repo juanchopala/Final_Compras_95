@@ -250,7 +250,12 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jProductoMouseClicked
 
     private void jProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMousePressed
-  // TODO add your handling code here:
+        jProducto.removeAllItems();
+        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
+        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
+            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto"));
+            
+          }    
     }//GEN-LAST:event_jProveedoresMousePressed
 
     private void jProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseExited
