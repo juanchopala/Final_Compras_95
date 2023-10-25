@@ -242,25 +242,23 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMouseClicked
-//        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
-//        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
-//            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto"));
-//            
-          
-        
+        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
+        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
+            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto"));
+            
+          }       
     }//GEN-LAST:event_jProductoMouseClicked
 
     private void jProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMousePressed
-
+  // TODO add your handling code here:
     }//GEN-LAST:event_jProveedoresMousePressed
 
     private void jProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseExited
- 
+   // TODO add your handling code here:
     }//GEN-LAST:event_jProveedoresMouseExited
 
     private void jProveedoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseMoved
-                    String ids = jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0];
-            jcantidad.setText(ids);
+  // TODO add your handling code here:
     }//GEN-LAST:event_jProveedoresMouseMoved
 
 
