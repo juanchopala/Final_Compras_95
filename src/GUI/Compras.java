@@ -5,15 +5,21 @@
 package GUI;
 
 import Conexion.ProveedorData;
+import Conexion.Proveedor_ProductoData;
 import Entidades.Proveedor;
+import java.util.Map;
 
 /**
  *
  * @author gonza
  */
 public class Compras extends javax.swing.JInternalFrame {
+
     private ProveedorData provD = new ProveedorData();
-     /**
+    private Proveedor_ProductoData propro = new Proveedor_ProductoData();
+    private Productos producto = new Productos();
+
+    /**
      * Creates new form Compras
      */
     public Compras() {
@@ -34,7 +40,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jProveedores = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jProducto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -49,7 +55,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jcantidad = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -64,6 +70,19 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel2.setText("Proveedor");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 91, -1));
 
+        jProveedores.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jProveedoresMouseMoved(evt);
+            }
+        });
+        jProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jProveedoresMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jProveedoresMousePressed(evt);
+            }
+        });
         jProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProveedoresActionPerformed(evt);
@@ -71,12 +90,17 @@ public class Compras extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 83, 241, -1));
 
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+        jProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jProductoMouseClicked(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 117, 241, -1));
+        jProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 117, 241, -1));
 
         jLabel3.setText("Producto");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 60, -1));
@@ -153,12 +177,12 @@ public class Compras extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 530, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jcantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jcantidadActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 90, -1));
+        jPanel1.add(jcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 90, -1));
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, -1));
 
         jLabel9.setText("Cantidad");
@@ -205,17 +229,39 @@ public class Compras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-      ///aqui va algo
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void jProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductoActionPerformed
+        ///aqui va algo
+    }//GEN-LAST:event_jProductoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcantidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jcantidadActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMouseClicked
+//        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
+//        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
+//            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto"));
+//            
+          
+        
+    }//GEN-LAST:event_jProductoMouseClicked
+
+    private void jProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMousePressed
+
+    }//GEN-LAST:event_jProveedoresMousePressed
+
+    private void jProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseExited
+ 
+    }//GEN-LAST:event_jProveedoresMouseExited
+
+    private void jProveedoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseMoved
+                    String ids = jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0];
+            jcantidad.setText(ids);
+    }//GEN-LAST:event_jProveedoresMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,7 +269,6 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -236,11 +281,12 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> jProducto;
     private javax.swing.JComboBox<String> jProveedores;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jcantidad;
     // End of variables declaration//GEN-END:variables
     private void listaProveedor() {
 
@@ -248,6 +294,5 @@ public class Compras extends javax.swing.JInternalFrame {
             jProveedores.addItem(prove.getIdProveedor() + " - " + prove.getRazonSocial());
         }
     }
-
 
 }

@@ -300,4 +300,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jTLista.setModel(modelo);
 
     }
-}
+
+ }
+

@@ -150,5 +150,39 @@ private ProductoData pd = new ProductoData();
    
     }   
         return productosconprecio;   
+    }  
+    
+   
+    
+       public List<Map<String,Object>> ProductoProveedor(int idProveedor){
+        ArrayList<Map<String,Object>> productos= new ArrayList<>();
+        String sql = "SELECT u.idProveedorproducto, u.idProducto, p.nombreProducto "
+                + "FROM proveedor_producto u "
+                + "JOIN producto p ON u.idProducto= p.idProducto "
+                + "JOIN proveedor pro ON u.idProveedor = pro.IdProveedor " 
+                + "WHERE u.idProveedor = ? ";
+               
+    try {
+        PreparedStatement ps= con.prepareStatement(sql);
+         ps.setInt(1, idProveedor);
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()){
+            Map<String,Object> mapita = new HashMap<>();
+            mapita.put("idProveedorproducto", rs.getInt("idProveedorproducto"));
+            mapita.put("idProducto",rs.getString("idProducto")); 
+            mapita.put("nombreProducto", "nombreProducto");
+            mapita.put("idProveedor",  rs.getInt("idProveedor"));
+            mapita.put("razonSocial", "razonSocial");
+
+            productos.add(mapita);
+            ps.close();
+        }
+        
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null,"error al acceder a la base de datos");
+   
+    }   
+        return productos;   
     }
 }

@@ -263,19 +263,7 @@ public class ProveedorProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCategoriaMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//               int id = jCalumno.getItemAt(jCalumno.getSelectedIndex()).getId_Alumnos();
-//        
-//
-//        // Limpia la tabla antes de actualizarla
-//        modelo.setRowCount(0);
-//
-//          for (Map<String, Object> materiaConNota : insc.obtenerMateriasConNotas(id)) {
-//              Object[] fila = new Object[3];
-//                      fila[0] = materiaConNota.get("id_Materia");
-//                      fila[1] = materiaConNota.get("nombre"); // Nombre de la materia
-//                      fila[2] = materiaConNota.get("nota");   // Nota
-//                      modelo.addRow(fila);
-//              }
+
         for (Map<String, Object> mapita : propro.ProductosConPrecio()) {
             Object[] fila = new Object[5];
             fila[0] = mapita.get("idProveedorproducto");
