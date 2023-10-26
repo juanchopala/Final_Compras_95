@@ -4,7 +4,30 @@
  */
 package GUI;
 
+import Conexion.CategoriasData;
+import Conexion.ProductoData;
+import Conexion.ProveedorData;
+import Conexion.Proveedor_ProductoData;
+import Entidades.Producto;
+import Entidades.Proveedor;
+import Entidades.Proveedor_Producto;
+import Entidades.Variables;
+import GUI.Compras;
+import GUI.Productos;
+import GUI.ProveedorProducto;
+import GUI.Proveedores;
+import GUI.Variables1;
+import GUI.Ventas;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+import java.util.Map;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,15 +35,40 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
  */
 public class MainFrameGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainFrameGUI
-     */
+    ButtonGroup mi = new ButtonGroup();
+    ProductoData prod = new ProductoData();
+    CategoriasData cate = new CategoriasData();
+    ProveedorData prove = new ProveedorData();
+    Proveedor_ProductoData propro = new Proveedor_ProductoData();
+    DefaultTableModel modelo = new DefaultTableModel();
+
     public MainFrameGUI() {
         initComponents();
-       // this.setExtendedState(MAXIMIZED_BOTH);
-       // Escritorio.isMaximumSizeSet();
-       // aqui lo saque para que se inicilize en el tamaño minimo y después se pueda agrandar
-       //ahora si quieres usar algun elemento de l
+        listaComboCatego();
+        listaComboProduc();
+        listaComboProveedores();
+        mi.add(JrMinimo);
+        mi.add(JrMaximo);
+        JrMinimo.setEnabled(false);
+        JrMaximo.setEnabled(false);
+        CargarTabla2();
+        JrStock.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (!JrStock.isSelected()) {
+                    JrMinimo.setEnabled(false);
+                    JrMaximo.setEnabled(false);
+                } else {
+                    JrMinimo.setEnabled(true);
+                    JrMaximo.setEnabled(true);
+                }
+            }
+        });
+
+        // this.setExtendedState(MAXIMIZED_BOTH);
+        // Escritorio.isMaximumSizeSet();
+        // aqui lo saque para que se inicilize en el tamaño minimo y después se pueda agrandar
+        //ahora si quieres usar algun elemento de l
     }
 
     /**
@@ -31,33 +79,35 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        MainTableGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        JrCompras = new javax.swing.JRadioButton();
+        JrVentas = new javax.swing.JRadioButton();
+        JrMinimo = new javax.swing.JRadioButton();
+        JrMaximo = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        JrStock = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        JCListarProductos = new javax.swing.JComboBox<>();
+        JCListarCategorias = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        JCListarProveedores = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Proveedores = new javax.swing.JMenuItem();
@@ -82,71 +132,67 @@ public class MainFrameGUI extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 470, 670, 80));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, 670, 90));
 
-        jRadioButton1.setText("Compras");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        MainTableGroup.add(JrCompras);
+        JrCompras.setText("Compras");
+        JrCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                JrComprasActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
+        jPanel2.add(JrCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
-        jRadioButton2.setText("Ventas");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, -1, -1));
+        MainTableGroup.add(JrVentas);
+        JrVentas.setText("Ventas");
+        jPanel2.add(JrVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, -1, -1));
 
-        jRadioButton4.setText("Minimo");
-        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, -1, -1));
+        JrMinimo.setSelected(true);
+        JrMinimo.setText("De Menor a");
+        jPanel2.add(JrMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, -1, -1));
 
-        jRadioButton3.setText("Maximo");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        JrMaximo.setText("De mayor a");
+        JrMaximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                JrMaximoActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+        jPanel2.add(JrMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, -1));
 
         jLabel2.setText("Stock");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 89, -1));
-        jPanel2.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 110, -1));
-        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 270, 120, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 89, -1));
+        jPanel2.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 110, -1));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 120, -1));
 
         jLabel3.setText("Entre fechas");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 150, 20));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 150, 20));
 
         jLabel5.setText("Hasta");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, 20));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, 20));
 
-        jRadioButton5.setText("Stock");
-        jPanel2.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 40, -1, -1));
-
-        jLabel1.setText("Ordenar");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
-
-        jButton1.setText("Nombre del proveedor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        MainTableGroup.add(JrStock);
+        JrStock.setSelected(true);
+        JrStock.setText("Stock");
+        JrStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JrStockActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 140, -1));
+        jPanel2.add(JrStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 40, -1, -1));
 
-        jButton2.setText("Nombre del  producto");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 140, -1));
+        jLabel1.setText("Productos por categoria");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 270, -1));
 
         jLabel4.setText("Fecha especifica");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         jButton5.setText("fecha");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -154,13 +200,21 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 170, -1));
+        jPanel2.add(JCListarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 320, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 170, -1));
+        JCListarCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JCListarCategoriasMouseClicked(evt);
+            }
+        });
+        JCListarCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCListarCategoriasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(JCListarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 320, -1));
 
         jButton3.setText("Buscar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -168,18 +222,15 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
-        jPanel2.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 130, -1));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, -1, -1));
+        jPanel2.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 130, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IdProducto", "idCategoria", "nombreProducto", "ImportadoNacional", "descripcion", "fechaLimite", "precioActual", "stock", "estado"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -187,7 +238,21 @@ public class MainFrameGUI extends javax.swing.JFrame {
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 670, 350));
 
         jLabel6.setText("Stock bajo");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 440, 150, 20));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 150, 20));
+
+        jLabel7.setText("Proveedores de producto");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 270, -1));
+
+        jLabel8.setText("Productos de poveedor");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 270, -1));
+
+        JCListarProveedores.setSelectedItem(null);
+        JCListarProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCListarProveedoresActionPerformed(evt);
+            }
+        });
+        jPanel2.add(JCListarProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 320, -1));
 
         Escritorio.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -195,11 +260,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -296,27 +361,23 @@ public class MainFrameGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void JrComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrComprasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_JrComprasActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void JrMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrMaximoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_JrMaximoActionPerformed
 
     private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
-         Compras compras = new Compras();
-         compras.setVisible(true);
-         Escritorio.add(compras);
-         Escritorio.moveToFront(compras);
+        Compras compras = new Compras();
+        compras.setVisible(true);
+        Escritorio.add(compras);
+        Escritorio.moveToFront(compras);
     }//GEN-LAST:event_ComprasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VentasActionPerformed
-        Ventas ventas = new Ventas ();
+        Ventas ventas = new Ventas();
         ventas.setVisible(true);
         Escritorio.add(ventas);
         Escritorio.moveToFront(ventas);
@@ -345,14 +406,14 @@ public class MainFrameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ProveedoresActionPerformed
 
     private void ProductoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductoProveedorActionPerformed
-      ProveedorProducto prodv = new  ProveedorProducto();
+        ProveedorProducto prodv = new ProveedorProducto();
         prodv.setVisible(true);
         Escritorio.add(prodv);
         Escritorio.moveToFront(prodv);
     }//GEN-LAST:event_ProductoProveedorActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -363,52 +424,99 @@ public class MainFrameGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void JrStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrStockActionPerformed
+        //pingo
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrameGUI().setVisible(true);
-            }
-        });
+    }//GEN-LAST:event_JrStockActionPerformed
+
+    private void JCListarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCListarCategoriasActionPerformed
+        int id = Integer.parseInt(JCListarCategorias.getItemAt(JCListarCategorias.getSelectedIndex()).split(" - ")[0]);
+        modelo.setRowCount(0);
+        for (Producto p : prod.listarProductosActivos(id)) {
+            Object[] fila = new Object[7];
+
+            fila[0] = p.getIdProducto();
+            fila[1] = p.getNombreProducto();
+            fila[2] = p.getImportadonacional();
+            fila[3] = p.getDescripcion();
+            fila[4] = p.getFechalimite().toString();
+            fila[5] = p.getPrecioActual();
+            fila[6] = p.getStock();
+            modelo.addRow(fila);
+        }
+    }//GEN-LAST:event_JCListarCategoriasActionPerformed
+
+    private void JCListarCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JCListarCategoriasMouseClicked
+     
+    }//GEN-LAST:event_JCListarCategoriasMouseClicked
+
+    private void JCListarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCListarProveedoresActionPerformed
+        int id = Integer.parseInt(JCListarProveedores.getItemAt(JCListarProveedores.getSelectedIndex()).split(" - ")[0]);
+        modelo.setRowCount(0);
+        for(Producto p: prod.listarProductos()){
+        
+        }
+        
+    }//GEN-LAST:event_JCListarProveedoresActionPerformed
+    private void listaComboCatego() {
+        for (Variables prod : cate.listarCategoria()) {
+            JCListarCategorias.addItem(prod.getIdCategoria() + " - " + prod.getnombreCategoria());
+        }
     }
+    
+    private void listaComboProduc(){
+    for(Variables c:cate.listarCategoria()){
+            int id = c.getIdCategoria();
+            for (Producto p : prod.listarProductosActivos(id)) {
+                JCListarProductos.addItem(p.getIdProducto() + " - " + p.getNombreProducto() + " - " + p.getPrecioActual());
+        }
+    }
+}
+    private void listaComboProveedores(){
+        for(Proveedor p: prove.listarProveedores()){
+             JCListarProveedores.addItem(p.getIdProveedor() + " - " + p.getRazonSocial());
+        }
+    }
+    
+    private void CargarTabla2(){
+        modelo.addColumn("idProducto");
+        modelo.addColumn("idCategoria");
+        modelo.addColumn("nombreProducto");
+        modelo.addColumn("importadoNacional");
+        modelo.addColumn("descripcion");
+        modelo.addColumn("fechaLimite");
+        modelo.addColumn("precioActual");
+        modelo.addColumn("stock");
+        modelo.addColumn("estado");
+        jTable2.setModel(modelo);
+        jTable1.setModel(modelo);
+    }
+
+    // rellenar tabla segun categoria en producto carga segun categoria 
+    // fecha especifica tiene que mapear los datos en la jtable segun esa fecha 
+    // entre los 2 day choser 
+    //ordenar 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compras;
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JComboBox<String> JCListarCategorias;
+    private javax.swing.JComboBox<String> JCListarProductos;
+    private javax.swing.JComboBox<String> JCListarProveedores;
+    private javax.swing.JRadioButton JrCompras;
+    private javax.swing.JRadioButton JrMaximo;
+    private javax.swing.JRadioButton JrMinimo;
+    private javax.swing.JRadioButton JrStock;
+    private javax.swing.JRadioButton JrVentas;
+    private javax.swing.ButtonGroup MainTableGroup;
     private javax.swing.JMenuItem ProductoProveedor;
     private javax.swing.JMenuItem Productos;
     private javax.swing.JMenuItem Proveedores;
     private javax.swing.JMenuItem Variables;
     private javax.swing.JMenuItem Ventas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -418,6 +526,8 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -425,11 +535,6 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
