@@ -93,7 +93,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 470, 670, 90));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 470, 670, 80));
 
         jRadioButton1.setText("Compras");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,10 +101,10 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
+        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
 
         jRadioButton2.setText("Ventas");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, -1, -1));
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, -1, -1));
 
         jRadioButton4.setText("Minimo");
         jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, -1, -1));
@@ -154,7 +154,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 170, -1));
@@ -195,11 +195,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

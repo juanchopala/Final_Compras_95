@@ -150,7 +150,7 @@ public class Proveedor_ProductoData {
 
     public List<Map<String, Object>> ProductoProveedor(int idProveedor) {
         ArrayList<Map<String, Object>> productos = new ArrayList<>();
-        String sql = "SELECT u.idProveedorproducto,u.idProveedor, u.idProducto, p.nombreProducto,pro.razonSocial "
+        String sql = "SELECT u.idProveedorproducto,u.idProveedor, u.idProducto,p.precioActual, p.nombreProducto,pro.razonSocial "
                 + "FROM proveedor_producto u "
                 + "JOIN producto p ON u.idProducto= p.idProducto "
                 + "JOIN proveedor pro ON u.idProveedor = pro.IdProveedor "
@@ -168,6 +168,7 @@ public class Proveedor_ProductoData {
                 mapita.put("nombreProducto", rs.getString("nombreProducto"));
                 mapita.put("idProveedor", rs.getInt("idProveedor"));
                 mapita.put("razonSocial", rs.getString("razonSocial"));
+                mapita.put("precioActual", rs.getDouble("precioActual"));
 
                 productos.add(mapita);
                 ps.close();

@@ -28,6 +28,7 @@ public class Compras extends javax.swing.JInternalFrame {
         initComponents();
         listaProveedor();
         cargarMetodos();
+       
     }
 
 
@@ -48,15 +49,15 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jTextField1 = new javax.swing.JTextField();
+        jprecio = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jcantidad = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jcantidad = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -67,7 +68,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 14, 183, -1));
 
         jLabel2.setText("Proveedor");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 91, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 91, -1));
 
         jProveedores.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -87,11 +88,14 @@ public class Compras extends javax.swing.JInternalFrame {
                 jProveedoresActionPerformed(evt);
             }
         });
-        jPanel1.add(jProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 83, 241, -1));
+        jPanel1.add(jProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 241, -1));
 
         jProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jProductoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jProductoMousePressed(evt);
             }
         });
         jProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -99,23 +103,23 @@ public class Compras extends javax.swing.JInternalFrame {
                 jProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(jProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 117, 241, -1));
+        jPanel1.add(jProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 241, -1));
 
         jLabel3.setText("Producto");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 60, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 60, -1));
 
         jMetodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMetodoActionPerformed(evt);
             }
         });
-        jPanel1.add(jMetodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 157, 241, -1));
+        jPanel1.add(jMetodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 150, -1));
 
         jLabel5.setText("Metodo de pago");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 91, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 91, -1));
 
         jLabel6.setText("Precio");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 83, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 83, 20));
 
         jButton1.setText("Compra");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +127,7 @@ public class Compras extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 140, 32));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 140, 32));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 326, 132, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -139,26 +143,19 @@ public class Compras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 583, 151));
-
-        jButton2.setText("Cargar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 583, 151));
 
         jLabel4.setText("Fecha ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 71, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 90, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 71, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 150, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jprecio.setEditable(false);
+        jprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jprecioActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 90, -1));
+        jPanel1.add(jprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 90, 30));
 
         jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -174,27 +171,40 @@ public class Compras extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 530, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, -1));
+
+        jLabel9.setText("Cantidad");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 60, -1));
+
+        jButton2.setText("Añadir al carrito");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 140, 40));
 
         jcantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcantidadActionPerformed(evt);
             }
         });
-        jPanel1.add(jcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 90, -1));
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, -1));
-
-        jLabel9.setText("Cantidad");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 50, -1));
+        jcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jcantidadKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jcantidadKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,12 +226,8 @@ public class Compras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+     this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -232,27 +238,19 @@ public class Compras extends javax.swing.JInternalFrame {
         ///aqui va algo
     }//GEN-LAST:event_jProductoActionPerformed
 
-    private void jcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcantidadActionPerformed
+    private void jprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jprecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcantidadActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jprecioActionPerformed
 
     private void jProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMouseClicked
-        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
-        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
-            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto"));
-            
-          }       
+      
     }//GEN-LAST:event_jProductoMouseClicked
 
     private void jProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMousePressed
         jProducto.removeAllItems();
         int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
         for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
-            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto"));
+            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto") + " -  " + productos.get("precioActual"));
           }    
     }//GEN-LAST:event_jProveedoresMousePressed
 
@@ -263,6 +261,29 @@ public class Compras extends javax.swing.JInternalFrame {
     private void jProveedoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseMoved
   // TODO add your handling code here:
     }//GEN-LAST:event_jProveedoresMouseMoved
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMousePressed
+       
+    }//GEN-LAST:event_jProductoMousePressed
+
+    private void jcantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyPressed
+        
+    }//GEN-LAST:event_jcantidadKeyPressed
+
+    private void jcantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyReleased
+        int Cantidad = Integer.parseInt(jcantidad.getText());
+        double precio =  Double.parseDouble(jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[2]);
+        double result = precio * Cantidad ;
+        jprecio.setText(String.valueOf(result)); 
+    }//GEN-LAST:event_jcantidadKeyReleased
+
+    private void jcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcantidadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -286,8 +307,8 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jProveedores;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jcantidad;
+    private javax.swing.JTextField jprecio;
     // End of variables declaration//GEN-END:variables
     private void listaProveedor() {
 
@@ -300,4 +321,11 @@ public class Compras extends javax.swing.JInternalFrame {
             jMetodo.addItem(var.getIdMetodoPago() + " - " + var.getNombreMetodo());
         }
      }
+ private void costo (){
+        int Cantidad = Integer.parseInt(jcantidad.getText());
+        double precio =  Double.parseDouble(jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[2]);
+        double result = precio * Cantidad ;
+        
+ }
+
 }
