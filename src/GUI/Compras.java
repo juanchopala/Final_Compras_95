@@ -10,17 +10,19 @@ import Conexion.Proveedor_ProductoData;
 import Entidades.Proveedor;
 import Entidades.Variable2;
 import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author gonza
  */
 public class Compras extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modelo = new DefaultTableModel();
     private ProveedorData provD = new ProveedorData();
     private Proveedor_ProductoData propro = new Proveedor_ProductoData();
     private Productos producto = new Productos();
     private CategoriasData categoriasData = new CategoriasData();
+    
     /**
      * Creates new form Compras
      */
@@ -28,7 +30,7 @@ public class Compras extends javax.swing.JInternalFrame {
         initComponents();
         listaProveedor();
         cargarMetodos();
-       
+        carroCompra();
     }
 
 
@@ -48,7 +50,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jcarro = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jprecio = new javax.swing.JTextField();
@@ -130,7 +132,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 140, 32));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 326, 132, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jcarro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,7 +143,7 @@ public class Compras extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jcarro);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 583, 151));
 
@@ -223,7 +225,9 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jProveedoresActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+//      for (int i = 0 > jcarro.getRowCount();i++){
+          
+//      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -263,7 +267,13 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jProveedoresMouseMoved
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+         int Cantidad = Integer.parseInt(jcantidad.getText());
+         String proveedor = jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[1];
+         String Producto =  jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[1];
+         int idProducto = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[0]);
+         double precio = Double.parseDouble(jprecio.getText());
+         modelo.addRow(new Object[]{proveedor,idProducto, Producto, Cantidad, precio });
+         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMousePressed
@@ -306,8 +316,8 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jProducto;
     private javax.swing.JComboBox<String> jProveedores;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jcantidad;
+    private javax.swing.JTable jcarro;
     private javax.swing.JTextField jprecio;
     // End of variables declaration//GEN-END:variables
     private void listaProveedor() {
@@ -327,5 +337,14 @@ public class Compras extends javax.swing.JInternalFrame {
         double result = precio * Cantidad ;
         
  }
+ private void carroCompra(){
+     modelo.addColumn("Proveedor");
+     modelo.addColumn("idProducto");
+     modelo.addColumn("Producto");
+     modelo.addColumn("Cantidad");
+     modelo.addColumn("Precio");
+     jcarro.setModel(modelo);
+ }
+ 
 
 }

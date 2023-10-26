@@ -61,36 +61,7 @@ public class Proveedor_ProductoData {
         }
     }
 
-//    public List<Producto> ProductosdeProveedor(int idProveedor){
-//        ArrayList<Producto> productos = new ArrayList<Producto>();
-//        String sql = "SELECT * FROM proveedor_producto WHERE idProvedor=?";
-//    try {
-//        PreparedStatement ps = con.prepareStatement(sql);
-//        ps.setInt(1, idProveedor);
-//        ResultSet rs = ps.executeQuery();
-//        
-//        while(rs.next()){
-//            Producto p = new Producto(categoria, Nombre, IM, fecha, precio, stock, activo);
-//            p.setIdProducto(rs.getInt("idProducto"));
-//            p.setCategoriaProducto(rs.getString("categoriaProducto"));
-//            p.setNombreProducto(rs.getString("nombreProducto"));
-//            p.setImportadonacional(rs.getString(4));
-//            p.setDescripcion(rs.getString("descripcion"));
-//            p.setFechalimite(rs.getDate("fechaLimite").toLocalDate());
-//            p.setPrecioActual(rs.getDouble("precioActual"));
-//            p.setStock(rs.getInt("stock"));
-//            p.setEstado(rs.getBoolean("estado"));
-//            productos.add(p);
-//            //TERMINAR ESTO DESPUÉS HACER UN LISTAR ALL Y UN TODOS LOS PROVEEDORES DE UN PRODUCTO
-//        }
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null,"error al acceder a la tabla proveedor_Producto");
-//        }
-//        
-//        
-//        return productos;
-//    }
-//    
+
     public List<Proveedor> ProveedoresdeProducto(int idproducto) {
         ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
         String sql = "SELECT * FROM proveedor_producto WHERE idProducto=?";
