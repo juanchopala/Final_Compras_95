@@ -17,7 +17,7 @@ import java.util.Map;
 public class Proveedor_ProductoData {
 
     private Connection con;
-    private ProveedorData ps = new ProveedorData();
+    private ProveedorData prove = new ProveedorData();
     private ProductoData pd = new ProductoData();
 
     public Proveedor_ProductoData() {
@@ -73,13 +73,7 @@ public class Proveedor_ProductoData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Proveedor p = new Proveedor();
-                p.setIdProveedor(rs.getInt("idProveedor"));
-                p.setRazonSocial(rs.getString("razonSocial"));
-                p.setDomicilio(rs.getString("domiciolio"));
-                p.setTelefono(rs.getInt("telefono"));
-                p.setEmail(rs.getString("email"));
-                p.setPagina(rs.getString("pagina"));
+                Proveedor p = prove.buscarProveedor(rs.getInt("idProveedor"));
                 proveedores.add(p);
             }
         } catch (SQLException ex) {

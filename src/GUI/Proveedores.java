@@ -288,11 +288,9 @@ public class Proveedores extends javax.swing.JInternalFrame {
         int id = Integer.parseInt(jCProveedores.getItemAt(jCProveedores.getSelectedIndex()).split(" - ")[0]);
 
         modelo.setRowCount(0);
-
-        for (Proveedor prove : provD.buscarProveedor(id)) {
-            modelo.addRow(new Object[]{prove.getIdProveedor(), prove.getRazonSocial(), prove.getDomicilio(), prove.getTelefono(), prove.getEmail(),
+        Proveedor prove =provD.buscarProveedor(id);
+        modelo.addRow(new Object[]{prove.getIdProveedor(), prove.getRazonSocial(), prove.getDomicilio(), prove.getTelefono(), prove.getEmail(),
                 prove.getPagina()});
-        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

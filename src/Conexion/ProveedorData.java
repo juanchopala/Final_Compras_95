@@ -81,29 +81,51 @@ public class ProveedorData {
         }
     }
 
-    public List<Proveedor> buscarProveedor(int id) {
-        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+//    public List<Proveedor> buscarProveedor(int id) {
+//        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+//        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, email, pagina FROM proveedor WHERE idProveedor = ? ";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            ResultSet rs = ps.executeQuery();
+//
+//            if (rs.next()) {
+//                Proveedor p = new Proveedor();
+//                p.setIdProveedor(rs.getInt("idProveedor"));
+//                p.setRazonSocial(rs.getString("razonSocial"));
+//                p.setDomicilio(rs.getString("domicilio"));
+//                p.setTelefono(rs.getInt("telefono"));
+//                p.setEmail(rs.getString("email"));
+//                p.setPagina(rs.getString("pagina"));
+//                proveedores.add(p);
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "error al aceder a la tabla proveedor");
+//        }
+//        return proveedores;
+//    } TENIA MIEDO QUE SI LO CAMBIABA PUEDA PASAR ALGO MALO 
+    
+        public Proveedor buscarProveedor(int id) {
+        
         String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, email, pagina FROM proveedor WHERE idProveedor = ? ";
-
+        Proveedor p = new Proveedor();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
+            ResultSet rs = ps.executeQuery();           
             if (rs.next()) {
-                Proveedor p = new Proveedor();
                 p.setIdProveedor(rs.getInt("idProveedor"));
                 p.setRazonSocial(rs.getString("razonSocial"));
                 p.setDomicilio(rs.getString("domicilio"));
                 p.setTelefono(rs.getInt("telefono"));
                 p.setEmail(rs.getString("email"));
-                p.setPagina(rs.getString("pagina"));
-                proveedores.add(p);
+                p.setPagina(rs.getString("pagina"));               
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al aceder a la tabla proveedor");
         }
-        return proveedores;
+        return p;
     }
 
     public List<Proveedor> listarProveedores() {
