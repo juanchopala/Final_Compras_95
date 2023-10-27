@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2023 a las 00:27:47
+-- Tiempo de generación: 27-10-2023 a las 23:52:02
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -51,8 +51,8 @@ CREATE TABLE `compra` (
   `idCompra` int(11) NOT NULL,
   `idProvedor` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `Reporte` varchar(200) NOT NULL
+  `idMetodoPago` int(11) NOT NULL,
+  `precioCosto` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -63,12 +63,10 @@ CREATE TABLE `compra` (
 
 CREATE TABLE `detallecompra` (
   `idDetalle` int(11) NOT NULL,
-  `idMetodoPago` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precioCosto` double NOT NULL,
   `idCompra` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL,
-  `fechaEntrega` date NOT NULL
+  `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -122,7 +120,8 @@ INSERT INTO `producto` (`idProducto`, `idCategoria`, `nombreProducto`, `importad
 (20, 8, 'Polenta', 'local', 'ffff', '2023-07-22', 1, 0, 1),
 (21, 9, 'Poet', 'local', 'dddd', '2023-07-22', 1, 0, 1),
 (22, 9, 'lusonfort', 'local', 'dddd', '2023-07-22', 12, 0, 1),
-(23, 9, 'Hierba', 'local', 'dddd', '2023-07-22', 12, 0, 1);
+(23, 9, 'Hierba', 'local', 'dddd', '2023-07-22', 12, 0, 1),
+(24, 7, 'asdfadf', 'asdfasdf', 'asdfasdfasdf', '2023-10-29', 1232, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +173,12 @@ INSERT INTO `proveedor_producto` (`idProveedorproducto`, `idProveedor`, `idProdu
 (10, 12, 20, 1),
 (11, 13, 21, 1),
 (12, 13, 22, 12),
-(13, 13, 23, 12);
+(13, 13, 23, 12),
+(14, 11, 21, 1),
+(15, 11, 16, 10),
+(16, 11, 15, 12),
+(17, 11, 17, 22),
+(18, 11, 24, 1232);
 
 -- --------------------------------------------------------
 
@@ -187,7 +191,8 @@ CREATE TABLE `ventas` (
   `idproducto` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `PrecioTotal` double NOT NULL
+  `PrecioTotal` double NOT NULL,
+  `idMetodoPago` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -205,7 +210,8 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`idCompra`),
-  ADD KEY `idProvedor` (`idProvedor`);
+  ADD KEY `idProvedor` (`idProvedor`),
+  ADD KEY `idMetodoPago` (`idMetodoPago`);
 
 --
 -- Indices de la tabla `detallecompra`
@@ -213,8 +219,7 @@ ALTER TABLE `compra`
 ALTER TABLE `detallecompra`
   ADD PRIMARY KEY (`idDetalle`),
   ADD KEY `detallecompra_ibfk_1` (`idCompra`),
-  ADD KEY `detallecompra_ibfk_2` (`idProducto`),
-  ADD KEY `idMetodoPago` (`idMetodoPago`);
+  ADD KEY `detallecompra_ibfk_2` (`idProducto`);
 
 --
 -- Indices de la tabla `metodopago`
@@ -248,7 +253,8 @@ ALTER TABLE `proveedor_producto`
 --
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`idventas`),
-  ADD KEY `idproducto` (`idproducto`);
+  ADD KEY `idproducto` (`idproducto`),
+  ADD KEY `idMetodoPago` (`idMetodoPago`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -282,7 +288,7 @@ ALTER TABLE `metodopago`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -294,7 +300,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `proveedor_producto`
 --
 ALTER TABLE `proveedor_producto`
-  MODIFY `idProveedorproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idProveedorproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
@@ -310,15 +316,15 @@ ALTER TABLE `ventas`
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `proveedor` (`idProveedor`);
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `proveedor` (`idProveedor`),
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`);
 
 --
 -- Filtros para la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
   ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`),
-  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`),
-  ADD CONSTRAINT `detallecompra_ibfk_3` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`);
+  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `producto`
@@ -337,7 +343,8 @@ ALTER TABLE `proveedor_producto`
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idProducto`);
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idProducto`),
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
