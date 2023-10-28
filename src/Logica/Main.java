@@ -21,6 +21,7 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args) {
+        
           MainFrameGUI mf = new MainFrameGUI();
           mf.setVisible(true);
           mf.setLocationRelativeTo(null);
@@ -41,8 +42,13 @@ public class Main {
 //            System.out.println(var.getIdCategoria());
 //        }
 //      }
-//       Producto produc = new Producto(8,6, "per", "pa","sadasd", LocalDate.of(2023, 10, 7), 555, 555, true);
-//                prod.modificarProducto(produc);
-
+//        for (Producto pro : prod.buscarStockProducto(15)) {
+//           int cantidad = 16;
+//            int stock = pro.getStock();
+//            int Resultado =  cantidad - stock;
+//            Producto pp = new Producto(15,22);
+//              prod.modificarStockProducto(pp);
+//        }
  }
+  
 }

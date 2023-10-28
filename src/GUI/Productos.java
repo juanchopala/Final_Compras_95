@@ -228,11 +228,9 @@ public class Productos extends javax.swing.JInternalFrame {
             String precio = Objects.toString(jTLista.getValueAt(selec, 5));
             String stock = Objects.toString(jTLista.getValueAt(selec, 6));
             LocalDate fechaLimite = LocalDate.parse(FechaLimite, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
             try {
                 int Stock = Integer.parseInt(stock);
                 double Precio = Double.parseDouble(precio);
-
                 Producto produc = new Producto(idp,id, nombre, importado, descri, fechaLimite, Precio, Stock, true);
                 prod.modificarProducto(produc);
             } catch (NumberFormatException e) {
