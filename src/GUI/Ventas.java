@@ -6,9 +6,19 @@ package GUI;
 
 import Conexion.CategoriasData;
 import Conexion.ProductoData;
+import Conexion.VentasData;
 import Entidades.Producto;
 import Entidades.Variable2;
 import Entidades.Variables;
+import Entidades.Venta;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.TemporalQueries.zone;
+import java.util.Objects;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -18,6 +28,9 @@ public class Ventas extends javax.swing.JInternalFrame {
 
     private CategoriasData categoriasData = new CategoriasData();
     private ProductoData prod = new ProductoData();
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private VentasData ven = new VentasData();
+
 
     /**
      * Creates new form Ventas
@@ -26,6 +39,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         initComponents();
         cargarCate();
         cargarMetodos();
+        modelList();
     }
 
     @SuppressWarnings("unchecked")
@@ -41,7 +55,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jMetodos = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jFecha = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jCategoria = new javax.swing.JComboBox<>();
@@ -49,6 +63,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        prueba = new javax.swing.JTextField();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(750, 600));
@@ -138,7 +153,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jMetodos, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,6 +169,10 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(54, 54, 54))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(prueba, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,14 +203,16 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(prueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,14 +223,30 @@ public class Ventas extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int idP = (Integer) jTable1.getValueAt(0, 0);
+        String FechaL = Objects.toString(jTable1.getValueAt(0, 1));
+        LocalDate fech = LocalDate.parse(FechaL, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        int cantidad = (Integer) jTable1.getValueAt(0, 2);
+        int idC = (Integer) jTable1.getValueAt(0, 3);
+
+        for (Producto pro : prod.buscarStockProducto(idP)) { 
+            int stock = pro.getStock();
+            int Resultado =  cantidad - stock;
+            Producto pp = new Producto(idP,Resultado);
+              prod.modificarStockProducto(pp);
+        }
+            Venta venta = new Venta(idP, fech,cantidad,1,idC);
+            ven.guardarVentas(venta);
+        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductoActionPerformed
@@ -230,10 +267,15 @@ public class Ventas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      int id = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[0]);
-      int Cantidad = Integer.parseInt(jcantidad.getText());
-      int metodo = Integer.parseInt(jMetodos.getItemAt(jMetodos.getSelectedIndex()).split(" - ")[0]);
- 
+        modelo.setRowCount(0);
+
+        int id = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[0]);
+        int Cantidad = Integer.parseInt(jcantidad.getText());
+        int metodo = Integer.parseInt(jMetodos.getItemAt(jMetodos.getSelectedIndex()).split(" - ")[0]);
+        LocalDate fecha = jFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        modelo.addRow(new Object[]{id, fecha, Cantidad, metodo});
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -242,7 +284,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCategoria;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -255,6 +297,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jcantidad;
+    private javax.swing.JTextField prueba;
     // End of variables declaration//GEN-END:variables
 
     private void cargarCate() {
@@ -268,5 +311,13 @@ public class Ventas extends javax.swing.JInternalFrame {
             jMetodos.addItem(var.getIdMetodoPago() + " - " + var.getNombreMetodo());
         }
 
+    }
+
+    private void modelList() {
+        modelo.addColumn("idProducto");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("cantidad");
+        modelo.addColumn("idMetodoPago");
+        jTable1.setModel(modelo);
     }
 }

@@ -10,30 +10,33 @@ import java.time.LocalDate;
  *
  * @author gonza
  */
-public class Ventas {
+public class Venta {
 
     private int idVentas;
-    private Producto Producto;
+    private int idProducto;
     private LocalDate fecha;
     private int Cantidad;
     private double PrecioTotal;
+    private int idMetodoPago;
 
-    public Ventas() {
+    public Venta() {
     }
 
-    public Ventas(int idVentas, Producto Producto, LocalDate fecha, int Cantidad, double PrecioTotal) {
+    public Venta(int idVentas, int idProducto, LocalDate fecha, int Cantidad, double PrecioTotal, int idMetodoPago) {
         this.idVentas = idVentas;
-        this.Producto = Producto;
+        this.idProducto = idProducto;
         this.fecha = fecha;
         this.Cantidad = Cantidad;
         this.PrecioTotal = PrecioTotal;
+        this.idMetodoPago = idMetodoPago;
     }
 
-    public Ventas(Producto Producto, LocalDate fecha, int Cantidad, double PrecioTotal) {
-        this.Producto = Producto;
+    public Venta(int idProducto, LocalDate fecha, int Cantidad, double PrecioTotal, int idMetodoPago) {
+        this.idProducto = idProducto;
         this.fecha = fecha;
         this.Cantidad = Cantidad;
         this.PrecioTotal = PrecioTotal;
+        this.idMetodoPago = idMetodoPago;
     }
 
     public int getIdVentas() {
@@ -44,12 +47,12 @@ public class Ventas {
         this.idVentas = idVentas;
     }
 
-    public Producto getProducto() {
-        return Producto;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setProducto(Producto Producto) {
-        this.Producto = Producto;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public LocalDate getFecha() {
@@ -76,9 +79,18 @@ public class Ventas {
         this.PrecioTotal = PrecioTotal;
     }
 
-    @Override
-    public String toString() {
-        return "Ventas{" + "idVentas=" + idVentas + ", Producto=" + Producto + ", fecha=" + fecha + ", Cantidad=" + Cantidad + ", PrecioTotal=" + PrecioTotal + '}';
+    public int getIdMetodoPago() {
+        return idMetodoPago;
     }
 
-}
+    public void setIdMetodoPago(int idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "Venta{" + "idVentas=" + idVentas + ", idProducto=" + idProducto + ", fecha=" + fecha + ", Cantidad=" + Cantidad + ", PrecioTotal=" + PrecioTotal + ", idMetodoPago=" + idMetodoPago + '}';
+    }
+
+  }  

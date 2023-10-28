@@ -59,14 +59,12 @@ public class ProductoData {
         }
     }
 
-
     public void modificarProducto(Producto p) {
         String sql = " UPDATE producto SET   idCategoria = ? , nombreProducto = ? , importadoNacional = ? , descripcion = ? , fechaLimite = ? , precioActual = ?, stock = ? , estado = ? "
-                + " WHERE idProducto = ? " ;
+                + " WHERE idProducto = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
-           
             ps.setInt(1, p.getidCategoria());
             ps.setString(2, p.getNombreProducto());
             ps.setString(3, p.getImportadonacional());
@@ -86,7 +84,7 @@ public class ProductoData {
     }
 
     public void eliminarProductoEstado(int id) {
-        String sql = " UPDATE `producto` SET `estado`='0' WHERE idProducto = ? " ;
+        String sql = " UPDATE `producto` SET `estado`='0' WHERE idProducto = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -114,21 +112,19 @@ public class ProductoData {
         }
     }
 
-
-  
     public List<Producto> listarProductosActivos(int idCategoria) {
         String sql = "SELECT * FROM producto WHERE estado = 1 AND idCategoria = ? ";
         ArrayList<Producto> Productos = new ArrayList<Producto>();
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idCategoria);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Producto p = new Producto();
                 p.setIdProducto(rs.getInt("idProducto"));
-                 p.setidCategoria(rs.getInt("idCategoria"));
+                p.setidCategoria(rs.getInt("idCategoria"));
                 p.setNombreProducto(rs.getString("nombreProducto"));
                 p.setImportadonacional(rs.getString("importadoNacional"));
                 p.setDescripcion(rs.getString("descripcion"));
@@ -201,4 +197,41 @@ public class ProductoData {
         return Productos;
     }
 
-}
+    public void modificarStockProducto(Producto producto) {
+        String sql = " UPDATE producto SET   stock = ? "
+                + " WHERE idProducto = ? ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, producto.getStock());
+            ps.setInt(2, producto.getIdProducto());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Producto modificado con exito");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla producto1");
+        }
+    }
+
+    public List<Producto> buscarStockProducto(int idProducto) {
+        String sql = "SELECT idProducto, stock FROM producto WHERE idProducto = ?";
+        ArrayList<Producto> Productos = new ArrayList<Producto>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProducto);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setIdProducto(idProducto);
+                p.setStock(rs.getInt("stock"));
+                Productos.add(p);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla producto");
+        }
+        return Productos;
+    }
+ }
