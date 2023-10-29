@@ -20,7 +20,6 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author gonza
@@ -236,28 +235,33 @@ public class Ventas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            if (jFecha.getDate() == null || (jFecha.getDate().before(java.sql.Date.valueOf(LocalDate.now())))) {
 
-        if (jFecha.getDate() == null ||  (jFecha.getDate().before(java.sql.Date.valueOf(LocalDate.now())))){
-            
-            JOptionPane.showMessageDialog(null, "Complete correctamente la fecha");
-        } else {
-            int idP = (Integer) jTable1.getValueAt(0, 0);
-            String FechaL = Objects.toString(jTable1.getValueAt(0, 1));
-            LocalDate fech = LocalDate.parse(FechaL, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            int cantidad = (Integer) jTable1.getValueAt(0, 2);
-            int idC = (Integer) jTable1.getValueAt(0, 3);
+                JOptionPane.showMessageDialog(null, "Complete correctamente la fecha");
+            } else {
+                int idP = (Integer) jTable1.getValueAt(0, 0);
+                String FechaL = Objects.toString(jTable1.getValueAt(0, 1));
+                LocalDate fech = LocalDate.parse(FechaL, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                int cantidad = (Integer) jTable1.getValueAt(0, 2);
+                int idC = (Integer) jTable1.getValueAt(0, 3);
 
-            for (Producto pro : prod.buscarStockProducto(idP)) {
-                int stock = pro.getStock();
-                int Resultado = cantidad - stock;
-                Producto pp = new Producto(idP, Resultado);
-                prod.modificarStockProducto(pp);
+                for (Producto pro : prod.buscarStockProducto(idP)) {
+                    int stock = pro.getStock();
+                    if ( stock <=  cantidad) {
+                        JOptionPane.showMessageDialog(null, "Sin stock");
+                    } else {
+                        int Resultado = stock - cantidad;
+                        Producto pp = new Producto(idP, Resultado);
+                        prod.modificarStockProducto(pp);
+                        Venta venta = new Venta(idP, fech, cantidad, 1, idC);
+                        ven.guardarVentas(venta);
+                    }
+                }
             }
-            Venta venta = new Venta(idP, fech, cantidad, 1, idC);
-            ven.guardarVentas(venta);
-            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Complete correctamente");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductoActionPerformed
