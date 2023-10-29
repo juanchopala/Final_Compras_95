@@ -311,6 +311,7 @@ public class CrearProducto extends javax.swing.JInternalFrame {
                 || jDfecha.getDate()==null || (jDfecha.getDate().before(Date.valueOf(LocalDate.now())))) {
 
             JOptionPane.showMessageDialog(null, "alguno de los datos se vacio o quieres comprar un producto vencido");
+            
         } else {
             String id = jCcategorias.getItemAt(jCcategorias.getSelectedIndex()).split(" - ")[0];
             int idc = Integer.parseInt(id);
@@ -336,14 +337,14 @@ public class CrearProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TNombreActionPerformed
 
     private void jprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jprecioKeyTyped
-           int Key = evt.getKeyChar();
+      int Key = evt.getKeyChar();
       boolean numero = Key >= 48 && Key <= 57;
       if (!numero){
           evt.consume();
-      }
+        }
       if (jprecio.getText().trim().length()==11){
           evt.consume();
-      }
+        }
     }//GEN-LAST:event_jprecioKeyTyped
 
     private void jstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jstockActionPerformed
@@ -358,7 +359,7 @@ public class CrearProducto extends javax.swing.JInternalFrame {
       }
       if (jstock.getText().trim().length()==11){
           evt.consume();
-      }
+        }
     }//GEN-LAST:event_jstockKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
