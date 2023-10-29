@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2023 a las 23:52:02
+-- Tiempo de generación: 30-10-2023 a las 00:28:22
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -49,11 +49,50 @@ INSERT INTO `categoria` (`idCategoria`, `nombreCategoria`) VALUES
 
 CREATE TABLE `compra` (
   `idCompra` int(11) NOT NULL,
-  `idProvedor` int(11) NOT NULL,
+  `idProveedor` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `idMetodoPago` int(11) NOT NULL,
   `precioCosto` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idCompra`, `idProveedor`, `fecha`, `idMetodoPago`, `precioCosto`) VALUES
+(1, 11, '2023-10-06', 4, 12),
+(2, 11, '2023-10-11', 4, 45),
+(3, 11, '2023-10-06', 4, 45),
+(4, 11, '2023-10-11', 4, 60),
+(5, 11, '2023-10-12', 4, 39),
+(6, 11, '2023-10-12', 4, 44),
+(7, 11, '2023-10-11', 4, 1246),
+(19, 11, '2023-10-19', 4, 12),
+(20, 11, '2023-10-24', 4, 123),
+(21, 11, '2023-10-05', 4, 12),
+(22, 11, '2023-10-25', 4, 15),
+(23, 11, '2023-10-17', 4, 112),
+(24, 11, '2023-10-17', 4, 112),
+(25, 11, '2023-10-12', 4, 123),
+(26, 11, '2023-10-12', 4, 123),
+(27, 11, '2023-10-12', 4, 123),
+(28, 11, '2023-10-12', 4, 123),
+(29, 11, '2023-10-13', 4, 15),
+(30, 11, '2023-10-19', 4, 15),
+(31, 11, '2023-10-12', 4, 15),
+(32, 11, '2023-10-13', 4, 12),
+(33, 11, '2023-10-13', 4, 12),
+(34, 11, '2023-10-11', 4, 12),
+(35, 11, '2023-10-12', 4, 12),
+(36, 11, '2023-10-12', 4, 1226),
+(37, 11, '2023-10-12', 4, 1223),
+(38, 11, '2023-10-12', 4, 1223),
+(39, 11, '2023-10-05', 4, 0),
+(40, 11, '2023-10-05', 4, 1),
+(41, 11, '2023-10-11', 4, 10),
+(42, 11, '2023-10-11', 4, 123),
+(43, 11, '2023-10-18', 4, 12),
+(44, 11, '2023-10-05', 4, 12);
 
 -- --------------------------------------------------------
 
@@ -68,6 +107,40 @@ CREATE TABLE `detallecompra` (
   `idCompra` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detallecompra`
+--
+
+INSERT INTO `detallecompra` (`idDetalle`, `cantidad`, `precioCosto`, `idCompra`, `idProducto`) VALUES
+(3, 15, 15, 5, 21),
+(4, 24, 24, 5, 21),
+(5, 11, 11, 6, 21),
+(6, 33, 33, 6, 21),
+(7, 14, 14, 7, 21),
+(8, 1, 1232, 7, 24),
+(23, 15, 15, 22, 21),
+(24, 112, 112, 23, 21),
+(25, 112, 112, 24, 21),
+(26, 123, 123, 25, 21),
+(27, 123, 123, 26, 21),
+(28, 123, 123, 28, 21),
+(29, 15, 15, 29, 21),
+(30, 15, 15, 30, 21),
+(31, 15, 15, 31, 21),
+(32, 12, 12, 32, 21),
+(33, 12, 12, 33, 21),
+(34, 12, 12, 34, 21),
+(35, 12, 12, 35, 21),
+(36, 12, 12, 36, 21),
+(37, 1214, 1214, 36, 15),
+(38, 1223, 1223, 37, 21),
+(39, 1223, 1223, 38, 21),
+(40, 1, 1, 40, 21),
+(41, 10, 10, 41, 21),
+(42, 123, 123, 42, 21),
+(43, 12, 12, 43, 21),
+(44, 12, 12, 44, 21);
 
 -- --------------------------------------------------------
 
@@ -118,7 +191,7 @@ INSERT INTO `producto` (`idProducto`, `idCategoria`, `nombreProducto`, `importad
 (18, 8, 'Arroz', 'local', 'ffff', '2023-07-22', 22, 0, 1),
 (19, 8, 'Azucar', 'local', 'ffff', '2023-07-22', 22, 0, 1),
 (20, 8, 'Polenta', 'local', 'ffff', '2023-07-22', 1, 0, 1),
-(21, 9, 'Poet', 'local', 'dddd', '2023-07-22', 1, 0, 1),
+(21, 9, 'Poet', 'local', 'dddd', '2023-07-22', 1, 12, 1),
 (22, 9, 'lusonfort', 'local', 'dddd', '2023-07-22', 12, 0, 1),
 (23, 9, 'Hierba', 'local', 'dddd', '2023-07-22', 12, 0, 1),
 (24, 7, 'asdfadf', 'asdfasdf', 'asdfasdfasdf', '2023-10-29', 1232, 12, 1);
@@ -167,7 +240,6 @@ CREATE TABLE `proveedor_producto` (
 INSERT INTO `proveedor_producto` (`idProveedorproducto`, `idProveedor`, `idProducto`, `costo`) VALUES
 (5, 11, 21, 1),
 (6, 11, 16, 10),
-(7, 11, 17, 22),
 (8, 12, 18, 22),
 (9, 12, 19, 22),
 (10, 12, 20, 1),
@@ -187,8 +259,8 @@ INSERT INTO `proveedor_producto` (`idProveedorproducto`, `idProveedor`, `idProdu
 --
 
 CREATE TABLE `ventas` (
-  `idventas` int(11) NOT NULL,
-  `idproducto` int(11) NOT NULL,
+  `idVentas` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `cantidad` int(11) NOT NULL,
   `PrecioTotal` double NOT NULL,
@@ -210,7 +282,7 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`idCompra`),
-  ADD KEY `idProvedor` (`idProvedor`),
+  ADD KEY `idProvedor` (`idProveedor`),
   ADD KEY `idMetodoPago` (`idMetodoPago`);
 
 --
@@ -252,8 +324,8 @@ ALTER TABLE `proveedor_producto`
 -- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`idventas`),
-  ADD KEY `idproducto` (`idproducto`),
+  ADD PRIMARY KEY (`idVentas`),
+  ADD KEY `idproducto` (`idProducto`),
   ADD KEY `idMetodoPago` (`idMetodoPago`);
 
 --
@@ -270,13 +342,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `metodopago`
@@ -306,7 +378,7 @@ ALTER TABLE `proveedor_producto`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `idventas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVentas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -316,7 +388,7 @@ ALTER TABLE `ventas`
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `proveedor` (`idProveedor`),
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`idProveedor`),
   ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`);
 
 --
@@ -343,8 +415,8 @@ ALTER TABLE `proveedor_producto`
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idProducto`),
-  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`);
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`),
+  ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

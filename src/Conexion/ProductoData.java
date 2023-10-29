@@ -260,4 +260,17 @@ public class ProductoData {
         }
         return p;
     }
+    
+    public void sumarStock(int id,int stock){
+        String sql = "UPDATE producto SET stock=stock+? WHERE idProducto=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, stock);
+            ps.setInt(2, id);
+            ResultSet rs = ps.executeQuery();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla producto123123");
+        }
+        
+    }
 }

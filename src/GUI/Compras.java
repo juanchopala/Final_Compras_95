@@ -251,6 +251,7 @@ public class Compras extends javax.swing.JInternalFrame {
         for (DetalleCompra dp : carrito) {
             dp.setIdCompra(cp.buscarCompra(id));
             dcp.guardarDetalle(dp);
+            prov.sumarStock(dp.getIdProducto().getIdProducto(),dp.getCantidad());
         }
         carrito.clear();
         modelo.setRowCount(0);

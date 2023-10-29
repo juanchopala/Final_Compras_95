@@ -108,7 +108,7 @@ public class CompraData {
     public List<Compra> listarCompras() {
         ArrayList<Compra> lista = new ArrayList<Compra>();
 
-        String sql = "SELECT * FROM compra where estado=1";
+        String sql = "SELECT * FROM compra";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -119,6 +119,7 @@ public class CompraData {
                 c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProveedor")));
                 c.setFecha(rs.getDate("fecha").toLocalDate());
                 c.setIdMetodoPago(cd.buscarMetodo(rs.getInt("idMetodoPago")));
+                c.setPrecioCosto(rs.getDouble("precioCosto"));
                 lista.add(c);
             }
             ps.close();

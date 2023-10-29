@@ -52,7 +52,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Administrador
  */
 public class MainFrameGUI extends javax.swing.JFrame {
-    VentasData venD =  new VentasData();
+
+    VentasData venD = new VentasData();
     ButtonGroup mi = new ButtonGroup();
     ProductoData prod = new ProductoData();
     CategoriasData cate = new CategoriasData();
@@ -113,19 +114,36 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 if (!JrStock.isSelected()) {
                     JrMinimo.setEnabled(false);
                     JrMaximo.setEnabled(false);
-                  
+
                 } else {
                     JrMinimo.setEnabled(true);
                     JrMaximo.setEnabled(true);
+                    JCListarProductos.setEnabled(true);
+                    JCListarCategorias.setEnabled(true);
+                    JCListarProveedores.setEnabled(true);
+
                     CargarTabla2Stock();
                 }
 
             }
         });
+        JrVentas.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (JrVentas.isSelected()) {
+                    JCListarProductos.setEnabled(false);
+                    JCListarCategorias.setEnabled(false);
+                    JCListarProveedores.setEnabled(false);
+                    tablaVenta();
+
+                }
+
+            }
+        });
+
         JrMinimo.setEnabled(true);
         JrMaximo.setEnabled(true);
 
-        
         // this.setExtendedState(MAXIMIZED_BOTH);
         // Escritorio.isMaximumSizeSet();
         // aqui lo saque para que se inicilize en el tamaño minimo y después se pueda agrandar
@@ -699,11 +717,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_JrVentasMouseClicked
 
     private void JrComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrComprasMouseClicked
-
+        CargarTabla2Compras();
     }//GEN-LAST:event_JrComprasMouseClicked
 
     private void JrVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrVentasActionPerformed
-       tablaVenta();
+        tablaVenta();
     }//GEN-LAST:event_JrVentasActionPerformed
 
     private void JrComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrComprasActionPerformed
@@ -733,19 +751,22 @@ public class MainFrameGUI extends javax.swing.JFrame {
             JCListarProveedores.addItem(p.getIdProveedor() + " - " + p.getRazonSocial());
         }
     }
-     private void tablaVenta(){
-         modelo.addColumn("idVnetas");
-         modelo.addColumn("idProducto");
-         modelo.addColumn("fecha");
-         modelo.addColumn("cantidad");
-         modelo.addColumn("PrecioTotal");
-         modelo.addColumn("idMetodoPago");
-         jTable2.setModel(modelo);
-          for (Venta venta : venD.ListaVenta() ){
-            modelo.addRow(new Object[]{venta.getIdVentas(),venta.getIdProducto(),venta.getFecha(),venta.getCantidad(),venta.getPrecioTotal(),venta.getIdMetodoPago()});
+
+    private void tablaVenta() {
+        modelo.setRowCount(0);
+        modelo.setColumnCount(0);
+        modelo.addColumn("idVnetas");
+        modelo.addColumn("idProducto");
+        modelo.addColumn("fecha");
+        modelo.addColumn("cantidad");
+        modelo.addColumn("PrecioTotal");
+        modelo.addColumn("idMetodoPago");
+        jTable2.setModel(modelo);
+        for (Venta venta : venD.ListaVenta()) {
+            modelo.addRow(new Object[]{venta.getIdVentas(), venta.getIdProducto(), venta.getFecha(), venta.getCantidad(), venta.getPrecioTotal(), venta.getIdMetodoPago()});
         }
-     }
-            
+    }
+
     private void CargarTabla2Stock() {
         modelo.setRowCount(0);
         modelo.setColumnCount(0);
@@ -758,34 +779,38 @@ public class MainFrameGUI extends javax.swing.JFrame {
         modelo.addColumn("precioActual");
         modelo.addColumn("stock");
         jTable2.setModel(modelo);
-        
-      
+
     }
 
     private void CargarTabla2Compras() {
         modelo.setRowCount(0);
         modelo.setColumnCount(0);
         modelo.addColumn("idCompra");
-        modelo.addColumn("idProveedor");
+        modelo.addColumn("Proveedor");
         modelo.addColumn("fecha");
         modelo.addColumn("idMetodoPago");
         modelo.addColumn("PrecioTotal");
+        jTable2.setModel(modelo);
         for (Compra c : cd.listarCompras()) {
             Object[] o = new Object[5];
             o[0] = c.getIdCompra();
-            o[1] = c.getIdProveedor();
+            o[1] = c.getIdProveedor().getRazonSocial();
             o[2] = c.getFecha();
-            o[3] = c.getIdMetodoPago();
+            o[3] = c.getIdMetodoPago().getNombreMetodo();
             o[4] = c.getPrecioCosto();
+
             modelo.addRow(o);
-            cargarFilaDetalle();
-            for(DetalleCompra dc:dcd.ListarDetalleCompra(c.getIdCompra())){
-                Object[] o1 = new Object[5];
-                o1[0]=dc.getIdDetalle();
-                
+
+            for (DetalleCompra dc : dcd.ListarDetalleCompra(c.getIdCompra())) {
+                o[0] = dc.getIdDetalle();
+                o[1] = dc.getIdProducto().getNombreProducto();
+                o[2] = dc.getCantidad();
+                o[3] = "";
+                o[4] = dc.getPrecioCosto();
+                modelo.addRow(o);
             }
+            modelo.addRow(new Object[]{"", "", "", "", ""});
         }
-        jTable2.setModel(modelo);
     }
 
     private void CargarTabla1() {
@@ -827,14 +852,16 @@ public class MainFrameGUI extends javax.swing.JFrame {
         }
         jTable1.setModel(modelo2);
     }
-    private void cargarFilaDetalle(){
+
+    private void cargarFilaDetalle() {
         Object[] o = new Object[5];
-        o[0]="idDetalle";
-        o[1]="idCantidad";
-        o[2]="precioCosto";
-        o[3]="idProducto";
+        o[0] = "idDetalle";
+        o[1] = "Producto";
+        o[2] = "Cantidad";
+        o[3] = "Precio";
         modelo.addRow(o);
     }
+
     private int ColumnaConDate() {
         int c = 0;
         for (int i = 0; i < modelo.getColumnCount(); i++) {
@@ -845,7 +872,6 @@ public class MainFrameGUI extends javax.swing.JFrame {
         }
         return c;
     }
-    
 
     // rellenar tabla segun categoria en producto carga segun categoria 
     // fecha especifica tiene que mapear los datos en la jtable segun esa fecha 
