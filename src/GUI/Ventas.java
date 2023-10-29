@@ -258,7 +258,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
                 for (Producto pro : prod.buscarStockProducto(idP)) {
                     int stock = pro.getStock();
-                    if ( stock <=  cantidad) {
+                    if ( stock <  cantidad) {
                         JOptionPane.showMessageDialog(null, "Sin stock");
                     } else {
                         int Resultado = stock - cantidad;
