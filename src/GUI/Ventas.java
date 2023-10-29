@@ -25,17 +25,18 @@ import javax.swing.table.DefaultTableModel;
  * @author gonza
  */
 public class Ventas extends javax.swing.JInternalFrame {
-
+    private VentasData ven = new VentasData();
     private CategoriasData categoriasData = new CategoriasData();
     private ProductoData prod = new ProductoData();
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private VentasData ven = new VentasData();
+    private DefaultTableModel modelo = new DefaultTableModel(){
        public boolean isCellEditable(int fila, int columna) {
             if (columna > 0) {
                 return false;
             } else {
                 return true;
             }
+         }
+
         };
     
 
@@ -180,8 +181,8 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addComponent(jButton3)
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +233,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
