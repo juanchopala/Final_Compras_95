@@ -1,5 +1,7 @@
 package Conexion;
 
+import Conexion.Conexion;
+import Conexion.ProveedorData;
 import Entidades.Compra;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,18 +26,18 @@ public class CompraData {
 
     public void guardarCompra(Compra p) {
 
-        String sql = "INSERT INTO Compra (idProvedor,fecha,estado,Reporte) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Compra (idProveedor,fecha,idMetodoPago,precioCosto) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1,p.getIdProveedor().getIdProveedor());
+            ps.setInt(1,p.getIdProveedor());
             ps.setDate(2,Date.valueOf(p.getFecha()));
-            ps.setBoolean(3, p.isEstado());
-            ps.setString(4, p.getReporte());
+            ps.setInt(3, p.getIdMetodoPago());
+            ps.setDouble(4, p.getPrecioCosto());
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
-                p.setIdCompra(rs.getInt(0));
+                p.setIdCompra(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "compra guardada con exito");
             }
 
@@ -44,27 +46,27 @@ public class CompraData {
         }
     }
     
-    public void modigicarCompra(Compra p){
-        String sql ="UPDATE compra set idProvedor=?,fecha=?,estado=?,reporte=?  where idCompra=?";
-        
-        try {
-            PreparedStatement ps =con.prepareStatement(sql);
-            ps.setInt(1,p.getIdProveedor().getIdProveedor());
-            ps.setDate(2,Date.valueOf(p.getFecha()));
-            ps.setBoolean(3, p.isEstado());
-            ps.setString(4, p.getReporte());
-            ps.setInt(5, p.getIdCompra());
-            int exito = ps.executeUpdate();
-            
-            if(exito == 1){
-                JOptionPane.showMessageDialog(null, "compra modificada con exito");
-            }
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-        }
-    
-    }
+//    public void modigicarCompra(Compra p){
+//        String sql ="UPDATE compra set idProvedor=?,fecha=?,estado=?,reporte=?  where idCompra=?";
+//        
+//        try {
+//            PreparedStatement ps =con.prepareStatement(sql);
+//            ps.setInt(1,p.getIdProveedor().getIdProveedor());
+//            ps.setDate(2,Date.valueOf(p.getFecha()));
+//            ps.setBoolean(3, p.isEstado());
+//            ps.setString(4, p.getReporte());
+//            ps.setInt(5, p.getIdCompra());
+//            int exito = ps.executeUpdate();
+//            
+//            if(exito == 1){
+//                JOptionPane.showMessageDialog(null, "compra modificada con exito");
+//            }
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
+//        }
+//    
+//    }
     
     public void eliminarCompra(int idCompra){
         String sql="UPDATE compra set estado=0 where idCompra=?";
@@ -119,27 +121,26 @@ public class CompraData {
 //        return c;
 //    } 
 //    
-//    public List<Compra> listarComprasActivas(){
-//        ArrayList<Compra> lista = new ArrayList<Compra>();
-//        
-//        String sql = "SELECT * FROM compra where estado=1";
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            
-//            while(rs.next()){
-//                Compra c = new Compra();
-//                c.setIdCompra(rs.getInt("idCompra"));
-//                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")));
-//                c.setFecha(rs.getDate("fecha").toLocalDate());
-//                c.setEstado(true);
-//                c.setReporte(rs.getString("Reporte"));
-//                lista.add(c);
-//            }
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-//        }
+    public List<Compra> listarCompras(){
+        ArrayList<Compra> lista = new ArrayList<Compra>();
+        
+        String sql = "SELECT * FROM compra where estado=1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Compra c = new Compra();
+                c.setIdCompra(rs.getInt("idCompra"));
+                c.setIdProveedor(pd.buscarProveedor(rs.getInt("idProvedor")).getIdProveedor());
+                c.setFecha(rs.getDate("fecha").toLocalDate());
+                c.setIdMetodoPago(rs.getInt("idMetodoPago"));
+                lista.add(c);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
+        }
 //        
 //        return lista;
 //    }

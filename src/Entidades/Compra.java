@@ -5,29 +5,29 @@ import java.time.LocalDate;
 
 public class Compra {
     private int idCompra;
-    private Proveedor idProveedor;
+    private int idProveedor;
     private LocalDate fecha;
-    private boolean estado;
-    private String Reporte;
-    
-    public Compra(){
+    private int idMetodoPago;
+    private Double precioCosto;
+
+    public Compra() {
     }
 
-    public Compra(int idCompra, Proveedor idProveedor, LocalDate fecha, boolean estado, String Reporte) {
+    public Compra(int idCompra, int idProveedor, LocalDate fecha, int idMetodoPago, Double precioCosto) {
         this.idCompra = idCompra;
         this.idProveedor = idProveedor;
         this.fecha = fecha;
-        this.estado = estado;
-        this.Reporte = Reporte;
+        this.idMetodoPago = idMetodoPago;
+        this.precioCosto = precioCosto;
     }
 
-    public Compra(Proveedor idProveedor, LocalDate fecha, boolean estado, String Reporte) {
+    public Compra(int idProveedor, LocalDate fecha, int idMetodoPago, Double precioCosto) {
         this.idProveedor = idProveedor;
         this.fecha = fecha;
-        this.estado = estado;
-        this.Reporte = Reporte;
+        this.idMetodoPago = idMetodoPago;
+        this.precioCosto = precioCosto;
     }
-       
+
     public int getIdCompra() {
         return idCompra;
     }
@@ -36,15 +36,13 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public Proveedor getIdProveedor() {
+    public int getIdProveedor() {
         return idProveedor;
     }
 
-    public void setIdProveedor(Proveedor idProveedor) {
+    public void setIdProveedor(int idProveedor) {
         this.idProveedor = idProveedor;
     }
-    
-    
 
     public LocalDate getFecha() {
         return fecha;
@@ -54,30 +52,25 @@ public class Compra {
         this.fecha = fecha;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public int getIdMetodoPago() {
+        return idMetodoPago;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setIdMetodoPago(int idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
     }
 
-    public String getReporte() {
-        return Reporte;
+    public Double getPrecioCosto() {
+        return precioCosto;
     }
 
-    public void setReporte(String Reporte) {
-        this.Reporte = Reporte;
+    public void setPrecioCosto(Double precioCosto) {
+        this.precioCosto = precioCosto;
     }
 
     @Override
     public String toString() {
-        return "Compra{" + "idCompra=" + idCompra + ", idProveedor=" + idProveedor + ", fecha=" + fecha + ", estado=" + estado + ", Reporte=" + Reporte + '}';
+        return "Compra{" + "idCompra=" + idCompra + ", idProveedor=" + idProveedor + ", fecha=" + fecha + ", idMetodoPago=" + idMetodoPago + ", precioCosto=" + precioCosto + '}';
     }
-
-
-    
-
-
     
 }

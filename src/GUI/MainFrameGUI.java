@@ -5,18 +5,28 @@
 package GUI;
 
 import Conexion.CategoriasData;
+import Conexion.CompraData;
+import Conexion.DetalleCompraData;
 import Conexion.ProductoData;
 import Conexion.ProveedorData;
 import Conexion.Proveedor_ProductoData;
+import Entidades.Compra;
+import Entidades.DetalleCompra;
 import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Proveedor_Producto;
 import Entidades.Variables;
 import GUI.Compras;
+import GUI.Compras;
+import GUI.Productos;
 import GUI.Productos;
 import GUI.ProveedorProducto;
+import GUI.ProveedorProducto;
+import GUI.Proveedores;
 import GUI.Proveedores;
 import GUI.Variables1;
+import GUI.Variables1;
+import GUI.Ventas;
 import GUI.Ventas;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.ActionEvent;
@@ -46,6 +56,8 @@ public class MainFrameGUI extends javax.swing.JFrame {
     CategoriasData cate = new CategoriasData();
     ProveedorData prove = new ProveedorData();
     Proveedor_ProductoData propro = new Proveedor_ProductoData();
+    CompraData cd = new CompraData();
+    DetalleCompraData dcd = new DetalleCompraData();
     DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int fila, int columna) {
             if (columna > 0) {
@@ -103,7 +115,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 } else {
                     JrMinimo.setEnabled(true);
                     JrMaximo.setEnabled(true);
-                    CargarTabla2();
+                    CargarTabla2Stock();
                 }
             }
         });
@@ -190,15 +202,20 @@ public class MainFrameGUI extends javax.swing.JFrame {
 
         MainTableGroup.add(JrCompras);
         JrCompras.setText("Compras");
-        JrCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JrComprasActionPerformed(evt);
+        JrCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JrComprasMouseClicked(evt);
             }
         });
         jPanel2.add(JrCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
         MainTableGroup.add(JrVentas);
         JrVentas.setText("Ventas");
+        JrVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JrVentasMouseClicked(evt);
+            }
+        });
         jPanel2.add(JrVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, -1, -1));
 
         JrMinimo.setSelected(true);
@@ -237,11 +254,6 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 JrStockMouseClicked(evt);
             }
         });
-        JrStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JrStockActionPerformed(evt);
-            }
-        });
         jPanel2.add(JrStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 40, -1, -1));
 
         jLabel1.setText("Categorias de Productos");
@@ -256,7 +268,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 270, 50, -1));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 270, 70, -1));
 
         JCListarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,8 +290,8 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, -1, -1));
-        jPanel2.add(JDfechaespecifica, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 130, -1));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 100, -1));
+        jPanel2.add(JDfechaespecifica, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 130, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -418,10 +430,6 @@ public class MainFrameGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JrComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrComprasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JrComprasActionPerformed
-
     private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
         Compras compras = new Compras();
         compras.setVisible(true);
@@ -541,10 +549,6 @@ public class MainFrameGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void JrStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrStockActionPerformed
-
-    }//GEN-LAST:event_JrStockActionPerformed
-
     private void JCListarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCListarCategoriasActionPerformed
         if (JrStock.isSelected()) {
             modelo.setRowCount(0);
@@ -605,7 +609,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
 
     private void JrStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrStockMouseClicked
 
-        CargarTabla2();
+        CargarTabla2Stock();
 
         for (Variables c : cate.listarCategoria()) {
             int id = c.getIdCategoria();
@@ -666,6 +670,17 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private void JrMaximoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrMaximoMouseClicked
         JrStock.doClick();
     }//GEN-LAST:event_JrMaximoMouseClicked
+
+    private void JrVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrVentasMouseClicked
+        if (JrVentas.isSelected()) {
+            modelo.setRowCount(0);
+            modelo.setColumnCount(0);
+        }
+    }//GEN-LAST:event_JrVentasMouseClicked
+
+    private void JrComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrComprasMouseClicked
+
+    }//GEN-LAST:event_JrComprasMouseClicked
     private void listaComboCatego() {
         for (Variables prod : cate.listarCategoria()) {
             JCListarCategorias.addItem(prod.getIdCategoria() + " - " + prod.getnombreCategoria());
@@ -687,7 +702,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         }
     }
 
-    private void CargarTabla2() {
+    private void CargarTabla2Stock() {
         modelo.setRowCount(0);
         modelo.setColumnCount(0);
         modelo.addColumn("idProducto");
@@ -698,6 +713,33 @@ public class MainFrameGUI extends javax.swing.JFrame {
         modelo.addColumn("fechaLimite");
         modelo.addColumn("precioActual");
         modelo.addColumn("stock");
+        jTable2.setModel(modelo);
+    }
+
+    private void CargarTabla2Compras() {
+        modelo.setRowCount(0);
+        modelo.setColumnCount(0);
+        modelo.addColumn("idCompra");
+        modelo.addColumn("idProveedor");
+        modelo.addColumn("fecha");
+        modelo.addColumn("idMetodoPago");
+        modelo.addColumn("PrecioTotal");
+        for (Compra c : cd.listarCompras()) {
+            Object[] o = new Object[5];
+            o[0] = c.getIdCompra();
+            o[1] = c.getIdProveedor();
+            o[2] = c.getFecha();
+            o[3] = c.getIdMetodoPago();
+            o[4] = c.getPrecioCosto();
+            modelo.addRow(o);
+            cargarFilaDetalle();
+            for(DetalleCompra dc:dcd.ListarDetalleCompra(c.getIdCompra())){
+                Object[] o1 = new Object[5];
+                o1[0]=dc.getIdDetalle();
+                o1[0]   
+                
+            }
+        }
         jTable2.setModel(modelo);
     }
 
@@ -713,34 +755,41 @@ public class MainFrameGUI extends javax.swing.JFrame {
         modelo2.addColumn("precioActual");
         modelo2.addColumn("stock");
 
-        CargarTabla2();
+        CargarTabla2Stock();
 
         for (Variables c : cate.listarCategoria()) {
             int id = c.getIdCategoria();
             String name = c.getnombreCategoria();
             List<Producto> productos = new ArrayList<Producto>();
             productos = prod.listarProductosActivos(id);
-            
-                Collections.sort(productos, new StockComparator1());
+
+            Collections.sort(productos, new StockComparator1());
             for (Producto p : productos) {
-                if(p.getStock()<StockMinimo){
-                Object[] fila = new Object[8];
-                fila[0] = p.getIdProducto();
-                fila[1] = name;
-                fila[2] = p.getNombreProducto();
-                fila[3] = p.getImportadonacional();
-                fila[4] = p.getDescripcion();
-                fila[5] = p.getFechalimite();
-                fila[6] = p.getPrecioActual();
-                fila[7] = p.getStock();
-                modelo2.addRow(fila); 
+                if (p.getStock() < StockMinimo) {
+                    Object[] fila = new Object[8];
+                    fila[0] = p.getIdProducto();
+                    fila[1] = name;
+                    fila[2] = p.getNombreProducto();
+                    fila[3] = p.getImportadonacional();
+                    fila[4] = p.getDescripcion();
+                    fila[5] = p.getFechalimite();
+                    fila[6] = p.getPrecioActual();
+                    fila[7] = p.getStock();
+                    modelo2.addRow(fila);
                 }
-                
+
             }
         }
         jTable1.setModel(modelo2);
     }
-
+    private void cargarFilaDetalle(){
+        Object[] o = new Object[5];
+        o[0]="idDetalle";
+        o[1]="idCantidad";
+        o[2]="precioCosto";
+        o[3]="idProducto";
+        modelo.addRow(o);
+    }
     private int ColumnaConDate() {
         int c = 0;
         for (int i = 0; i < modelo.getColumnCount(); i++) {
@@ -751,6 +800,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         }
         return c;
     }
+    
 
     // rellenar tabla segun categoria en producto carga segun categoria 
     // fecha especifica tiene que mapear los datos en la jtable segun esa fecha 
