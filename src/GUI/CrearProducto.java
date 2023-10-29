@@ -8,6 +8,7 @@ import Conexion.CategoriasData;
 import Conexion.ProductoData;
 import Entidades.Producto;
 import Entidades.Variables;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
@@ -337,22 +338,23 @@ public class CrearProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TNombreActionPerformed
 
     private void jprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jprecioKeyTyped
-      int Key = evt.getKeyChar();
-      boolean numero = Key >= 48 && Key <= 57;
-      if (!numero){
-          evt.consume();
-        }
-      if (jprecio.getText().trim().length()==11){
-          evt.consume();
+        char caracter = evt.getKeyChar();
+        
+        if ((caracter < '0' || caracter > '9')
+            && (caracter != KeyEvent.VK_BACK_SPACE)
+            && (caracter != '.' || jprecio.getText().contains(".")))
+            {
+            evt.consume();
+                
         }
     }//GEN-LAST:event_jprecioKeyTyped
-
+        
     private void jstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jstockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jstockActionPerformed
 
     private void jstockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jstockKeyTyped
-         int Key = evt.getKeyChar();
+      int Key = evt.getKeyChar();
       boolean numero = Key >= 48 && Key <= 57;
       if (!numero){
           evt.consume();

@@ -217,9 +217,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selec = jTLista.getSelectedRow();
-
-        if (selec != -1) {
-            int id = Integer.parseInt(jClista.getItemAt(jClista.getSelectedIndex()).split(" - ")[0]);
+          int id = Integer.parseInt(jClista.getItemAt(jClista.getSelectedIndex()).split(" - ")[0]);
             int idp = (Integer) jTLista.getValueAt(selec, 0);
             String nombre = Objects.toString(jTLista.getValueAt(selec, 1));
             String importado = Objects.toString(jTLista.getValueAt(selec, 2));
@@ -228,6 +226,11 @@ public class Productos extends javax.swing.JInternalFrame {
             String precio = Objects.toString(jTLista.getValueAt(selec, 5));
             String stock = Objects.toString(jTLista.getValueAt(selec, 6));
             LocalDate fechaLimite = LocalDate.parse(FechaLimite, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (selec != -1) {
+            if (nombre.trim().isEmpty()||precio.trim().isEmpty()||FechaLimite.trim().isEmpty()||precio.trim().isEmpty()
+                    ||stock.trim().isEmpty()||importado.trim().isEmpty()||descri.trim().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Complete todos los campos");
+            }else{
             try {
                 int Stock = Integer.parseInt(stock);
                 double Precio = Double.parseDouble(precio);
@@ -235,6 +238,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 prod.modificarProducto(produc);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Complete con datos válidos ");
+            }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila para modificar.");

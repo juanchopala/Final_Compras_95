@@ -244,7 +244,8 @@ public class Compras extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error en ejecutar la compra");
         }
-
+           
+        
         cp.guardarCompra(p);
         int id = p.getIdCompra();
         for (DetalleCompra dp : carrito) {
