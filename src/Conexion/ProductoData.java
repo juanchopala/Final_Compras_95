@@ -202,7 +202,7 @@ public class ProductoData {
                 + " WHERE idProducto = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setInt(1, producto.getStock());
             ps.setInt(2, producto.getIdProducto());
             int exito = ps.executeUpdate();
@@ -234,4 +234,30 @@ public class ProductoData {
         }
         return Productos;
     }
- }
+
+    public Producto buscarProducto(int id) {
+        Producto p = new Producto();
+        String sql = "SELECT * FROM producto WHERE idProducto = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                p.setIdProducto(id);
+                p.setidCategoria(rs.getInt("idCategoria"));
+                p.setNombreProducto(rs.getString("nombreProducto"));
+                p.setImportadonacional(rs.getString("importadoNacional"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setFechalimite(rs.getDate("fechaLimite").toLocalDate());
+                p.setPrecioActual(rs.getDouble("precioActual"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getBoolean("estado"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla producto");
+        }
+        return p;
+    }
+}

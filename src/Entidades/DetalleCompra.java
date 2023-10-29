@@ -5,6 +5,7 @@
 package Entidades;
 
 import Conexion.ProductoData;
+import java.util.Objects;
 
 /**
  *
@@ -15,11 +16,10 @@ public class DetalleCompra {
     private int idDetalle;
     private int cantidad;
     private double precioCosto;
-    private int idCompra;
-    private int idProducto;
-    private String nombreProducto;
+    private Compra idCompra;
+    private Producto idProducto;
 
-    public DetalleCompra(int idDetalle, int cantidad, double precioCosto, int idCompra, int idProducto) {
+    public DetalleCompra(int idDetalle, int cantidad, double precioCosto, Compra idCompra, Producto idProducto) {
         this.idDetalle = idDetalle;
         this.cantidad = cantidad;
         this.precioCosto = precioCosto;
@@ -27,29 +27,18 @@ public class DetalleCompra {
         this.idProducto = idProducto;
     }
 
-    public DetalleCompra(int cantidad, double precioCosto, int idCompra, int idProducto) {
+    public DetalleCompra(int cantidad, double precioCosto, Compra idCompra, Producto idProducto) {
         this.cantidad = cantidad;
         this.precioCosto = precioCosto;
         this.idCompra = idCompra;
         this.idProducto = idProducto;
     }
 
-    public DetalleCompra(int cantidad, double precioCosto, int idProducto) {
+    public DetalleCompra(int cantidad, double precioCosto, Producto idProducto) {
         this.cantidad = cantidad;
         this.precioCosto = precioCosto;
         this.idProducto = idProducto;
     }
-
-    public DetalleCompra(int cantidad, double precioCosto, int idProducto, String nombreProducto) {
-        this.cantidad = cantidad;
-        this.precioCosto = precioCosto;
-        this.idProducto = idProducto;
-        this.nombreProducto = nombreProducto;
-    }
-    
-    
-    
-    
 
     public DetalleCompra() {
     }
@@ -78,34 +67,25 @@ public class DetalleCompra {
         this.precioCosto = precioCosto;
     }
 
-    public int getIdCompra() {
+    public Compra getIdCompra() {
         return idCompra;
     }
 
-    public void setIdCompra(int idCompra) {
+    public void setIdCompra(Compra idCompra) {
         this.idCompra = idCompra;
     }
 
-    public int getIdProducto() {
+    public Producto getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(Producto idProducto) {
         this.idProducto = idProducto;
-    }
-
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + this.idProducto;
+        int hash = 7;
         return hash;
     }
 
@@ -121,17 +101,22 @@ public class DetalleCompra {
             return false;
         }
         final DetalleCompra other = (DetalleCompra) obj;
-        return this.idProducto == other.idProducto;
+        if (this.cantidad != other.cantidad) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.precioCosto) != Double.doubleToLongBits(other.precioCosto)) {
+            return false;
+        }
+        return Objects.equals(this.idProducto, other.idProducto);
     }
     
-    
-
-
     
 
     @Override
     public String toString() {
         return "DetalleCompra{" + "idDetalle=" + idDetalle + ", cantidad=" + cantidad + ", precioCosto=" + precioCosto + ", idCompra=" + idCompra + ", idProducto=" + idProducto + '}';
     }
+
+  
 
 }

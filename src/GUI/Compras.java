@@ -12,6 +12,7 @@ import Conexion.ProveedorData;
 import Conexion.Proveedor_ProductoData;
 import Entidades.Compra;
 import Entidades.DetalleCompra;
+import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Variable2;
 import GUI.Productos;
@@ -178,6 +179,9 @@ public class Compras extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jcantidadKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jcantidadKeyTyped(evt);
+            }
         });
         jPanel1.add(jcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 90, -1));
 
@@ -223,6 +227,10 @@ public class Compras extends javax.swing.JInternalFrame {
         if (jcarro.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "No HayProductos en el carro");
         }
+        
+        if(jDfecha.getDate()==null){
+            JOptionPane.showMessageDialog(null,"Tienes que especificar la fecha de la compra");
+        }
         Compra p = new Compra();
         try {
             int IdProveedor = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
@@ -230,18 +238,18 @@ public class Compras extends javax.swing.JInternalFrame {
             java.util.Date fecha = jDfecha.getDate();
             LocalDate fechaN = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Double PrecioCosto = Double.parseDouble(jprecioTotal.getText());
-            p.setIdProveedor(IdProveedor);
+            p.setIdProveedor(provD.buscarProveedor(IdProveedor));
             p.setFecha(fechaN);
-            p.setIdMetodoPago(IdMetodoPago);
+            p.setIdMetodoPago(categoriasData.buscarMetodo(IdMetodoPago));
             p.setPrecioCosto(PrecioCosto);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error en ejecutar la compra");
         }
-
+        
         cp.guardarCompra(p);
         int id = p.getIdCompra();
         for (DetalleCompra dp : carrito) {
-            dp.setIdCompra(id);
+            dp.setIdCompra(cp.buscarCompra(id));
             dcp.guardarDetalle(dp);
         }
         carrito.clear();
@@ -263,12 +271,14 @@ public class Compras extends javax.swing.JInternalFrame {
     private void BtnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAñadirCarritoActionPerformed
         int cantidad = Integer.parseInt(jcantidad.getText());
         int idProducto = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[0]);
+        Producto p =new Producto();
+        p=prov.buscarProducto(idProducto);
         String nombre = jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[1];
         double precioCosto = Double.parseDouble(jprecio.getText());
-        DetalleCompra d = new DetalleCompra(cantidad, precioCosto, idProducto,nombre);
+        DetalleCompra d = new DetalleCompra(cantidad, precioCosto,p);
         boolean nuevo=true;
         for(DetalleCompra dp: carrito){
-            if(idProducto==dp.getIdProducto()){
+            if(p.equals(dp.getIdProducto())){
                 dp.setCantidad(cantidad);
                 dp.setPrecioCosto(precioCosto);
                 nuevo=false;
@@ -288,6 +298,17 @@ public class Compras extends javax.swing.JInternalFrame {
         double result = precio * Cantidad;
         jprecio.setText(String.valueOf(result));
     }//GEN-LAST:event_jcantidadKeyReleased
+
+    private void jcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyTyped
+        int Key = evt.getKeyChar();
+        boolean numero = Key >= 48 && Key <= 57;
+        if (!numero){
+            evt.consume();
+        }
+        if (jcantidad.getText().trim().length()==11){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jcantidadKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -344,8 +365,8 @@ public class Compras extends javax.swing.JInternalFrame {
         modelo.addColumn("PrecioTotal");
         jcarro.setModel(modelo);
         for (DetalleCompra dp : carrito) {
-            int id = dp.getIdProducto();
-            String nom = dp.getNombreProducto();
+            int id = dp.getIdProducto().getIdProducto();
+            String nom = dp.getIdProducto().getNombreProducto();
             int cantidad = dp.getCantidad();
             double precioCosto = dp.getPrecioCosto();
             modelo.addRow(new Object[]{id,nom, cantidad, precioCosto});

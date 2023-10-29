@@ -291,7 +291,7 @@ public class CrearProducto extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (TNombre.getText().equals("") || Im.getText().equals("") || jdetalles.getText().equals("") || jprecio.getText().equals("") || (Float.parseFloat(jprecio.getText().toString()) <= 0) || jstock.getText().equals("")
-                || jDfecha.getDate().toString().equals("") || (jDfecha.getDate().before(Date.valueOf(LocalDate.now())))) {
+                || jDfecha.getDate()==null || (jDfecha.getDate().before(Date.valueOf(LocalDate.now())))) {
             JOptionPane.showMessageDialog(null, "alguno de los datos se vacio o quieres comprar un producto vencido");
         } else {
             String id = jCcategorias.getItemAt(jCcategorias.getSelectedIndex()).split(" - ")[0];

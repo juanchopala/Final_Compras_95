@@ -168,5 +168,25 @@ public class CategoriasData {
         }
         return variable2;
       }
+  
+  public Variable2 buscarMetodo(int id){
+      String sql = "Select * from metodopago where idMetodoPago=?";
+      Variable2 m=new Variable2();
+      
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                m.setIdMetodoPago(rs.getInt("idMetodoPago"));
+                m.setNombreMetodo(rs.getString("NombreMetodo"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar a la base de datos");
+        }
+      
+      return m;
+  }
 
 }

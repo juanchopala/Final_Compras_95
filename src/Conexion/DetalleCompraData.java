@@ -25,6 +25,8 @@ import org.mariadb.jdbc.Connection;
  */
 public class DetalleCompraData {
     private Connection con = null;
+    private CompraData cd= new CompraData();
+    private ProductoData pd= new ProductoData();
     
     public DetalleCompraData(){
         this.con = (Connection) Conexion.getConexion();
@@ -40,8 +42,8 @@ public class DetalleCompraData {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,dc.getCantidad());
             ps.setDouble(2, dc.getPrecioCosto());
-            ps.setInt(3,dc.getIdCompra());
-            ps.setInt(4, dc.getIdProducto());
+            ps.setInt(3,dc.getIdCompra().getIdCompra());
+            ps.setInt(4, dc.getIdProducto().getIdProducto());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
@@ -68,8 +70,8 @@ public class DetalleCompraData {
                 d.setIdDetalle(rs.getInt("idDetalle"));
                 d.setCantidad(rs.getInt("cantidad"));
                 d.setPrecioCosto(rs.getDouble("precioCosto"));
-                d.setIdCompra(idCompra);
-                d.setIdProducto(rs.getInt("idProducto"));
+                d.setIdCompra(cd.buscarCompra(rs.getInt("idCompra")));
+                d.setIdProducto(pd.buscarProducto(rs.getInt("idProducto")));
                 list.add(d);
             }
             ps.close();
