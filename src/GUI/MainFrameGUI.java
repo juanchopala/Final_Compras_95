@@ -113,17 +113,19 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 if (!JrStock.isSelected()) {
                     JrMinimo.setEnabled(false);
                     JrMaximo.setEnabled(false);
-
+                  
                 } else {
                     JrMinimo.setEnabled(true);
                     JrMaximo.setEnabled(true);
                     CargarTabla2Stock();
                 }
+
             }
         });
         JrMinimo.setEnabled(true);
         JrMaximo.setEnabled(true);
 
+        
         // this.setExtendedState(MAXIMIZED_BOTH);
         // Escritorio.isMaximumSizeSet();
         // aqui lo saque para que se inicilize en el tamaño minimo y después se pueda agrandar
@@ -209,6 +211,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 JrComprasMouseClicked(evt);
             }
         });
+        JrCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JrComprasActionPerformed(evt);
+            }
+        });
         jPanel2.add(JrCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
         MainTableGroup.add(JrVentas);
@@ -230,6 +237,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
         JrMinimo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JrMinimoMouseClicked(evt);
+            }
+        });
+        JrMinimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JrMinimoActionPerformed(evt);
             }
         });
         jPanel2.add(JrMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
@@ -693,6 +705,14 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private void JrVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrVentasActionPerformed
        tablaVenta();
     }//GEN-LAST:event_JrVentasActionPerformed
+
+    private void JrComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrComprasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JrComprasActionPerformed
+
+    private void JrMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrMinimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JrMinimoActionPerformed
     private void listaComboCatego() {
         for (Variables prod : cate.listarCategoria()) {
             JCListarCategorias.addItem(prod.getIdCategoria() + " - " + prod.getnombreCategoria());

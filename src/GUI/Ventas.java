@@ -30,6 +30,14 @@ public class Ventas extends javax.swing.JInternalFrame {
     private ProductoData prod = new ProductoData();
     private DefaultTableModel modelo = new DefaultTableModel();
     private VentasData ven = new VentasData();
+       public boolean isCellEditable(int fila, int columna) {
+            if (columna > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+    
 
     /**
      * Creates new form Ventas
