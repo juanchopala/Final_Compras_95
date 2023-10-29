@@ -736,7 +736,6 @@ public class MainFrameGUI extends javax.swing.JFrame {
             for(DetalleCompra dc:dcd.ListarDetalleCompra(c.getIdCompra())){
                 Object[] o1 = new Object[5];
                 o1[0]=dc.getIdDetalle();
-                o1[0]   
                 
             }
         }

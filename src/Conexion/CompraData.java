@@ -141,10 +141,10 @@ public class CompraData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
         }
-//        
-//        return lista;
-//    }
-//    
+        
+        return lista;
+    }
+    
 //        public List<Compra> listarComprasInactivas(){
 //        ArrayList<Compra> lista = new ArrayList<Compra>();
 //        
