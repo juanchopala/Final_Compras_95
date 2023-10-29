@@ -40,9 +40,8 @@ public class Compras extends javax.swing.JInternalFrame {
     private CompraData cp = new CompraData();
     private DetalleCompraData dcp = new DetalleCompraData();
     List<DetalleCompra> carrito = new ArrayList<>();
-    
-    //esto lo cambie a un treeSet
 
+    //esto lo cambie a un treeSet
     /**
      * Creates new form Compras
      */
@@ -227,9 +226,9 @@ public class Compras extends javax.swing.JInternalFrame {
         if (jcarro.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "No HayProductos en el carro");
         }
-        
-        if(jDfecha.getDate()==null){
-            JOptionPane.showMessageDialog(null,"Tienes que especificar la fecha de la compra");
+
+        if (jDfecha.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Tienes que especificar la fecha de la compra");
         }
         Compra p = new Compra();
         try {
@@ -245,7 +244,7 @@ public class Compras extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error en ejecutar la compra");
         }
-        
+
         cp.guardarCompra(p);
         int id = p.getIdCompra();
         for (DetalleCompra dp : carrito) {
@@ -270,25 +269,29 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private void BtnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAñadirCarritoActionPerformed
         int cantidad = Integer.parseInt(jcantidad.getText());
-        int idProducto = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[0]);
-        Producto p =new Producto();
-        p=prov.buscarProducto(idProducto);
-        String nombre = jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[1];
-        double precioCosto = Double.parseDouble(jprecio.getText());
-        DetalleCompra d = new DetalleCompra(cantidad, precioCosto,p);
-        boolean nuevo=true;
-        for(DetalleCompra dp: carrito){
-            if(p.equals(dp.getIdProducto())){
-                dp.setCantidad(cantidad);
-                dp.setPrecioCosto(precioCosto);
-                nuevo=false;
+        if (!(cantidad == 0)){
+            int idProducto = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[0]);
+            Producto p = new Producto();
+            p = prov.buscarProducto(idProducto);
+            String nombre = jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[1];
+            double precioCosto = Double.parseDouble(jprecio.getText());
+            DetalleCompra d = new DetalleCompra(cantidad, precioCosto, p);
+            boolean nuevo = true;
+            for (DetalleCompra dp : carrito) {
+                if (p.equals(dp.getIdProducto())) {
+                    dp.setCantidad(cantidad);
+                    dp.setPrecioCosto(precioCosto);
+                    nuevo = false;
+                }
             }
+            if (nuevo) {
+                carrito.add(d);
+            }
+            actualizarPrecioTotal();
+            carroCompra();
+        }else{
+            JOptionPane.showMessageDialog(null, "no puedes hacer una compra de 0 productos");
         }
-        if(nuevo){
-            carrito.add(d);
-        }
-        actualizarPrecioTotal();
-        carroCompra();
 
     }//GEN-LAST:event_BtnAñadirCarritoActionPerformed
 
@@ -302,10 +305,14 @@ public class Compras extends javax.swing.JInternalFrame {
     private void jcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyTyped
         int Key = evt.getKeyChar();
         boolean numero = Key >= 48 && Key <= 57;
-        if (!numero){
+        if (!numero) {
             evt.consume();
         }
-        if (jcantidad.getText().trim().length()==11){
+        if (jcantidad.getText().trim().length() == 11) {
+            evt.consume();
+        }
+
+        if (jcantidad.getText().equals("-")) {
             evt.consume();
         }
     }//GEN-LAST:event_jcantidadKeyTyped
@@ -369,7 +376,7 @@ public class Compras extends javax.swing.JInternalFrame {
             String nom = dp.getIdProducto().getNombreProducto();
             int cantidad = dp.getCantidad();
             double precioCosto = dp.getPrecioCosto();
-            modelo.addRow(new Object[]{id,nom, cantidad, precioCosto});
+            modelo.addRow(new Object[]{id, nom, cantidad, precioCosto});
 
         }
     }
