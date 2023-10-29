@@ -188,6 +188,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTTelefono">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTTelefonoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTMail">
           <Events>

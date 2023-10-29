@@ -12,6 +12,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -53,31 +55,7 @@ public class VentasData {
         }
 
     }
-         //HASH
-//    public void modificarVentas(Ventas ventas) {
-//
-//        String sql = "UPDATE ventas SET idProducto= ?,fecha= ?, cantidad= ?, PrecioTotal= ?"
-//                + "WHERE idVentas= ?";
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setObject(1, ventas.getIdProducto());
-//            ps.setDate(2, Date.valueOf(ventas.getFecha()));
-//            ps.setInt(3, ventas.getCantidad());
-//            ps.setDouble(4, ventas.getPrecioTotal());
-//            ps.setInt(5, ventas.getIdVentas());
-//            int exito = ps.executeUpdate();
-//            if (exito == 1) {
-//
-//            }
-//
-//        } catch (SQLException ex) {
-//
-//        }
-//        {
-//            JOptionPane.showMessageDialog(null, "ventas modificadas");
-//
-//        }
-//    }
+
 
     public void eliminarVentas(int id) {
 
@@ -89,11 +67,35 @@ public class VentasData {
             ps.setInt(1, id);
             int exito = ps.executeUpdate();
             if (exito == 1) {
-
+            JOptionPane.showMessageDialog(null, "Ventas eliminadas");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ventas eliminadas");
+            JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla ventas");
         }
     }
+    public List<Venta> ListaVenta (){
+        ArrayList <Venta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM `ventas`";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Venta venta = new Venta();
+                venta.setIdVentas(rs.getInt("idVentas"));
+                venta.setIdProducto(rs.getInt("idProducto"));
+                venta.setFecha(rs.getDate("fecha").toLocalDate());
+                venta.setCantidad(rs.getInt("cantidad"));
+                venta.setPrecioTotal(rs.getDouble("PrecioTotal"));
+                venta.setIdMetodoPago(rs.getInt("idMetodoPago"));
+                lista.add(venta);   
+            }
+           ps.close();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla ventas");
+        }
+        return lista;
+    }
+    
 }
