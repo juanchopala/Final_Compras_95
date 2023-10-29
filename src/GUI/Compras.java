@@ -5,11 +5,23 @@
 package GUI;
 
 import Conexion.CategoriasData;
+import Conexion.CompraData;
+import Conexion.DetalleCompraData;
+import Conexion.ProductoData;
 import Conexion.ProveedorData;
 import Conexion.Proveedor_ProductoData;
+import Entidades.Compra;
+import Entidades.DetalleCompra;
 import Entidades.Proveedor;
 import Entidades.Variable2;
+import GUI.Productos;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,12 +29,19 @@ import javax.swing.table.DefaultTableModel;
  * @author gonza
  */
 public class Compras extends javax.swing.JInternalFrame {
+
     private DefaultTableModel modelo = new DefaultTableModel();
     private ProveedorData provD = new ProveedorData();
     private Proveedor_ProductoData propro = new Proveedor_ProductoData();
+    private ProductoData prov = new ProductoData();
     private Productos producto = new Productos();
     private CategoriasData categoriasData = new CategoriasData();
+    private CompraData cp = new CompraData();
+    private DetalleCompraData dcp = new DetalleCompraData();
+    List<DetalleCompra> carrito = new ArrayList<>();
     
+    //esto lo cambie a un treeSet
+
     /**
      * Creates new form Compras
      */
@@ -31,8 +50,8 @@ public class Compras extends javax.swing.JInternalFrame {
         listaProveedor();
         cargarMetodos();
         carroCompra();
-    }
 
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,22 +63,23 @@ public class Compras extends javax.swing.JInternalFrame {
         jProveedores = new javax.swing.JComboBox<>();
         jProducto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jMetodo = new javax.swing.JComboBox<>();
+        jMetodoPago = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BtnComprar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jcarro = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jprecio = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jDfecha = new com.toedter.calendar.JDateChooser();
+        jprecioTotal = new javax.swing.JTextField();
+        BtnEliminar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BtnAñadirCarrito = new javax.swing.JButton();
         jcantidad = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jprecio = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -72,19 +92,6 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel2.setText("Proveedor");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 91, -1));
 
-        jProveedores.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jProveedoresMouseMoved(evt);
-            }
-        });
-        jProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jProveedoresMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jProveedoresMousePressed(evt);
-            }
-        });
         jProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProveedoresActionPerformed(evt);
@@ -92,14 +99,6 @@ public class Compras extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 241, -1));
 
-        jProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jProductoMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jProductoMousePressed(evt);
-            }
-        });
         jProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProductoActionPerformed(evt);
@@ -110,26 +109,26 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel3.setText("Producto");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 60, -1));
 
-        jMetodo.addActionListener(new java.awt.event.ActionListener() {
+        jMetodoPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMetodoActionPerformed(evt);
+                jMetodoPagoActionPerformed(evt);
             }
         });
-        jPanel1.add(jMetodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 150, -1));
+        jPanel1.add(jMetodoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 150, -1));
 
         jLabel5.setText("Metodo de pago");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 91, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 91, -1));
 
         jLabel6.setText("Precio");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 83, 20));
 
-        jButton1.setText("Compra");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnComprar.setText("Comprar");
+        BtnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnComprarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 140, 32));
+        jPanel1.add(BtnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 130, -1));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 326, 132, -1));
 
         jcarro.setModel(new javax.swing.table.DefaultTableModel(
@@ -143,64 +142,52 @@ public class Compras extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jcarro.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jcarro);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 583, 151));
 
         jLabel4.setText("Fecha ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 71, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 150, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 71, -1));
+        jPanel1.add(jDfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 150, -1));
 
-        jprecio.setEditable(false);
-        jprecio.addActionListener(new java.awt.event.ActionListener() {
+        jprecioTotal.setEditable(false);
+        jPanel1.add(jprecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 90, 30));
+
+        BtnEliminar.setText("eliminar seleccionado");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jprecioActionPerformed(evt);
+                BtnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 90, 30));
-
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 580, -1, -1));
-
-        jButton4.setText("eliminar seleccionado");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, -1, -1));
+        jPanel1.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 130, -1));
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, -1));
 
         jLabel9.setText("Cantidad");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 60, -1));
 
-        jButton2.setText("Añadir al carrito");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnAñadirCarrito.setText("Añadir al carrito");
+        BtnAñadirCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnAñadirCarritoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 140, 40));
+        jPanel1.add(BtnAñadirCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 140, 40));
 
-        jcantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcantidadActionPerformed(evt);
-            }
-        });
         jcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jcantidadKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jcantidadKeyReleased(evt);
             }
         });
         jPanel1.add(jcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 90, -1));
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Solo una compra  por proveedor");
+        jLabel10.setToolTipText("");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 210, 30));
+
+        jprecio.setEditable(false);
+        jPanel1.add(jprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,99 +197,106 @@ public class Compras extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMetodoActionPerformed
+    private void jMetodoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMetodoPagoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMetodoActionPerformed
+    }//GEN-LAST:event_jMetodoPagoActionPerformed
 
     private void jProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProveedoresActionPerformed
-        // TODO add your handling code here:
+        jProducto.removeAllItems();
+        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
+        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
+            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto") + " -  " + productos.get("precioActual"));
+        }
+        carrito.clear();
+        carroCompra();
+        actualizarPrecioTotal();
     }//GEN-LAST:event_jProveedoresActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//      for (int i = 0 > jcarro.getRowCount();i++){
-          
-//      }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (jcarro.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No HayProductos en el carro");
+        }
+        Compra p = new Compra();
+        try {
+            int IdProveedor = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
+            int IdMetodoPago = Integer.parseInt(jMetodoPago.getItemAt(jMetodoPago.getSelectedIndex()).split(" - ")[0]);
+            java.util.Date fecha = jDfecha.getDate();
+            LocalDate fechaN = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Double PrecioCosto = Double.parseDouble(jprecioTotal.getText());
+            p.setIdProveedor(IdProveedor);
+            p.setFecha(fechaN);
+            p.setIdMetodoPago(IdMetodoPago);
+            p.setPrecioCosto(PrecioCosto);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error en ejecutar la compra");
+        }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        cp.guardarCompra(p);
+        int id = p.getIdCompra();
+        for (DetalleCompra dp : carrito) {
+            dp.setIdCompra(id);
+            dcp.guardarDetalle(dp);
+        }
+        carrito.clear();
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_BtnComprarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+
+        int fila = jcarro.getSelectedRow();
+        modelo.removeRow(fila);
+        carrito.remove(fila);
+        actualizarPrecioTotal();
+    }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void jProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductoActionPerformed
         ///aqui va algo
     }//GEN-LAST:event_jProductoActionPerformed
 
-    private void jprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jprecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jprecioActionPerformed
+    private void BtnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAñadirCarritoActionPerformed
+        int cantidad = Integer.parseInt(jcantidad.getText());
+        int idProducto = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[0]);
+        String nombre = jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[1];
+        double precioCosto = Double.parseDouble(jprecio.getText());
+        DetalleCompra d = new DetalleCompra(cantidad, precioCosto, idProducto,nombre);
+        boolean nuevo=true;
+        for(DetalleCompra dp: carrito){
+            if(idProducto==dp.getIdProducto()){
+                dp.setCantidad(cantidad);
+                dp.setPrecioCosto(precioCosto);
+                nuevo=false;
+            }
+        }
+        if(nuevo){
+            carrito.add(d);
+        }
+        actualizarPrecioTotal();
+        carroCompra();
 
-    private void jProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMouseClicked
-      
-    }//GEN-LAST:event_jProductoMouseClicked
-
-    private void jProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMousePressed
-        jProducto.removeAllItems();
-        int id = Integer.parseInt(jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[0]);
-        for (Map<String, Object> productos : propro.ProductoProveedor(id)) {
-            jProducto.addItem(productos.get("idProducto") + " - " + productos.get("nombreProducto") + " -  " + productos.get("precioActual"));
-          }    
-    }//GEN-LAST:event_jProveedoresMousePressed
-
-    private void jProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseExited
-   // TODO add your handling code here:
-    }//GEN-LAST:event_jProveedoresMouseExited
-
-    private void jProveedoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProveedoresMouseMoved
-  // TODO add your handling code here:
-    }//GEN-LAST:event_jProveedoresMouseMoved
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         int Cantidad = Integer.parseInt(jcantidad.getText());
-         String proveedor = jProveedores.getItemAt(jProveedores.getSelectedIndex()).split(" - ")[1];
-         String Producto =  jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[1];
-         int idProducto = Integer.parseInt(jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[0]);
-         double precio = Double.parseDouble(jprecio.getText());
-         modelo.addRow(new Object[]{proveedor,idProducto, Producto, Cantidad, precio });
-         
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProductoMousePressed
-       
-    }//GEN-LAST:event_jProductoMousePressed
-
-    private void jcantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyPressed
-        
-    }//GEN-LAST:event_jcantidadKeyPressed
+    }//GEN-LAST:event_BtnAñadirCarritoActionPerformed
 
     private void jcantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyReleased
         int Cantidad = Integer.parseInt(jcantidad.getText());
-        double precio =  Double.parseDouble(jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[2]);
-        double result = precio * Cantidad ;
-        jprecio.setText(String.valueOf(result)); 
+        double precio = Double.parseDouble(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[2]);
+        double result = precio * Cantidad;
+        jprecio.setText(String.valueOf(result));
     }//GEN-LAST:event_jcantidadKeyReleased
-
-    private void jcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcantidadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton BtnAñadirCarrito;
+    private javax.swing.JButton BtnComprar;
+    private javax.swing.JButton BtnEliminar;
+    private com.toedter.calendar.JDateChooser jDfecha;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -311,7 +305,7 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> jMetodo;
+    private javax.swing.JComboBox<String> jMetodoPago;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jProducto;
     private javax.swing.JComboBox<String> jProveedores;
@@ -319,6 +313,7 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jcantidad;
     private javax.swing.JTable jcarro;
     private javax.swing.JTextField jprecio;
+    private javax.swing.JTextField jprecioTotal;
     // End of variables declaration//GEN-END:variables
     private void listaProveedor() {
 
@@ -326,25 +321,44 @@ public class Compras extends javax.swing.JInternalFrame {
             jProveedores.addItem(prove.getIdProveedor() + " - " + prove.getRazonSocial());
         }
     }
- private void cargarMetodos(){
-        for (Variable2 var : categoriasData.listarMetodos()){
-            jMetodo.addItem(var.getIdMetodoPago() + " - " + var.getNombreMetodo());
+
+    private void cargarMetodos() {
+        for (Variable2 var : categoriasData.listarMetodos()) {
+            jMetodoPago.addItem(var.getIdMetodoPago() + " - " + var.getNombreMetodo());
         }
-     }
- private void costo (){
+    }
+
+    private void costo() {
         int Cantidad = Integer.parseInt(jcantidad.getText());
-        double precio =  Double.parseDouble(jProducto.getItemAt(jProducto.getSelectedIndex()).split( " - ")[2]);
-        double result = precio * Cantidad ;
-        
- }
- private void carroCompra(){
-     modelo.addColumn("Proveedor");
-     modelo.addColumn("idProducto");
-     modelo.addColumn("Producto");
-     modelo.addColumn("Cantidad");
-     modelo.addColumn("Precio");
-     jcarro.setModel(modelo);
- }
- 
+        double precio = Double.parseDouble(jProducto.getItemAt(jProducto.getSelectedIndex()).split(" - ")[2]);
+        double result = precio * Cantidad;
+
+    }
+
+    private void carroCompra() {
+        modelo.setRowCount(0);
+        modelo.setColumnCount(0);
+        modelo.addColumn("idProducto");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("PrecioTotal");
+        jcarro.setModel(modelo);
+        for (DetalleCompra dp : carrito) {
+            int id = dp.getIdProducto();
+            String nom = dp.getNombreProducto();
+            int cantidad = dp.getCantidad();
+            double precioCosto = dp.getPrecioCosto();
+            modelo.addRow(new Object[]{id,nom, cantidad, precioCosto});
+
+        }
+    }
+
+    private void actualizarPrecioTotal() {
+        double total = 0;
+        for (DetalleCompra c : carrito) {
+            total = total + c.getPrecioCosto();
+        }
+        jprecioTotal.setText(String.valueOf(total));
+    }
 
 }
