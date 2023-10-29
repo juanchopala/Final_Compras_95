@@ -218,6 +218,11 @@ public class MainFrameGUI extends javax.swing.JFrame {
                 JrVentasMouseClicked(evt);
             }
         });
+        JrVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JrVentasActionPerformed(evt);
+            }
+        });
         jPanel2.add(JrVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, -1, -1));
 
         JrMinimo.setSelected(true);
@@ -684,6 +689,10 @@ public class MainFrameGUI extends javax.swing.JFrame {
     private void JrComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrComprasMouseClicked
 
     }//GEN-LAST:event_JrComprasMouseClicked
+
+    private void JrVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrVentasActionPerformed
+       tablaVenta();
+    }//GEN-LAST:event_JrVentasActionPerformed
     private void listaComboCatego() {
         for (Variables prod : cate.listarCategoria()) {
             JCListarCategorias.addItem(prod.getIdCategoria() + " - " + prod.getnombreCategoria());
