@@ -97,6 +97,11 @@ public class CrearProducto extends javax.swing.JInternalFrame {
                 jprecioActionPerformed(evt);
             }
         });
+        jprecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jprecioKeyTyped(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,6 +146,17 @@ public class CrearProducto extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setText("Stock");
+
+        jstock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jstockActionPerformed(evt);
+            }
+        });
+        jstock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jstockKeyTyped(evt);
+            }
+        });
 
         jactivo.setText("Activo");
 
@@ -290,7 +306,7 @@ public class CrearProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jdetallesActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (TNombre.getText().equals("") || Im.getText().equals("") || jdetalles.getText().equals("") || jprecio.getText().equals("") || (Float.parseFloat(jprecio.getText().toString()) <= 0) || jstock.getText().equals("")
+        if (validarDatos(jstock.getText().trim())|| validarDouble(jprecio.getText().trim()) ||TNombre.getText().equals("") || Im.getText().equals("") || jdetalles.getText().equals("") || jprecio.getText().equals("") || (Float.parseFloat(jprecio.getText().toString()) <= 0) || jstock.getText().equals("")
                 || jDfecha.getDate().toString().equals("") || (jDfecha.getDate().before(Date.valueOf(LocalDate.now())))) {
             JOptionPane.showMessageDialog(null, "alguno de los datos se vacio o quieres comprar un producto vencido");
         } else {
@@ -316,10 +332,40 @@ public class CrearProducto extends javax.swing.JInternalFrame {
     private void TNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TNombreActionPerformed
-    public static boolean validarDatos(String datos) {
-        return datos.matches("[0-9]");
-    }
 
+    private void jprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jprecioKeyTyped
+           int Key = evt.getKeyChar();
+      boolean numero = Key >= 48 && Key <= 57;
+      if (!numero){
+          evt.consume();
+      }
+      if (jprecio.getText().trim().length()==11){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jprecioKeyTyped
+
+    private void jstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jstockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jstockActionPerformed
+
+    private void jstockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jstockKeyTyped
+         int Key = evt.getKeyChar();
+      boolean numero = Key >= 48 && Key <= 57;
+      if (!numero){
+          evt.consume();
+      }
+      if (jstock.getText().trim().length()==11){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jstockKeyTyped
+
+    public static boolean validarDatos(String datos){
+        return datos.matches("[0-9]");
+        
+    }
+    public static boolean validarDouble(String datos){
+        return datos.matches("-?\\d+(\\.\\d+)?");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Im;
     private javax.swing.JTextField TNombre;

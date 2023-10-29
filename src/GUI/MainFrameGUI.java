@@ -10,12 +10,14 @@ import Conexion.DetalleCompraData;
 import Conexion.ProductoData;
 import Conexion.ProveedorData;
 import Conexion.Proveedor_ProductoData;
+import Conexion.VentasData;
 import Entidades.Compra;
 import Entidades.DetalleCompra;
 import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Proveedor_Producto;
 import Entidades.Variables;
+import Entidades.Venta;
 import GUI.Compras;
 import GUI.Compras;
 import GUI.Productos;
@@ -50,7 +52,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Administrador
  */
 public class MainFrameGUI extends javax.swing.JFrame {
-
+    VentasData venD =  new VentasData();
     ButtonGroup mi = new ButtonGroup();
     ProductoData prod = new ProductoData();
     CategoriasData cate = new CategoriasData();
@@ -675,6 +677,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         if (JrVentas.isSelected()) {
             modelo.setRowCount(0);
             modelo.setColumnCount(0);
+            tablaVenta();
         }
     }//GEN-LAST:event_JrVentasMouseClicked
 
@@ -701,7 +704,19 @@ public class MainFrameGUI extends javax.swing.JFrame {
             JCListarProveedores.addItem(p.getIdProveedor() + " - " + p.getRazonSocial());
         }
     }
-
+     private void tablaVenta(){
+         modelo.addColumn("idVnetas");
+         modelo.addColumn("idProducto");
+         modelo.addColumn("fecha");
+         modelo.addColumn("cantidad");
+         modelo.addColumn("PrecioTotal");
+         modelo.addColumn("idMetodoPago");
+         jTable2.setModel(modelo);
+          for (Venta venta : venD.ListaVenta() ){
+            modelo.addRow(new Object[]{venta.getIdVentas(),venta.getIdProducto(),venta.getFecha(),venta.getCantidad(),venta.getPrecioTotal(),venta.getIdMetodoPago()});
+        }
+     }
+            
     private void CargarTabla2Stock() {
         modelo.setRowCount(0);
         modelo.setColumnCount(0);
@@ -714,6 +729,8 @@ public class MainFrameGUI extends javax.swing.JFrame {
         modelo.addColumn("precioActual");
         modelo.addColumn("stock");
         jTable2.setModel(modelo);
+        
+      
     }
 
     private void CargarTabla2Compras() {

@@ -221,6 +221,7 @@
         <Component class="javax.swing.JTextField" name="jprecio">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jprecioActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jprecioKeyTyped"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -292,6 +293,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jstock">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jstockActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jstockKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jactivo">
           <Properties>

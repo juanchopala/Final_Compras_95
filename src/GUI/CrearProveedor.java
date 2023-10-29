@@ -75,6 +75,12 @@ public class CrearProveedor extends javax.swing.JInternalFrame {
             }
         });
 
+        jTTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTTelefonoKeyTyped(evt);
+            }
+        });
+
         jTMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTMailActionPerformed(evt);
@@ -251,6 +257,17 @@ public class CrearProveedor extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTelefonoKeyTyped
+          int Key = evt.getKeyChar();
+      boolean numero = Key >= 48 && Key <= 57;
+      if (!numero){
+          evt.consume();
+      }
+      if (jTTelefono.getText().trim().length()==20){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jTTelefonoKeyTyped
     public static boolean validarDatos(String datos) {
         return datos.matches("[0-9]");
     }
