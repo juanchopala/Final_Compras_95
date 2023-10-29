@@ -236,11 +236,11 @@ public class Ventas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//
-//        if (jFecha.getDate() == null || (jFecha.getDate().before(Date.valueOf(LocalDate.now())))){
-//            
-//            JOptionPane.showMessageDialog(null, "Complete correctamente la fecha");
-//        } else {
+
+        if (jFecha.getDate() == null ||  (jFecha.getDate().before(java.sql.Date.valueOf(LocalDate.now())))){
+            
+            JOptionPane.showMessageDialog(null, "Complete correctamente la fecha");
+        } else {
             int idP = (Integer) jTable1.getValueAt(0, 0);
             String FechaL = Objects.toString(jTable1.getValueAt(0, 1));
             LocalDate fech = LocalDate.parse(FechaL, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -256,7 +256,7 @@ public class Ventas extends javax.swing.JInternalFrame {
             Venta venta = new Venta(idP, fech, cantidad, 1, idC);
             ven.guardarVentas(venta);
             
-//        }
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
