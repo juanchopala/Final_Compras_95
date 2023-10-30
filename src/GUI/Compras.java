@@ -294,7 +294,7 @@ public class Compras extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, "no puedes hacer una compra de 0 productos");
         }
-
+        jcantidad.setText("");
     }//GEN-LAST:event_BtnAñadirCarritoActionPerformed
 
     private void jcantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyReleased
