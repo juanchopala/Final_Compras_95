@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2023 a las 00:28:22
+-- Tiempo de generación: 30-10-2023 a las 01:57:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -37,9 +37,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nombreCategoria`) VALUES
-(7, 'Indumentarias'),
-(8, 'Comestibles'),
-(9, 'Limpieza');
+(10, 'Limpieza'),
+(12, 'Indumentaria'),
+(17, 'Comestibles');
 
 -- --------------------------------------------------------
 
@@ -60,39 +60,12 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`idCompra`, `idProveedor`, `fecha`, `idMetodoPago`, `precioCosto`) VALUES
-(1, 11, '2023-10-06', 4, 12),
-(2, 11, '2023-10-11', 4, 45),
-(3, 11, '2023-10-06', 4, 45),
-(4, 11, '2023-10-11', 4, 60),
-(5, 11, '2023-10-12', 4, 39),
-(6, 11, '2023-10-12', 4, 44),
-(7, 11, '2023-10-11', 4, 1246),
-(19, 11, '2023-10-19', 4, 12),
-(20, 11, '2023-10-24', 4, 123),
-(21, 11, '2023-10-05', 4, 12),
-(22, 11, '2023-10-25', 4, 15),
-(23, 11, '2023-10-17', 4, 112),
-(24, 11, '2023-10-17', 4, 112),
-(25, 11, '2023-10-12', 4, 123),
-(26, 11, '2023-10-12', 4, 123),
-(27, 11, '2023-10-12', 4, 123),
-(28, 11, '2023-10-12', 4, 123),
-(29, 11, '2023-10-13', 4, 15),
-(30, 11, '2023-10-19', 4, 15),
-(31, 11, '2023-10-12', 4, 15),
-(32, 11, '2023-10-13', 4, 12),
-(33, 11, '2023-10-13', 4, 12),
-(34, 11, '2023-10-11', 4, 12),
-(35, 11, '2023-10-12', 4, 12),
-(36, 11, '2023-10-12', 4, 1226),
-(37, 11, '2023-10-12', 4, 1223),
-(38, 11, '2023-10-12', 4, 1223),
-(39, 11, '2023-10-05', 4, 0),
-(40, 11, '2023-10-05', 4, 1),
-(41, 11, '2023-10-11', 4, 10),
-(42, 11, '2023-10-11', 4, 123),
-(43, 11, '2023-10-18', 4, 12),
-(44, 11, '2023-10-05', 4, 12);
+(1, 14, '2023-10-31', 8, 25851),
+(2, 14, '2023-11-29', 8, 45156),
+(3, 14, '2023-11-23', 7, 45156),
+(4, 14, '2023-11-23', 7, 45156),
+(5, 14, '2023-11-23', 7, 151413),
+(6, 16, '2023-11-16', 7, 520782);
 
 -- --------------------------------------------------------
 
@@ -113,34 +86,10 @@ CREATE TABLE `detallecompra` (
 --
 
 INSERT INTO `detallecompra` (`idDetalle`, `cantidad`, `precioCosto`, `idCompra`, `idProducto`) VALUES
-(3, 15, 15, 5, 21),
-(4, 24, 24, 5, 21),
-(5, 11, 11, 6, 21),
-(6, 33, 33, 6, 21),
-(7, 14, 14, 7, 21),
-(8, 1, 1232, 7, 24),
-(23, 15, 15, 22, 21),
-(24, 112, 112, 23, 21),
-(25, 112, 112, 24, 21),
-(26, 123, 123, 25, 21),
-(27, 123, 123, 26, 21),
-(28, 123, 123, 28, 21),
-(29, 15, 15, 29, 21),
-(30, 15, 15, 30, 21),
-(31, 15, 15, 31, 21),
-(32, 12, 12, 32, 21),
-(33, 12, 12, 33, 21),
-(34, 12, 12, 34, 21),
-(35, 12, 12, 35, 21),
-(36, 12, 12, 36, 21),
-(37, 1214, 1214, 36, 15),
-(38, 1223, 1223, 37, 21),
-(39, 1223, 1223, 38, 21),
-(40, 1, 1, 40, 21),
-(41, 10, 10, 41, 21),
-(42, 123, 123, 42, 21),
-(43, 12, 12, 43, 21),
-(44, 12, 12, 44, 21);
+(6, 1231, 25851, 1, 27),
+(7, 213, 45156, 2, 28),
+(8, 1231, 151413, 5, 29),
+(9, 123, 520782, 6, 35);
 
 -- --------------------------------------------------------
 
@@ -158,9 +107,9 @@ CREATE TABLE `metodopago` (
 --
 
 INSERT INTO `metodopago` (`idMetodoPago`, `NombreMetodo`) VALUES
-(4, 'Debito'),
-(5, 'Credito'),
-(6, 'Efectivo');
+(7, 'Efectivo'),
+(8, 'Debito'),
+(9, 'Credito');
 
 -- --------------------------------------------------------
 
@@ -185,16 +134,19 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `idCategoria`, `nombreProducto`, `importadoNacional`, `descripcion`, `fechaLimite`, `precioActual`, `stock`, `estado`) VALUES
-(15, 7, 'Short', 'local', 'sadas', '2023-10-29', 12, 0, 1),
-(16, 7, 'remeras', 'local', 'sadas', '2023-10-29', 10, 0, 1),
-(17, 7, 'medias', 'local', 'sadas', '2023-10-29', 22, 0, 1),
-(18, 8, 'Arroz', 'local', 'ffff', '2023-07-22', 22, 0, 1),
-(19, 8, 'Azucar', 'local', 'ffff', '2023-07-22', 22, 0, 1),
-(20, 8, 'Polenta', 'local', 'ffff', '2023-07-22', 1, 0, 1),
-(21, 9, 'Poet', 'local', 'dddd', '2023-07-22', 1, 12, 1),
-(22, 9, 'lusonfort', 'local', 'dddd', '2023-07-22', 12, 0, 1),
-(23, 9, 'Hierba', 'local', 'dddd', '2023-07-22', 12, 0, 1),
-(24, 7, 'asdfadf', 'asdfasdf', 'asdfasdfasdf', '2023-10-29', 1232, 12, 1);
+(27, 10, 'Lavandina', 'local', '1', '2023-10-31', 21, 8, 1),
+(28, 10, 'Escoba', 'local', '2', '2023-10-31', 212, 213, 1),
+(29, 10, 'Poet', 'local', 'da', '2023-10-31', 123, 1231, 1),
+(30, 12, 'Short', 'local', '1', '2023-10-31', 213, 0, 1),
+(32, 12, 'Remeras', 'local', 'asd', '2023-10-31', 654, 0, 1),
+(33, 12, 'Boxer', 'local', '123', '2023-10-31', 423, 0, 1),
+(34, 17, 'Azucar', 'local', 'sad', '2023-10-31', 123, 0, 1),
+(35, 17, 'arroz', 'local', 'sda', '2023-10-31', 4234, 123, 1),
+(36, 17, 'fideos', 'local', 'adsa', '2023-10-31', 1234, 0, 1),
+(37, 10, 'ad', 'asd', 'asd', '2023-10-31', 123, 123, 0),
+(38, 10, 'dsad', 'fsdf', 'asdasd', '2023-10-31', 123, 234, 0),
+(39, 12, 'Medios', 'Local', 'asda', '2023-10-31', 123, 0, 1),
+(40, 17, 'asdas', 'sad', '1231', '2023-10-31', 123, 4123, 0);
 
 -- --------------------------------------------------------
 
@@ -216,9 +168,9 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idProveedor`, `razonSocial`, `domicilio`, `telefono`, `email`, `pagina`) VALUES
-(11, 'Pepito', 'calle 22', 111111111, '', ''),
-(12, 'Este', 'calle 15', 223312, '', ''),
-(13, 'plo', 'calle 455', 4323123, '', '');
+(14, 'Pepito Sanchez', 'Villa uganda', 11652254, '', ''),
+(15, 'EstebanCarritos', 'Santiago del Estero 1655', 125444446, '', ''),
+(16, 'ViejosCarros', 'Fabel 15400', 12334534, '', '');
 
 -- --------------------------------------------------------
 
@@ -238,19 +190,16 @@ CREATE TABLE `proveedor_producto` (
 --
 
 INSERT INTO `proveedor_producto` (`idProveedorproducto`, `idProveedor`, `idProducto`, `costo`) VALUES
-(5, 11, 21, 1),
-(6, 11, 16, 10),
-(8, 12, 18, 22),
-(9, 12, 19, 22),
-(10, 12, 20, 1),
-(11, 13, 21, 1),
-(12, 13, 22, 12),
-(13, 13, 23, 12),
-(14, 11, 21, 1),
-(15, 11, 16, 10),
-(16, 11, 15, 12),
-(17, 11, 17, 22),
-(18, 11, 24, 1232);
+(19, 14, 27, 21),
+(20, 14, 28, 212),
+(21, 14, 29, 123),
+(22, 15, 30, 213),
+(23, 15, 32, 654),
+(24, 15, 33, 423),
+(25, 15, 39, 123),
+(26, 16, 34, 123),
+(27, 16, 35, 4234),
+(29, 16, 36, 1234);
 
 -- --------------------------------------------------------
 
@@ -266,6 +215,14 @@ CREATE TABLE `ventas` (
   `PrecioTotal` double NOT NULL,
   `idMetodoPago` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`idVentas`, `idProducto`, `fecha`, `cantidad`, `PrecioTotal`, `idMetodoPago`) VALUES
+(21, 27, '2023-10-30', 123, 1, 7),
+(22, 27, '2023-10-29', 1100, 1, 7);
 
 --
 -- Índices para tablas volcadas
@@ -336,49 +293,49 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `metodopago`
 --
 ALTER TABLE `metodopago`
-  MODIFY `idMetodoPago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idMetodoPago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor_producto`
 --
 ALTER TABLE `proveedor_producto`
-  MODIFY `idProveedorproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idProveedorproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `idVentas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVentas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
@@ -415,8 +372,8 @@ ALTER TABLE `proveedor_producto`
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`),
-  ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`),
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`idMetodoPago`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

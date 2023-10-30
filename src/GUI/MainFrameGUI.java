@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -539,12 +540,34 @@ public class MainFrameGUI extends javax.swing.JFrame {
             b = false;
         }
         if (b) {
-            for (int i = 0; i < filas; i++) {
-                if (!(Sfecha.equals(modelo.getValueAt(i, j).toString()))) {
-                    modelo.removeRow(i);
-                    i--;
+            if (j == 5) {
+                for (int i = 0; i < filas; i++) {
+
+                    if (!(Sfecha.equals(modelo.getValueAt(i, j).toString()))) {
+                        modelo.removeRow(i);
+                        i--;
+                    }
+
+                }
+
+            } else {
+                for (int i = 0; i < filas; i++) {
+
+                    if (!(Sfecha.equals(modelo.getValueAt(i, j).toString()))) {
+                        do {
+                            modelo.removeRow(i);
+                        } while (modelo.getValueAt(i, j) != "");
+                        modelo.removeRow(i);
+                        i--;
+                    } else {
+                        do {
+                            i++;
+                        } while (modelo.getValueAt(i, j) != "");
+                    }
+
                 }
             }
+
         }
 
 
@@ -576,11 +599,31 @@ public class MainFrameGUI extends javax.swing.JFrame {
             b = false;
         }
         if (b) {
-            for (int i = 0; i < filas; i++) {
-                LocalDate fech = LocalDate.parse(modelo.getValueAt(i, j).toString());
-                if (!((fech.isBefore(fecha2) && fech.isAfter(fecha1)))) {
-                    modelo.removeRow(i);
-                    i--;
+            if (j == 5) {
+                for (int i = 0; i < filas; i++) {
+                    LocalDate fech = LocalDate.parse(modelo.getValueAt(i, j).toString());
+                    if (!((fech.isBefore(fecha2) && fech.isAfter(fecha1)))) {
+                        modelo.removeRow(i);
+                        i--;
+                    }
+
+                }
+
+            } else {
+                for (int i = 0; i < filas; i++) {
+                    LocalDate fech = LocalDate.parse(modelo.getValueAt(i, j).toString());
+                    if (!((fech.isBefore(fecha2) && fech.isAfter(fecha1)))) {
+                        do {
+                            modelo.removeRow(i);
+                        } while (modelo.getValueAt(i, j) != "");
+                        modelo.removeRow(i);
+                        i--;
+                    } else {
+                        do {
+                            i++;
+                        } while (modelo.getValueAt(i, j) != "");
+                    }
+
                 }
             }
         }
@@ -866,7 +909,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
         int c = 0;
         for (int i = 0; i < modelo.getColumnCount(); i++) {
             String ColumnName = modelo.getColumnName(i);
-            if (ColumnName.equals("fechaLimite")) {
+            if (ColumnName.equals("fechaLimite") || ColumnName.equals("fecha")) {
                 c = i;
             }
         }
