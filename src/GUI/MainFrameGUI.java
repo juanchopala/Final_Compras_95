@@ -688,7 +688,7 @@ public class MainFrameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_JCListarProveedoresActionPerformed
 
     private void JrStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JrStockMouseClicked
-
+        CargarTabla1();
         CargarTabla2Stock();
 
         for (Variables c : cate.listarCategoria()) {
@@ -857,8 +857,8 @@ public class MainFrameGUI extends javax.swing.JFrame {
     }
 
     private void CargarTabla1() {
-        modelo.setRowCount(0);
-        modelo.setColumnCount(0);
+        modelo2.setRowCount(0);
+        modelo2.setColumnCount(0);
         modelo2.addColumn("idProducto");
         modelo2.addColumn("Categoria");
         modelo2.addColumn("nombreProducto");
