@@ -57,6 +57,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jCProveedores = new javax.swing.JComboBox<>();
+        jButton8 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -134,6 +135,13 @@ public class Proveedores extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton8.setText("Salir");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         EscritProveedor.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         EscritProveedor.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         EscritProveedor.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -145,6 +153,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         EscritProveedor.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         EscritProveedor.setLayer(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         EscritProveedor.setLayer(jCProveedores, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        EscritProveedor.setLayer(jButton8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout EscritProveedorLayout = new javax.swing.GroupLayout(EscritProveedor);
         EscritProveedor.setLayout(EscritProveedorLayout);
@@ -165,55 +174,62 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addComponent(jButton5)
                 .addGap(0, 89, Short.MAX_VALUE))
             .addGroup(EscritProveedorLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EscritProveedorLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EscritProveedorLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EscritProveedorLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton1))))
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(EscritProveedorLayout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jButton2)
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton3)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton4)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton1)))
                 .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritProveedorLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addGap(65, 65, 65))
+            .addGroup(EscritProveedorLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jButton2)
+                .addGap(68, 68, 68)
+                .addComponent(jButton3)
+                .addGap(57, 57, 57)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8)
+                .addGap(82, 82, 82))
         );
         EscritProveedorLayout.setVerticalGroup(
             EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritProveedorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addGap(18, 18, 18)
-                .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(89, 89, 89))
+                .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EscritProveedorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jCProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addGroup(EscritProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addComponent(jButton7)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritProveedorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)
+                        .addGap(182, 182, 182))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,7 +275,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila antes de presionar el boton.");
         }
-
+        jCProveedores.removeAllItems();
+         listaCombo();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -300,16 +317,20 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        //Seleccionar Lista
         int selec = jTLista.getSelectedRow();
         if (selec != 1) {
             int idP = (Integer) jTLista.getValueAt(selec, 0);
-            provD.buscarProveedor(idP);
+            provD.eliminarProveedor(idP);
             modelo.removeRow(selec);
-
+            jCProveedores.removeAllItems();
+            listaCombo();
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -321,6 +342,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jCProveedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

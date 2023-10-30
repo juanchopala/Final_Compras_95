@@ -241,6 +241,7 @@ public class Variables1 extends javax.swing.JInternalFrame {
             categoriasData.modificarCategoria(vari);
             jCcategoria.removeAllItems();
             cargarLista();
+            jTNuevoDato.setText("");
         }
 
 
@@ -254,6 +255,9 @@ public class Variables1 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Llenar campos para guardar");
         } else {
             categoriasData.guardarCategoria(variable);
+            jCcategoria.removeAllItems();
+            cargarLista();
+            jTCategorias.setText("");
         }
     }//GEN-LAST:event_jBCrearActionPerformed
 
@@ -269,6 +273,9 @@ public class Variables1 extends javax.swing.JInternalFrame {
         String id = jCcategoria.getItemAt(jCcategoria.getSelectedIndex()).split(" - ")[0];
         int idc = Integer.parseInt(id);
         categoriasData.borrarCategoria(idc);
+       jCcategoria.removeAllItems();
+            cargarLista();
+            jTNuevoDato.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -284,7 +291,7 @@ public class Variables1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCMetodoActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+    this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -294,6 +301,10 @@ public class Variables1 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Llenar campos para guardar");
         } else {
             categoriasData.guardarMetodos(variable);
+            jCMetodo.removeAllItems();
+            cargarMetodos();
+          jTMetodo.setText("");
+            
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -308,6 +319,8 @@ public class Variables1 extends javax.swing.JInternalFrame {
             categoriasData.modificarMetodo(vari);
             jCMetodo.removeAllItems();
             cargarMetodos();
+            jTNuevoMetodo.setText("");
+            
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -319,6 +332,9 @@ public class Variables1 extends javax.swing.JInternalFrame {
         String id = jCMetodo.getItemAt(jCMetodo.getSelectedIndex()).split(" - ")[0];
         int idc = Integer.parseInt(id);
         categoriasData.borrarMetodoPago(idc);
+       jCMetodo.removeAllItems();
+            cargarMetodos();
+           jTNuevoMetodo.setText("");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCategoriasActionPerformed

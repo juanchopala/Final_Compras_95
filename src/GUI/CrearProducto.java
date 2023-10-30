@@ -139,6 +139,11 @@ public class CrearProducto extends javax.swing.JInternalFrame {
         });
 
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jCcategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +164,7 @@ public class CrearProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jactivo.setSelected(true);
         jactivo.setText("Activo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -327,6 +333,11 @@ public class CrearProducto extends javax.swing.JInternalFrame {
             Producto producto = new Producto(idc, Nombre, IM, detalle, fechaN, precio, stoc, activo);
             prod.guardarProducto(producto);
         }
+        TNombre.setText("");
+        Im.setText("");
+        jdetalles.setText("");
+        jprecio.setText("");
+        jstock.setText(title);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
@@ -363,6 +374,10 @@ public class CrearProducto extends javax.swing.JInternalFrame {
           evt.consume();
         }
     }//GEN-LAST:event_jstockKeyTyped
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Im;

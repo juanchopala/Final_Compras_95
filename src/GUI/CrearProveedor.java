@@ -242,8 +242,11 @@ public class CrearProveedor extends javax.swing.JInternalFrame {
         } catch (java.lang.NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "Complete con datos válidos el campo teléfono.");
         } 
-
-            
+        jTRazonSocial.setText("");
+        jTDomiciliop.setText("");
+        jTTelefono.setText("");
+        jTMail.setText("");
+        jTWeb.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTMailActionPerformed
